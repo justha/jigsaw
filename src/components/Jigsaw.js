@@ -13,8 +13,8 @@ export const Jigsaw = () => (
 
         <h2>Puzzles</h2>
             <PuzzleProvider>
-                <PuzzleList />
                 <PuzzleForm />
+                <PuzzleList />
             </PuzzleProvider>
 
         <h2>Workspaces</h2>

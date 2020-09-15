@@ -68,7 +68,7 @@ export const PuzzleForm = (props) => {
     return (
         <form className="puzzleForm">
             
-            <h2 className="puzzleForm__title">New Puzzle</h2>
+            <h2 className="puzzleForm__title">Add a Puzzle</h2>
 
             <fieldset>
                 <div className="form-group">
