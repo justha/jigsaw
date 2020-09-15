@@ -68,7 +68,7 @@ export const PuzzleForm = (props) => {
     return (
         <form className="puzzleForm">
             
-            <h2 className="puzzleForm__title">Add a Puzzle</h2>
+            <h3 className="puzzleForm__title">Add a Puzzle</h3>
 
             <fieldset>
                 <div className="form-group">
@@ -150,13 +150,13 @@ export const PuzzleForm = (props) => {
             </fieldset> */}
 
 
-            <button type="submit"
+            <button type="submit" className="btn btn--primary"
                 onClick={evt => {
                     evt.preventDefault() // Prevent browser from submitting the form
                     createNewPuzzle()
                 }}
-                className="btn btn-primary">
-                Save
+            >
+            Save
             </button>
 
         </form>

@@ -4,6 +4,7 @@ import { Puzzle } from "./Puzzle"
 import "./Puzzle.css"
 
 export const PuzzleList = () => {
+    
     const { puzzles, getPuzzles } = useContext(PuzzleContext)
 
 
@@ -13,16 +14,10 @@ export const PuzzleList = () => {
     }, [])
 
 
-    useEffect(() => {
-        console.log("PuzzleList: Puzzle state changed")
-        console.log(puzzles)
-    }, [puzzles])
-
-
     return (
         <>
-            <button className="button__addPuzzle">Add</button>
-            <div className="puzzleList">{puzzles.map(puzzle => <Puzzle key={puzzle.id} puzzle={puzzle} />)}</div>
+            <button className="btn btn--primary">Add</button>
+            <div className="puzzleList">{puzzles.map(puzzle => <Puzzle key={puzzle.id} puzzle={puzzle} /> )}</div>
         </>
     )
 }
