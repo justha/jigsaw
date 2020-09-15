@@ -20,10 +20,9 @@ export const PuzzleList = () => {
 
 
     return (
-        <div className="puzzles">
-        {
-            puzzles.map(puzzle => <Puzzle key={puzzle.id} puzzle={puzzle} />)
-        }
-        </div>
+        <>
+            <button className="button__addPuzzle">Add</button>
+            <div className="puzzleList">{puzzles.map(puzzle => <Puzzle key={puzzle.id} puzzle={puzzle} />)}</div>
+        </>
     )
 }

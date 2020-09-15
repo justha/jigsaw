@@ -14,6 +14,9 @@ export const Jigsaw = () => (
             <PuzzleProvider>
                 <PuzzleList />
             </PuzzleProvider>
+
+        <h2>Workspaces</h2>
+
     </>
 )
 
