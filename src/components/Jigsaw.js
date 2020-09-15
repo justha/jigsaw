@@ -1,6 +1,7 @@
 import React from "react"
-import { PuzzleList } from "./puzzle/PuzzleList"
 import { PuzzleProvider } from "./puzzle/PuzzleProvider"
+import { PuzzleList } from "./puzzle/PuzzleList"
+import { PuzzleForm } from "./puzzle/PuzzleForm";
 import "./Jigsaw.css"
 
 export const Jigsaw = () => (
@@ -13,6 +14,7 @@ export const Jigsaw = () => (
         <h2>Puzzles</h2>
             <PuzzleProvider>
                 <PuzzleList />
+                <PuzzleForm />
             </PuzzleProvider>
 
         <h2>Workspaces</h2>
