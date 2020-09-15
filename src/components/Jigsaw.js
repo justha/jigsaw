@@ -1,7 +1,7 @@
 import React from "react"
 import { PuzzleProvider } from "./puzzle/PuzzleProvider"
-import { PuzzleList } from "./puzzle/PuzzleList"
 import { PuzzleForm } from "./puzzle/PuzzleForm";
+import { PuzzleList } from "./puzzle/PuzzleList"
 import "./Jigsaw.css"
 
 export const Jigsaw = () => (
