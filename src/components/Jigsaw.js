@@ -9,24 +9,15 @@ import "./Jigsaw.css"
 
 export const Jigsaw = () => (
     <>
+        <div>
+            <h1>puzzl</h1>
+            <small>an app for avid jigsaw puzzlers</small>
+            <br></br>
+            {/* <small>log. plan. trade.</small> */}
+        </div>
 
         <NavBar />
         <ApplicationViews />
 
-        {/* <h1>puzzl</h1>
-        <small>an app for avid jigsaw puzzlers</small>
-        <br></br>
-        <small>log. plan. trade.</small>
-
-        <h2>Puzzles</h2>
-            <PuzzleProvider>
-                <PuzzleForm />
-                <PuzzleList />
-            </PuzzleProvider>
-
-        <h2>Workspaces</h2> */}
-
     </>
 )
-
-
