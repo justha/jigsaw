@@ -1,15 +1,22 @@
 import React from "react"
-import { PuzzleProvider } from "./puzzle/PuzzleProvider"
-import { PuzzleForm } from "./puzzle/PuzzleForm";
-import { PuzzleList } from "./puzzle/PuzzleList"
+import { Route } from "react-router-dom"
+import { NavBar } from "./nav/NavBar"
+import { ApplicationViews } from "./ApplicationViews"
 import "./Jigsaw.css"
+// import { PuzzleProvider } from "./puzzle/PuzzleProvider"
+// import { PuzzleForm } from "./puzzle/PuzzleForm";
+// import { PuzzleList } from "./puzzle/PuzzleList"
 
 export const Jigsaw = () => (
     <>
-        <h1>puzzl</h1>
+
+        <NavBar />
+        <ApplicationViews />
+
+        {/* <h1>puzzl</h1>
         <small>an app for avid jigsaw puzzlers</small>
-        {/* <br></br>
-        <small>log. plan. trade.</small> */}
+        <br></br>
+        <small>log. plan. trade.</small>
 
         <h2>Puzzles</h2>
             <PuzzleProvider>
@@ -17,7 +24,7 @@ export const Jigsaw = () => (
                 <PuzzleList />
             </PuzzleProvider>
 
-        <h2>Workspaces</h2>
+        <h2>Workspaces</h2> */}
 
     </>
 )
