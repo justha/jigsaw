@@ -1,6 +1,11 @@
 import React from "react"
 import { Route } from "react-router-dom"
 import { PuzzleProvider } from "./puzzle/PuzzleProvider"
+import { BrandProvider } from "./brand/BrandProvider"
+import { StatusProvider } from "./status/StatusProvider"
+import { BoxProvider } from "./box/BoxProvider"
+import { TextureProvider } from "./texture/TextureProvider"
+import { DustProvider } from "./dust/DustProvider"
 import { PuzzleForm } from "./puzzle/PuzzleForm"
 import { PuzzleList } from "./puzzle/PuzzleList"
 import { Logout } from "./auth/Logout"
@@ -10,14 +15,38 @@ export const ApplicationViews = (props) => {
         <>
             <Route exact path="/">Welcome!</Route>
             
-            <Route exact path="/workspaces">Workspaces</Route>
+            <Route exact path="/spaces">Workspaces</Route>
         
+
             <PuzzleProvider>
-                <Route exact path="/puzzles">
-                    <PuzzleForm/>
-                    <PuzzleList/>
-                </Route>
+                <StatusProvider>
+                        <BrandProvider>
+                            <Route exact path="/puzzles" render={(props) => {
+                                return <PuzzleList history={props.history}/>
+                            }} />                                
+                        </BrandProvider>
+                </StatusProvider>
             </PuzzleProvider>
+
+
+            <PuzzleProvider>
+                <BrandProvider>
+                    <StatusProvider>
+                        <BoxProvider>
+                            <TextureProvider>
+                                <DustProvider>
+
+                                    <Route exact path="/puzzles/create" render={
+                                        props => <PuzzleForm {...props} />
+                                    } />
+
+                                </DustProvider>
+                            </TextureProvider>
+                        </BoxProvider>
+                    </StatusProvider>
+                </BrandProvider>
+            </PuzzleProvider>
+
 
             <Route exact path="/logout">
                 <Logout />

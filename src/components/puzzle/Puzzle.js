@@ -1,28 +1,25 @@
 import React from "react"
+import { PuzzleDetail } from "./PuzzleDetail"
 import "./Puzzle.css"
 
-export const Puzzle = ({ puzzle }) => (
-    <section className="puzzle">
-        <h4 className="puzzle__name">{puzzle.name}</h4>
-    
-            {/* this block will move to PuzzleDetail */}
-            <div className="puzzle__brand">Brand: {puzzle.brandId}</div>
-            <div className="puzzle__count">Pieces: {puzzle.count}</div>
-            <div className="puzzle__dimensions">Dimensions: {puzzle.length} x {puzzle.width} in.</div>
-            <div className="puzzle__box">Box Size: {puzzle.boxId}</div>
-            <div className="puzzle__poster">Poster Included: {puzzle.poster}</div>
-            <div className="puzzle__texture">Texture: {puzzle.textureId}</div>
-            <div className="puzzle__dust">Puzzledust Rating: {puzzle.dustId}</div>
-            <div className="puzzle__note">Note: {puzzle.note}</div>
-            <div className="puzzle__assembled">Assembled: {puzzle.assembled}</div>
-            <div className="puzzle__status">Status: {puzzle.statusId}</div>
-            <div className="puzzle__favorite">Favorite: {puzzle.favorite}</div>
-
-            <button className="btn btn--primary">Edit</button>
-        
-            <button className="btn btn--primary">Delete</button>
-            {/* this block will move to PuzzleDetail */}
 
 
-    </section>
-)
+export const Puzzle = ({ puzzle }) => {
+
+    const puzzleId = puzzle.id
+
+    return (
+        <section className="puzzle">
+            <div className="puzzle__name"><b>{puzzle.name}</b></div>
+            <div className="puzzle__brand">by {puzzle.brandId}</div>
+            <div className="puzzle__status">Status {puzzle.statusId}</div>
+
+            <button className="btn btn--primary"
+                onClick={() => {
+                    PuzzleDetail(puzzleId)
+                }}
+            >Details</button>
+
+        </section>
+    )
+}

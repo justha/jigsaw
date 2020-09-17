@@ -24,7 +24,7 @@ export const PuzzleProvider = (props) => {
     }
 
     const getPuzzleById = (id) => {
-        return fetch(`http://localhost:8088/puzzles/${ id }?_expand=status&_expand=brand`)
+        return fetch(`http://localhost:8088/puzzles/${ id }?_expand=brand&_expand=status`)
             .then(res => res.json())
     }
 

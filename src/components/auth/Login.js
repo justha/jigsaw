@@ -68,7 +68,7 @@ export const Login = props => {
                 </form>
             </section>
             <section className="link--register">
-                <Link className="linkRegister" to="/register">Register</Link>
+                <Link className="linkRegister" to="/register">Register</Link> as a new user
             </section>
         </main>
     )
