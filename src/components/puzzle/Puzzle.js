@@ -20,6 +20,8 @@ export const Puzzle = ({ puzzle }) => {
                 }}
             >Details</button>
 
+            <dialog></dialog>
+
         </section>
     )
 }

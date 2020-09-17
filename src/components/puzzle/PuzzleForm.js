@@ -29,6 +29,7 @@ export const PuzzleForm = (props) => {
     const length = useRef(null)
     const width = useRef(null)
     // const favorite = useRef(null)
+    
 
 
     useEffect(() => {
@@ -64,7 +65,7 @@ export const PuzzleForm = (props) => {
                 assembled: assembled.current.value,
                 statusId,
                 boxId,
-                poster: poster.current.value,
+                poster: JSON.parse(poster.current.value),
                 textureId,
                 dustId,
                 note: note.current.value,
