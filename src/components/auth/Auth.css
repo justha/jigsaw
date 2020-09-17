@@ -3,13 +3,6 @@
     font-size: small;
 }
 
-fieldset {
-    min-width: 0;
-    padding: 1rem 0;
-    margin: 0;
-    border: 0;
-}
-
 .form--login {
     display: inline-block;
     margin: 0 auto;
@@ -69,13 +62,10 @@ fieldset {
 }
 
 .link--register {
-    display: flex;
-    justify-content: flex-start;
 }
 
 .linkRegister {
     color: dimgrey;
-    /* text-decoration: none; */
+    text-decoration: none;
     font-weight: bold;
-
 }
