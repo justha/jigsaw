@@ -41,7 +41,7 @@ export const PuzzleForm = (props) => {
     }, [])
 
     const createNewPuzzle = () => {
-        const puzzleName = parseInt(name.current.value)
+        const puzzleName = (name.current.value)
         const brandId = parseInt(brand.current.value)
         const statusId = parseInt(status.current.value)
         const textureId = parseInt(texture.current.value)
@@ -50,12 +50,22 @@ export const PuzzleForm = (props) => {
         const puzzleLength = parseInt(length.current.value)
         const puzzleWidth = parseInt(width.current.value)
 
-        if (puzzleName === ""){window.alert("please input a name or description")}
-        if (statusId === 0){window.alert("please select a status")}
-        if (brandId === 0){window.alert("please select a brand")}
-        if (puzzleLength === ""){window.alert("please input a length")}
-        if (puzzleWidth === ""){window.alert("please input a width")}
-        if (boxId === 0){window.alert("please select a box size")}
+
+        if (
+            puzzleName === "" || 
+            brandId === 0 ||
+            statusId === 0 ||
+            boxId === 0 ||
+            isNaN(puzzleLength) === true ||
+            isNaN(puzzleWidth) === true 
+            )
+            {window.alert("please enter all required fields")}
+        // if (puzzleName === ""){window.alert("please input a name or description")}
+        // if (brandId === 0){window.alert("please select a brand")}
+        // if (statusId === 0){window.alert("please select a status")}
+        // if (boxId === 0){window.alert("please select a box size")}
+        // if (isNaN(puzzleLength) === true){window.alert("please input a length")}
+        // if (isNaN(puzzleWidth) === true){window.alert("please input a width")}
         else {
             addPuzzle({
                 userId: 1,

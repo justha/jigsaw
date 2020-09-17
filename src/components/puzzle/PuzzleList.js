@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { PuzzleContext } from "./PuzzleProvider"
 import { BrandContext } from "../brand/BrandProvider"
 import { StatusContext } from "../status/StatusProvider"
@@ -11,27 +11,11 @@ export const PuzzleList = (props) => {
     const { brands, getBrands } = useContext(BrandContext)
     const { statuses, getStatuses } = useContext(StatusContext)
 
-    const [puzzle, setPuzzle] = useState({})
-    const [brand, setBrand] = useState({})
-    const [status, setStatus] = useState({})
-
 
     useEffect(() => {
         console.log("PuzzleList: Initial render before data")
         getPuzzles()
-        .then(getBrands)
-        .then(getStatuses)
     }, [])
-
-    useEffect(() => {
-        const brand = brands.find(b => b.id === puzzle.brandId) || {}
-        setBrand(brand)
-    }, [brands])
-
-    useEffect(() => {
-        const status = statuses.find(s => s.id === puzzle.statusId) || {}
-        setBrand(status)
-    }, [statuses])
 
 
     // "Add Puzzle" button below
@@ -47,5 +31,5 @@ export const PuzzleList = (props) => {
             <div className="puzzleList">{puzzles.map(puzzle => <Puzzle key={puzzle.id} puzzle={puzzle} /> )}</div> 
         </>
     )
-    
+
 }
