@@ -2,15 +2,37 @@ import React, { useState } from "react"
 
 export const PuzzleContext = React.createContext()
 
+
+
+
 export const PuzzleProvider = (props) => {
     const [puzzles, setPuzzles] = useState([])
-    // const [ searchTerms, setTerms ] = useState("")
     
     const getPuzzles = () => {
         return fetch("http://localhost:8088/puzzles")
-            .then(res => res.json())
-            .then(setPuzzles)
+        .then(res => res.json())
+        .then(setPuzzles)
     }
+    
+    // const getPuzzlesForActiveUser = () => {
+    //     const activeId = parseInt(localStorage.getItem("app_user"))
+    //     let allPuzzles = getPuzzles()
+        
+        
+    //     return fetch("http://localhost:8088/puzzles")
+    //     .then(res => res.json())
+    //     .then(puzzlesArray => {
+            
+    //         allPuzzles = puzzlesArray
+
+    //         const puzzlesArrayForActiveUser = 
+    //             allPuzzles.filter(p => {p.userId = activeId})
+
+    //         return puzzlesArrayForActiveUser
+    //         }
+    //     )
+    //     .then(setPuzzles)  
+    // }
 
     const addPuzzle = puzzle => {
         return fetch("http://localhost:8088/puzzles", {

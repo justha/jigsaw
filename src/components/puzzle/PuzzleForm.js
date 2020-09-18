@@ -31,7 +31,6 @@ export const PuzzleForm = (props) => {
     // const favorite = useRef(null)
     
 
-
     useEffect(() => {
         getBrands()
         getStatuses()
@@ -40,6 +39,8 @@ export const PuzzleForm = (props) => {
         getDusts()
     }, [])
 
+    
+    
     const createNewPuzzle = () => {
         const puzzleName = (name.current.value)
         const brandId = parseInt(brand.current.value)
@@ -49,8 +50,15 @@ export const PuzzleForm = (props) => {
         const boxId = parseInt(box.current.value)
         const puzzleLength = parseInt(length.current.value)
         const puzzleWidth = parseInt(width.current.value)
+        const puzzleCount = parseInt(count.current.value)
 
 
+        // if (puzzleName === ""){window.alert("please input a name or description")}
+        // if (brandId === 0){window.alert("please select a brand")}
+        // if (statusId === 0){window.alert("please select a status")}
+        // if (boxId === 0){window.alert("please select a box size")}
+        // if (isNaN(puzzleLength) === true){window.alert("please input a length")}
+        // if (isNaN(puzzleWidth) === true){window.alert("please input a width")}
         if (
             puzzleName === "" || 
             brandId === 0 ||
@@ -59,19 +67,16 @@ export const PuzzleForm = (props) => {
             isNaN(puzzleLength) === true ||
             isNaN(puzzleWidth) === true 
             )
-            {window.alert("please enter all required fields")}
-        // if (puzzleName === ""){window.alert("please input a name or description")}
-        // if (brandId === 0){window.alert("please select a brand")}
-        // if (statusId === 0){window.alert("please select a status")}
-        // if (boxId === 0){window.alert("please select a box size")}
-        // if (isNaN(puzzleLength) === true){window.alert("please input a length")}
-        // if (isNaN(puzzleWidth) === true){window.alert("please input a width")}
+            {window.alert("Please enter all required fields")}
+        else if (
+            isNaN(puzzleCount) === true 
+            )
+            {window.alert("Puzzle count should be a number")}
         else {
             addPuzzle({
-                userId: 1,
                 name: name.current.value,
-                brandId: brand.current.value,
-                count: count.current.value,
+                brandId,
+                count: parseInt(count.current.value),
                 assembled: assembled.current.value,
                 statusId,
                 boxId,
@@ -79,9 +84,10 @@ export const PuzzleForm = (props) => {
                 textureId,
                 dustId,
                 note: note.current.value,
-                length: length.current.value,
-                width: width.current.value,
-                favorite: false
+                length: parseInt(length.current.value),
+                width: parseInt(width.current.value),
+                favorite: false,
+                userId: 1
             })
             .then(() => props.history.push("/puzzles"))
         }
@@ -192,7 +198,7 @@ export const PuzzleForm = (props) => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="puzzleAssembled">Date Assembled: </label>
-                    <input type="text" id="puzzleAssembled" ref={assembled} autoFocus className="form--control" placeholder="if applicable" />
+                    <input type="date" id="puzzleAssembled" ref={assembled} autoFocus className="form--control" placeholder="if applicable" />
                 </div>
             </fieldset>
 

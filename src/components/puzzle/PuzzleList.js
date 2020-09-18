@@ -1,62 +1,48 @@
 import React, { useContext, useEffect, useState } from "react"
 import { PuzzleContext } from "./PuzzleProvider"
-import { BrandContext } from "../brand/BrandProvider"
-import { StatusContext } from "../status/StatusProvider"
-import { Puzzle } from "./Puzzle"
+import { Puzzle } from "./Puzzle";
 import "./Puzzle.css"
 
 export const PuzzleList = (props) => {
     
-    const { puzzles, getPuzzles, deletePuzzle } = useContext(PuzzleContext)
-    const [puzzle, setPuzzle] = useState ({ brand: {}, status: {}})
+    const { puzzles, getPuzzles } = useContext(PuzzleContext)
 
-
+    
     useEffect(() => {
         console.log("PuzzleList: Initial render before data")
         getPuzzles()
     }, [])
 
 
-    // "Add Puzzle" button below
     return (
         <>
-            <button className="btn btn--primary"
-                onClick={() => {props.history.push("/puzzles/create")}}>
-                    <b>
-                        +
-                    </b>
+            <button className="btn btn--primary" id="btnAddPuzzle"
+                onClick={() => {props.history.push("/puzzles/create")}}
+            >
+            +
             </button>  
 
 
             <div className="puzzleList">
-                {puzzles.map(puzzle => {
-                    return (
-                        <section className="puzzle">
-                            <div><b>{puzzle.name}</b></div>
-                            <div>by {puzzle.brandId}</div>
-                            <div>status {puzzle.statusId}</div>
 
-                            <button className="btn btn--primary"
-                                onClick={() => {
-                                    deletePuzzle(puzzle.id)
-                                    .then(() => {props.history.push("/puzzles")})
-                                }}
-                            >
-                                <b>
-                                    –
-                                </b>
-                            </button>  
-
-                        </section>
-
-                        
-                        )
-                }
+                {puzzles.map(p => 
+                    <Puzzle key={p.id} puzzle={p} />
                 )}
             </div> 
 
 
-            {/* <div className="puzzleList">{puzzles.map(puzzle => <Puzzle key={puzzle.id} puzzle={puzzle} /> )}</div>  */}
+            {/* <div className="puzzleList">
+                {puzzles.map(puzzle => {
+                    return (
+                        <article className="puzzle">
+                            <div><b>{puzzle.name}</b></div>
+                            <div>by {puzzle.brandId}</div>
+                            <button className="btn btn--primary" id="btnPuzzleDetail">ℹ︎</button>
+                        </article>                        
+                    )
+                })}
+            </div>  */}
+            
 
         </>
     )

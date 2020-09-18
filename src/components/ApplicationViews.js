@@ -8,6 +8,7 @@ import { TextureProvider } from "./texture/TextureProvider"
 import { DustProvider } from "./dust/DustProvider"
 import { PuzzleForm } from "./puzzle/PuzzleForm"
 import { PuzzleList } from "./puzzle/PuzzleList"
+// import { PuzzleDetail } from "./puzzle/PuzzleDetail"
 import { Logout } from "./auth/Logout"
 
 export const ApplicationViews = (props) => {
@@ -21,9 +22,17 @@ export const ApplicationViews = (props) => {
             <PuzzleProvider>
                 <StatusProvider>
                         <BrandProvider>
-                            <Route exact path="/puzzles" render={(props) => {
+
+                            <Route exact path="/puzzles" 
+                                render={(props) => {
                                 return <PuzzleList history={props.history}/>
-                            }} />                                
+                            }} />
+
+                            {/* <Route exact path="/puzzles/:puzzleId(\d+)" 
+                                render={(props) => {
+                                    <PuzzleDetail {...props}/>
+                            }} /> */}
+
                         </BrandProvider>
                 </StatusProvider>
             </PuzzleProvider>
@@ -36,8 +45,9 @@ export const ApplicationViews = (props) => {
                             <TextureProvider>
                                 <DustProvider>
 
-                                    <Route exact path="/puzzles/create" render={
-                                        props => <PuzzleForm {...props} />
+                                    <Route exact path="/puzzles/create" 
+                                        render={props => 
+                                            <PuzzleForm {...props} />
                                     } />
 
                                 </DustProvider>

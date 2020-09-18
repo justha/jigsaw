@@ -11,7 +11,7 @@ import "./Jigsaw.css"
 export const Jigsaw = () => (
     <>
         <Route render={() => {
-            if (localStorage.getItem("application_user")) {
+            if (localStorage.getItem("app_user")) {
                 return (
                     <>
                         <Route render={props => <Header {...props} />} />
