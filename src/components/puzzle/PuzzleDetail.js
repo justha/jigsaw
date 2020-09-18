@@ -5,11 +5,15 @@ import "./Puzzle.css"
 
 export const PuzzleDetail = (props) => {
 
+    const { deletePuzzle } = useContext(PuzzleContext)
    
     return (
         <section className="puzzle">
-            <h4 className="puzzle__name">{puzzle.name}</h4>
-            <small className="puzzle__brand">Brand: {puzzle.brandId}</small>
+
+            TEST 1-2-3
+
+            {/* <h4 className="puzzle__name">{props.puzzle.state.chosenPuzzle.name}</h4> */}
+            {/* <small className="puzzle__brand">Brand: {puzzle.brandId}</small>
             <br></br>
             <div className="puzzle__count">Pieces: {puzzle.count}</div>
             <div className="puzzle__dimensions">Dimensions: {puzzle.length} in. x {puzzle.width} in.</div>
@@ -31,7 +35,10 @@ export const PuzzleDetail = (props) => {
             x
             </button> 
 
-            <button className="btn btn--primary" id="btnPuzzleEdit">✎</button>
+
+            <button className="btn btn--primary" id="btnPuzzleEdit">✎</button> */}
+
+           
         </section>
     )
 

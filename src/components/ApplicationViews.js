@@ -8,30 +8,28 @@ import { TextureProvider } from "./texture/TextureProvider"
 import { DustProvider } from "./dust/DustProvider"
 import { PuzzleForm } from "./puzzle/PuzzleForm"
 import { PuzzleList } from "./puzzle/PuzzleList"
-// import { PuzzleDetail } from "./puzzle/PuzzleDetail"
+import { PuzzleDetail } from "./puzzle/PuzzleDetail"
 import { Logout } from "./auth/Logout"
 
 export const ApplicationViews = (props) => {
     return (
         <>
-            <Route exact path="/">Welcome!</Route>
+            <Route exact path="/">
+                Welcome!
+            </Route>
             
-            <Route exact path="/spaces">Workspaces</Route>
+            <Route exact path="/spaces">
+                Workspaces
+            </Route>
         
 
             <PuzzleProvider>
                 <StatusProvider>
                         <BrandProvider>
 
-                            <Route exact path="/puzzles" 
-                                render={(props) => {
-                                return <PuzzleList history={props.history}/>
-                            }} />
-
-                            {/* <Route exact path="/puzzles/:puzzleId(\d+)" 
-                                render={(props) => {
-                                    <PuzzleDetail {...props}/>
-                            }} /> */}
+                            <Route exact path="/puzzles" render={ 
+                                props => <PuzzleList {...props}/>}>
+                            </Route> 
 
                         </BrandProvider>
                 </StatusProvider>
@@ -44,6 +42,10 @@ export const ApplicationViews = (props) => {
                         <BoxProvider>
                             <TextureProvider>
                                 <DustProvider>
+
+                                    <Route path="/puzzles/:puzzleId(\d+)" render={
+                                        props => <PuzzleDetail {...props}/>}> 
+                                    </Route>
 
                                     <Route exact path="/puzzles/create" 
                                         render={props => 
