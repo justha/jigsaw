@@ -10,11 +10,10 @@ import "./Puzzle.css"
 export const PuzzleList = (props) => {
     
     const { puzzles, getPuzzles } = useContext(PuzzleContext)
-    const { brands, getBrands } = useContext(BrandContext)
-    const { statuses, getStatuses } = useContext(StatusContext)
+    const { getBrands } = useContext(BrandContext)
+    const { getStatuses } = useContext(StatusContext)
     
-    const [puzzle, setPuzzle] = useState ({ brand: {}, status: {}})
-    
+   
     useEffect(() => {
         console.log("PuzzleList: Initial render before data")
         getPuzzles()
@@ -36,13 +35,16 @@ export const PuzzleList = (props) => {
                 {puzzles.map(p => {
                     return (
                         <article>
-                            <Puzzle key={p.id} puzzle={p} />
 
-                            <Link to={{
+                            <Link className="link__toPuzzleDetails" 
+                                to={{
                                     pathname: `/puzzles/${p.id}`,
                                     state: { chosenPuzzle: p }
-                                    }}
-                            ><button>ℹ︎</button></Link>
+                                }}
+                            >
+                                <Puzzle key={p.id} puzzle={p} />
+                                {/* <button>ℹ︎</button> */}
+                            </Link>
 
                         </article>   
                     )

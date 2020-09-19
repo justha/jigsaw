@@ -21,3 +21,25 @@
     -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
+
+.link__toPuzzleDetails {
+    text-decoration: none;
+}
+
+.puzzle__name {
+    font-size: large;
+    font-weight: bold;
+}
+
+.puzzle__brand {
+    font-size: small;
+}
+
+.puzzle__detail {
+    font-size: small;
+}
+
+.puzzle__title {
+    font-weight: bold;
+}

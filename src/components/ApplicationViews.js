@@ -17,13 +17,9 @@ export const ApplicationViews = (props) => {
             <Route exact path="/">
                 Welcome!
             </Route>
-            
-            <Route exact path="/spaces">
-                Workspaces
-            </Route>
         
 
-            <PuzzleProvider>
+            {/* <PuzzleProvider>
                 <StatusProvider>
                         <BrandProvider>
 
@@ -31,9 +27,13 @@ export const ApplicationViews = (props) => {
                                 props => <PuzzleList {...props}/>}>
                             </Route> 
 
+                            <Route path="/puzzles/:puzzleId(\d+)" render={
+                                props => <PuzzleDetail {...props}/>} > 
+                            </Route>
+
                         </BrandProvider>
                 </StatusProvider>
-            </PuzzleProvider>
+            </PuzzleProvider> */}
 
 
             <PuzzleProvider>
@@ -43,8 +43,12 @@ export const ApplicationViews = (props) => {
                             <TextureProvider>
                                 <DustProvider>
 
+                                    <Route exact path="/puzzles" render={ 
+                                        props => <PuzzleList {...props}/>}>
+                                    </Route> 
+
                                     <Route path="/puzzles/:puzzleId(\d+)" render={
-                                        props => <PuzzleDetail {...props}/>}> 
+                                        props => <PuzzleDetail {...props}/>} > 
                                     </Route>
 
                                     <Route exact path="/puzzles/create" 
@@ -58,6 +62,11 @@ export const ApplicationViews = (props) => {
                     </StatusProvider>
                 </BrandProvider>
             </PuzzleProvider>
+
+
+            <Route exact path="/spaces">
+                Workspaces
+            </Route>
 
 
             <Route exact path="/logout">
