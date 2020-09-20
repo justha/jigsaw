@@ -5,6 +5,13 @@
     margin: 1rem;
 }
 
+/* .form--group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+} */
+
 .form--control {
     display: block;
     width: 50%;
@@ -22,6 +29,16 @@
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
+.form__puzzleDimensions {
+    display: flex;
+    flex-direction: row;
+}
+
+#puzzleLength, 
+#puzzleWidth {
+    width: 2.5em;
+    text-align: center;
+}
 
 .link__toPuzzleDetails {
     text-decoration: none;

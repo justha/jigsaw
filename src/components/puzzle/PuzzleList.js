@@ -8,20 +8,23 @@ import "./Puzzle.css"
 
 
 export const PuzzleList = (props) => {
-    
     const { puzzles, getPuzzles } = useContext(PuzzleContext)
     const { getBrands } = useContext(BrandContext)
     const { getStatuses } = useContext(StatusContext)
     
-   
+    //filter list by active user
+    const activeId = parseInt(localStorage.getItem("app_user"))
+    const puzzlesActive = puzzles.filter(p => p.userId === activeId)
+    
+
     useEffect(() => {
         console.log("PuzzleList: Initial render before data")
         getPuzzles()
         getBrands()
         getStatuses()
     }, [])
-
-
+    
+    
     return (
         <>
             <button className="btn btn--primary" id="btnAddPuzzle"
@@ -32,7 +35,8 @@ export const PuzzleList = (props) => {
             
 
             <div className="puzzleList">
-                {puzzles.map(p => {
+                {
+                puzzlesActive.map(p => {
                     return (
                         <article>
 
@@ -45,16 +49,25 @@ export const PuzzleList = (props) => {
                                 <Puzzle key={p.id} puzzle={p} />
                                 {/* <button>ℹ︎</button> */}
                                 <br></br>
-                                
+
                             </Link>
 
                         </article>   
                     )
                 })}
             </div> 
+            
+
+        </>
+    )
+
+}
 
 
-            {/* <div className="puzzleList">
+
+
+
+{/* <div className="puzzleList">
                 {puzzles.map(puzzle => {
                     const puzzleBrand = brands.find(b => b.id === puzzle.brandId) || {}
                     const puzzleStatus = statuses.find(s => s.id === puzzle.statusId) || {}
@@ -75,9 +88,3 @@ export const PuzzleList = (props) => {
                     )
                 })}
             </div>  */}
-            
-
-        </>
-    )
-
-}
