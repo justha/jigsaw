@@ -25,6 +25,7 @@
 
 .link__toPuzzleDetails {
     text-decoration: none;
+    color: inherit;
 }
 
 .puzzle__name {

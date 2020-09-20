@@ -24,12 +24,12 @@ export const ApplicationViews = (props) => {
                         <BrandProvider>
 
                             <Route exact path="/puzzles" render={ 
-                                props => <PuzzleList {...props}/>}>
-                            </Route> 
+                                props => <PuzzleList {...props}/>
+                            } />
 
                             <Route path="/puzzles/:puzzleId(\d+)" render={
-                                props => <PuzzleDetail {...props}/>} > 
-                            </Route>
+                                props => <PuzzleDetail {...props}/>
+                            } /> 
 
                         </BrandProvider>
                 </StatusProvider>
@@ -44,18 +44,22 @@ export const ApplicationViews = (props) => {
                                 <DustProvider>
 
                                     <Route exact path="/puzzles" render={ 
-                                        props => <PuzzleList {...props}/>}>
-                                    </Route> 
-
-                                    <Route path="/puzzles/:puzzleId(\d+)" render={
-                                        props => <PuzzleDetail {...props}/>} > 
-                                    </Route>
+                                        props => <PuzzleList {...props}/>
+                                    } />
 
                                     <Route exact path="/puzzles/create" 
                                         render={props => 
                                             <PuzzleForm {...props} />
                                     } />
 
+                                    <Route path="/puzzles/:puzzleId(\d+)" render={
+                                        props => <PuzzleDetail {...props}/>
+                                    } /> 
+
+                                    <Route path="/puzzles/edit/:puzzleId(\d+)" render={
+                                        props => <PuzzleForm {...props}/>
+                                    } /> 
+                                
                                 </DustProvider>
                             </TextureProvider>
                         </BoxProvider>

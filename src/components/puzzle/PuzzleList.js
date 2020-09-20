@@ -44,6 +44,8 @@ export const PuzzleList = (props) => {
                             >
                                 <Puzzle key={p.id} puzzle={p} />
                                 {/* <button>ℹ︎</button> */}
+                                <br></br>
+                                
                             </Link>
 
                         </article>   
