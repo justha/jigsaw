@@ -63,8 +63,9 @@ export const PuzzleForm = (props) => {
     const note = useRef(null)
     const length = useRef(null)
     const width = useRef(null)
+    const activeId = parseInt(localStorage.getItem("app_user"))
     
-    
+
     const createNewPuzzle = () => {
         const puzzleName = (name.current.value)
         const brandId = parseInt(brand.current.value)
@@ -111,7 +112,7 @@ export const PuzzleForm = (props) => {
                     length: parseInt(length.current.value),
                     width: parseInt(width.current.value),
                     favorite: false,
-                    userId: 1, 
+                    userId: activeId, 
                     id: puzzle.id
                 })
                 .then(() => props.history.push("/puzzles"))
@@ -131,7 +132,7 @@ export const PuzzleForm = (props) => {
                     length: parseInt(length.current.value),
                     width: parseInt(width.current.value),
                     favorite: false,
-                    userId: 1
+                    userId: activeId
                 })
                 .then(() => props.history.push("/puzzles"))
             }
@@ -355,7 +356,7 @@ export const PuzzleForm = (props) => {
                             id="puzzleLength" 
                             proptype="int"
                             type="text" 
-                            placeholder="length" 
+                            // placeholder="length" 
                             defaultValue={puzzle.length} 
                             onChange={handleControlledInputChange}
                         />
@@ -366,7 +367,7 @@ export const PuzzleForm = (props) => {
                             id="puzzleWidth" 
                             proptype="int"
                             type="text" 
-                            placeholder="width" 
+                            // placeholder="width" 
                             defaultValue={puzzle.width} 
                             onChange={handleControlledInputChange}
                         />

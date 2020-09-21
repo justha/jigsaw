@@ -12,7 +12,10 @@ export const Logout = (props) => {
     return (
         <>
             <form className="logoutForm">
-                <div>Are you sure?</div>
+                <div>
+                    See you again soon.<br></br>
+                    Happy puzzling! 
+                </div>
                 
                 <button className="btn btn--primary"
                 onClick={() => handleLogout()}

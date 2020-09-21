@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { PuzzleContext } from "./PuzzleProvider"
 import { BrandContext } from "../brand/BrandProvider"
@@ -14,8 +14,8 @@ export const PuzzleList = (props) => {
     
     //filter list by active user
     const activeId = parseInt(localStorage.getItem("app_user"))
-    const puzzlesActive = puzzles.filter(p => p.userId === activeId)
-    
+    const puzzlesActiveUser = puzzles.filter(p => p.userId === activeId)
+    let filteredPuzzles = puzzlesActiveUser
 
     useEffect(() => {
         console.log("PuzzleList: Initial render before data")
@@ -27,16 +27,11 @@ export const PuzzleList = (props) => {
     
     return (
         <>
-            <button className="btn btn--primary" id="btnAddPuzzle"
-                onClick={() => {props.history.push("/puzzles/create")}}
-            >
-            +
-            </button>  
+            <h3>My Collection</h3>
             
-
             <div className="puzzleList">
                 {
-                puzzlesActive.map(p => {
+                filteredPuzzles.map(p => {
                     return (
                         <article>
 
@@ -47,7 +42,6 @@ export const PuzzleList = (props) => {
                                 }}
                             >
                                 <Puzzle key={p.id} puzzle={p} />
-                                {/* <button>ℹ︎</button> */}
                                 <br></br>
 
                             </Link>
@@ -56,8 +50,14 @@ export const PuzzleList = (props) => {
                     )
                 })}
             </div> 
-            
 
+
+            <button className="btn btn--primary" id="btnAddPuzzle"
+                onClick={() => {props.history.push("/puzzles/create")}}
+            >
+            +
+            </button>  
+        
         </>
     )
 

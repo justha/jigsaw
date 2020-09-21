@@ -9,7 +9,7 @@ import "./Puzzle.css"
 
 
 export const PuzzleDetail = (props) => {
-    const {puzzles, getPuzzles} = useContext(PuzzleContext)
+    const {puzzles, getPuzzles, deletePuzzle} = useContext(PuzzleContext)
     const {brands, getBrands} = useContext(BrandContext)
     const {boxes, getBoxes} = useContext(BoxContext)
     const {textures, getTextures} = useContext(TextureContext)
@@ -23,8 +23,7 @@ export const PuzzleDetail = (props) => {
     const [dust, setDust] = useState({})
     const [status, setStatus] = useState({})
         
-    const { deletePuzzle } = useContext(PuzzleContext)
-   
+  
     useEffect(() => {
         getPuzzles()
         getBrands()

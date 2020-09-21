@@ -30,19 +30,3 @@ export const Jigsaw = () => (
 
     </>
 )
-
-
-// export const Jigsaw = () => (
-//     <>
-//         <div>
-//             <h1>puzzl</h1>
-//             <small>an app for avid jigsaw puzzlers</small>
-//             <br></br>
-//             {/* <small>log. plan. trade.</small> */}
-//         </div>
-
-//          <NavBar />
-//          <ApplicationViews />
-
-//      </>
-//  )
