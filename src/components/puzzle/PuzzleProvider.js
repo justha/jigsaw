@@ -2,16 +2,18 @@ import React, { useState } from "react"
 
 export const PuzzleContext = React.createContext()
 
+
+
+
 export const PuzzleProvider = (props) => {
     const [puzzles, setPuzzles] = useState([])
-    // const [ searchTerms, setTerms ] = useState("")
     
     const getPuzzles = () => {
         return fetch("http://localhost:8088/puzzles")
-            .then(res => res.json())
-            .then(setPuzzles)
+        .then(res => res.json())
+        .then(setPuzzles)
     }
-
+ 
     const addPuzzle = puzzle => {
         return fetch("http://localhost:8088/puzzles", {
             method: "POST",

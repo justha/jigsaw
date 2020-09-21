@@ -1,24 +1,24 @@
-// import React from "react"
-// import "./Puzzle.css"
+import React, {useContext} from "react"
+import { BrandContext } from "../brand/BrandProvider"
+import { StatusContext } from "../status/StatusProvider"
+import "./Puzzle.css"
 
 
-// export const Puzzle = ({ puzzle }) => {
-    
-//     return (
-//         <section className="puzzle">
-//             <div className="puzzle__name"><b>{puzzle.name}</b></div>
-//             <div className="puzzle__brand">by {puzzle.brandId}</div>
-//             <div className="puzzle__status">Status {puzzle.statusId}</div>
+export const Puzzle = ({ puzzle }) => {
 
-//             <button className="btn btn--primary"
-//                 // onClick={() => {
-//                 //     PuzzleDetail(puzzleId)
-//                 // }}
-//             >Details</button>
+    const { brands } = useContext(BrandContext)
+    const { statuses } = useContext(StatusContext)
 
-//             <dialog></dialog>
+    const puzzleBrand = brands.find(b => b.id === puzzle.brandId) || {}
+    const puzzleStatus = statuses.find(s => s.id === puzzle.statusId) || {}
 
-//         </section>
-//     )
+    return (
+        <section className="puzzle">
+            <div className="puzzle__name"><b>{puzzle.name}</b></div>
+            <div className="puzzle__brand">by {puzzleBrand.name}</div>
+            <small className="puzzle__status">{puzzleStatus.message}</small>
+        </section>
+    )
 
-// }
+}
+

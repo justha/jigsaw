@@ -5,7 +5,7 @@ import "./Header.css"
 export const Header = () => {
     return (
         <section>
-            <div><b>puzzl</b></div>
+            <div><b>puzl</b></div>
             <small>an app for avid jigsaw puzzlers</small>
             <br></br>
         </section>

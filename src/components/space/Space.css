@@ -1,38 +1,34 @@
-.puzzleForm, 
-.puzzleList {
+.spaceForm, 
+.spaceList {
     font-size: small;
     margin: 1rem;
 }
 
-.form__puzzleDimensions {
+.form__spaceDimensions {
     display: flex;
     flex-direction: row;
 }
 
-#puzzleLength, 
-#puzzleWidth {
+#spaceLength, 
+#spaceWidth {
     width: 2.5em;
     text-align: center;
 }
 
-.link__toPuzzleDetails {
+.link__toSpaceDetails {
     text-decoration: none;
     color: inherit;
 }
 
-.puzzle__name {
+.space__name {
     font-size: large;
     font-weight: bold;
 }
 
-.puzzle__brand {
+.space__detail {
     font-size: small;
 }
 
-.puzzle__detail {
-    font-size: small;
-}
-
-.puzzle__title {
+.space__title {
     font-weight: bold;
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from "react"
+import React, { useContext, useRef, useEffect, useState} from "react"
 import { PuzzleContext } from "./PuzzleProvider"
 import { BrandContext } from "../brand/BrandProvider"
 import { BoxContext } from "../box/BoxProvider"
@@ -8,13 +8,48 @@ import { StatusContext } from "../status/StatusProvider"
 import "./Puzzle.css"
 
 export const PuzzleForm = (props) => {
-    const { addPuzzle } = useContext(PuzzleContext)
+    // context providers
+    const { addPuzzle, puzzles, editPuzzle, getPuzzles } = useContext(PuzzleContext)
     const { brands, getBrands } = useContext(BrandContext)
     const { statuses, getStatuses } = useContext(StatusContext)
     const { boxes, getBoxes } = useContext(BoxContext)
     const { textures, getTextures } = useContext(TextureContext)
     const { dusts, getDusts } = useContext(DustContext)
 
+    // component state
+    const [puzzle, setPuzzle] = useState({})
+
+    const editMode = props.match.params.hasOwnProperty("puzzleId")
+
+    const handleControlledInputChange = (event) => {
+        const newPuzzle = Object.assign({}, puzzle)
+        newPuzzle[event.target.name] = event.target.value 
+        setPuzzle(newPuzzle)
+    }
+
+    const getPuzzleInEditMode = () => {
+        if (editMode) {
+            const puzzleId = parseInt(props.match.params.puzzleId)
+            const selectedPuzzle = puzzles.find(p => p.id === puzzleId) || {}
+            setPuzzle(selectedPuzzle)
+        }
+    }
+    
+    
+    useEffect(() => {
+        getPuzzles()
+        getBrands()
+        getStatuses()
+        getBoxes()
+        getTextures()
+        getDusts()
+    }, [])
+
+
+    useEffect (() => {
+        getPuzzleInEditMode()
+    }, [puzzles])
+    
 
     const name = useRef(null)
     const brand = useRef(null)
@@ -28,17 +63,8 @@ export const PuzzleForm = (props) => {
     const note = useRef(null)
     const length = useRef(null)
     const width = useRef(null)
-    // const favorite = useRef(null)
+    const activeId = parseInt(localStorage.getItem("app_user"))
     
-
-
-    useEffect(() => {
-        getBrands()
-        getStatuses()
-        getBoxes()
-        getTextures()
-        getDusts()
-    }, [])
 
     const createNewPuzzle = () => {
         const puzzleName = (name.current.value)
@@ -49,8 +75,14 @@ export const PuzzleForm = (props) => {
         const boxId = parseInt(box.current.value)
         const puzzleLength = parseInt(length.current.value)
         const puzzleWidth = parseInt(width.current.value)
+        const puzzleCount = parseInt(count.current.value)
 
-
+        // if (puzzleName === ""){window.alert("please input a name or description")}
+        // if (brandId === 0){window.alert("please select a brand")}
+        // if (statusId === 0){window.alert("please select a status")}
+        // if (boxId === 0){window.alert("please select a box size")}
+        // if (isNaN(puzzleLength) === true){window.alert("please input a length")}
+        // if (isNaN(puzzleWidth) === true){window.alert("please input a width")}
         if (
             puzzleName === "" || 
             brandId === 0 ||
@@ -59,179 +91,289 @@ export const PuzzleForm = (props) => {
             isNaN(puzzleLength) === true ||
             isNaN(puzzleWidth) === true 
             )
-            {window.alert("please enter all required fields")}
-        // if (puzzleName === ""){window.alert("please input a name or description")}
-        // if (brandId === 0){window.alert("please select a brand")}
-        // if (statusId === 0){window.alert("please select a status")}
-        // if (boxId === 0){window.alert("please select a box size")}
-        // if (isNaN(puzzleLength) === true){window.alert("please input a length")}
-        // if (isNaN(puzzleWidth) === true){window.alert("please input a width")}
+            {window.alert("Please enter all required fields")}
+        else if (
+            isNaN(puzzleCount) === true 
+            )
+            {window.alert("Puzzle count should be a number")}
         else {
-            addPuzzle({
-                userId: 1,
-                name: name.current.value,
-                brandId: brand.current.value,
-                count: count.current.value,
-                assembled: assembled.current.value,
-                statusId,
-                boxId,
-                poster: JSON.parse(poster.current.value),
-                textureId,
-                dustId,
-                note: note.current.value,
-                length: length.current.value,
-                width: width.current.value,
-                favorite: false
-            })
-            .then(() => props.history.push("/puzzles"))
+            if (editMode) {
+                editPuzzle({
+                    name: name.current.value,
+                    brandId,
+                    count: parseInt(count.current.value),
+                    assembled: assembled.current.value,
+                    statusId,
+                    boxId,
+                    poster: JSON.parse(poster.current.value),
+                    textureId,
+                    dustId,
+                    note: note.current.value,
+                    length: parseInt(length.current.value),
+                    width: parseInt(width.current.value),
+                    favorite: false,
+                    userId: activeId, 
+                    id: puzzle.id
+                })
+                .then(() => props.history.push("/puzzles"))
+            }
+            else {
+                addPuzzle({
+                    name: name.current.value,
+                    brandId,
+                    count: parseInt(count.current.value),
+                    assembled: assembled.current.value,
+                    statusId,
+                    boxId,
+                    poster: JSON.parse(poster.current.value),
+                    textureId,
+                    dustId,
+                    note: note.current.value,
+                    length: parseInt(length.current.value),
+                    width: parseInt(width.current.value),
+                    favorite: false,
+                    userId: activeId
+                })
+                .then(() => props.history.push("/puzzles"))
+            }
         }
     }
 
     return (
-        <form className="puzzleForm">
-            
-            <h3 className="puzzleForm__title">Add a Puzzle</h3>
+        <form className="puzzleForm">            
+            <h3 className="puzzleForm__title">{editMode ? "Edit Puzzle" : "Add a Puzzle"}</h3>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzleName">Puzzle Name*: </label>
-                    <input type="text" id="puzzleName" ref={name} required autoFocus className="form--control" placeholder="input name or desc" />
+                <div className="form--group">
+                    <label htmlFor="name">Puzzle Name*: </label>
+                    <input 
+                        className="form--control" 
+                        ref={name} required autoFocus 
+                        id="name" 
+                        proptype="varchar"
+                        type="text" 
+                        placeholder="input name or desc" 
+                        defaultValue={puzzle.name} 
+                        onChange={handleControlledInputChange}
+                    />
                 </div>
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzleBrand">Brand*: </label>
-                    <select className="form--control" defaultValue="" name="brand" ref={brand} id="puzzleBrand" >
+                <div className="form--group">
+                    <label htmlFor="brandId">
+                        Brand*: 
+                    </label>
+                    <select 
+                        className="form--control" 
+                        ref={brand} required
+                        id="brandId" 
+                        proptype="int"
+                        name="brandId" 
+                        value={puzzle.brandId}
+                        onChange={handleControlledInputChange}
+                    >
                         <option value="0">select</option>
                             {brands.map(b => (
-                                <option key={b.id} value={b.id}>
-                                    {b.name}
-                                </option>    
-                            ))}    
+                        <option key={b.id} value={b.id}>
+                            {b.name}</option>))}    
                     </select>  
-                    {/* <input type="text" id="puzzleBrand" ref={brand} required autoFocus className="form--control" placeholder="input brand name" /> */}
                 </div>
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzleCount">Number of Pieces: </label>
-                    <input type="text" id="puzzleCount" ref={count} autoFocus className="form--control" placeholder="input piece count" />
+                <div className="form--group">
+                    <label htmlFor="count">
+                        Number of Pieces: 
+                    </label>
+                    <input 
+                        className="form--control" 
+                        ref={count} autoFocus 
+                        id="count" 
+                        proptype="int"
+                        type="text" 
+                        placeholder="input piece count" 
+                        defaultValue={puzzle.count} 
+                        onChange={handleControlledInputChange}
+                    />
                 </div>
             </fieldset>
 
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzleBox">Box Size*: </label>
-                    <select className="form--control" defaultValue="" name="box" ref={box} id="puzzleBox" >
+                <div className="form--group">
+                    <label htmlFor="boxId">
+                        Box Size*: 
+                    </label>
+                    <select 
+                        className="form--control" 
+                        ref={box} required
+                        id="boxId" 
+                        proptype="int"
+                        name="boxId" 
+                        value={puzzle.boxId}
+                        onChange={handleControlledInputChange}
+                    >
                         <option value="0">select</option>
                             {boxes.map(b => (
-                                <option key={b.id} value={b.id}>
-                                    {b.size}
-                                </option>    
-                            ))}    
+                        <option key={b.id} value={b.id}>
+                            {b.size}</option>))}    
                     </select>   
-                    {/* <input type="text" id="puzzleBox" ref={box} required autoFocus className="form--control" placeholder="small, large" /> */}
                 </div>
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzlePoster">Poster Included: </label>
-                    <select className="form--control" defaultValue="" name="poster" ref={poster} id="puzzlePoster" >
+                <div className="form--group">
+                    <label htmlFor="posterId">
+                        Poster Included: 
+                    </label>
+                    <select 
+                        className="form--control" 
+                        ref={poster} 
+                        id="posterId" 
+                        proptype="int"
+                        name="posterId" 
+                        value={puzzle.posterId}
+                        onChange={handleControlledInputChange}
+                    >
                         <option value="false">No</option>
                         <option value="true">Yes</option>
                     </select>   
-                    {/* <input type="text" id="puzzlePoster" ref={poster} autoFocus className="form--control" placeholder="true, false" /> */}
                 </div>
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzleTexture">Texture: </label>
-                    <select className="form--control" defaultValue="" name="texture" ref={texture} id="puzzleTexture" >
+                <div className="form--group">
+                    <label htmlFor="textureId">
+                        Texture: 
+                    </label>
+                    <select 
+                        className="form--control" 
+                        ref={texture} 
+                        id="textureId" 
+                        proptype="int"
+                        name="textureId" 
+                        value={puzzle.textureId}
+                        onChange={handleControlledInputChange}
+                    >
                         <option value="0">select</option>
                             {textures.map(t => (
-                                
-                                <option key={t.id} value={t.id}>
-                                    {t.desc}
-                                </option>    
-
-                            ))}    
+                        <option key={t.id} value={t.id}>
+                            {t.desc}</option>))}    
                     </select>   
-                    {/* <input type="text" id="puzzleTexture" ref={texture} autoFocus className="form--control" placeholder="matte, glossy, crosshatch, other" /> */}
                 </div>
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzleDust">Puzzledust: </label>
-                    <select className="form--control" defaultValue="" name="dust" ref={dust} id="puzzleDust" >
+                <div className="form--group">
+                    <label htmlFor="dustId">
+                        Puzzledust: 
+                    </label>
+                    <select 
+                        className="form--control" 
+                        ref={dust} 
+                        id="dustId" 
+                        proptype="int"
+                        name="dustId" 
+                        value={puzzle.dustId}
+                        onChange={handleControlledInputChange}
+                    >
                         <option value="0">select</option>
                             {dusts.map(d => (
-                                
-                                <option key={d.id} value={d.id}>
-                                    {d.amount}
-                                </option>    
-
-                            ))}    
+                        <option key={d.id} value={d.id}>
+                            {d.amount}</option>))}    
                     </select>   
-                    {/* <input type="text" id="puzzleDust" ref={dust} autoFocus className="form--control" placeholder="none, minimal, moderate, significant" /> */}
                 </div>
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzleNote">Note: </label>
-                    <input type="text" id="puzzleNote" ref={note} autoFocus className="form--control" placeholder="additional notes" />
+                <div className="form--group">
+                    <label htmlFor="note">
+                        Note: 
+                    </label>
+                    <textarea 
+                        className="form--control" 
+                        ref={note} autoFocus 
+                        id="note" 
+                        proptype="varchar"
+                        type="text" 
+                        placeholder="additional notes" 
+                        defaultValue={puzzle.note} 
+                        onChange={handleControlledInputChange}
+                    />
                 </div>
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzleAssembled">Date Assembled: </label>
-                    <input type="text" id="puzzleAssembled" ref={assembled} autoFocus className="form--control" placeholder="if applicable" />
+                <div className="form--group">
+                    <label htmlFor="assembled">
+                        Date Assembled: 
+                    </label>
+                    <input 
+                        className="form--control" 
+                        ref={assembled} autoFocus 
+                        id="assembled" 
+                        proptype="date"
+                        type="date" 
+                        placeholder="if applicable" 
+                        defaultValue={puzzle.assembled} 
+                        onChange={handleControlledInputChange}
+                    />
                 </div>
             </fieldset>
 
             <fieldset>    
-                <div className="form-group">
-                <label htmlFor="puzzleStatus">Status*: </label>
-                <select className="form--control" defaultValue="" name="status" ref={status} id="puzzleStatus" >
+                <div className="form--group">
+                <label htmlFor="statusId">
+                    Status*: 
+                </label>
+                <select 
+                    className="form--control" 
+                    ref={status} required
+                    id="statusId" 
+                    proptype="int"
+                    name="statusId" 
+                    value={puzzle.statusId}
+                    onChange={handleControlledInputChange} 
+                >
                     <option value="0">select</option>
                         {statuses.map(s => (
-                            <option key={s.id} value={s.id}>
-                                {s.desc}
-                            </option>    
-                        ))}    
+                    <option key={s.id} value={s.id}>
+                        {s.desc}</option>))}    
                 </select>            
                 </div>
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzleLength">Dimensions (Inches)*: </label>
-                    <input type="text" id="puzzleLength" ref={length} required autoFocus className="form--control" placeholder="length" />
-                    <input type="text" id="puzzleWidth" ref={width} required autoFocus className="form--control" placeholder="width" />
+                <div className="form--group">
+                    <label htmlFor="puzzleLength">
+                        Dimensions (Inches)*: 
+                    </label>
+                    <div className="form__puzzleDimensions">
+                        <input 
+                            className="form--control" 
+                            ref={length} required autoFocus 
+                            id="puzzleLength" 
+                            proptype="int"
+                            type="text" 
+                            // placeholder="length" 
+                            defaultValue={puzzle.length} 
+                            onChange={handleControlledInputChange}
+                        />
+                        <div>x</div>
+                        <input 
+                            className="form--control" 
+                            ref={width} required autoFocus 
+                            id="puzzleWidth" 
+                            proptype="int"
+                            type="text" 
+                            // placeholder="width" 
+                            defaultValue={puzzle.width} 
+                            onChange={handleControlledInputChange}
+                        />
+                    </div>
                 </div>
             </fieldset>
-
-
-            {/* <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzleFavorite">Favorite: </label>
-                    <input type="text" id="puzzleFavorite" ref={favorite} autoFocus className="form--control" placeholder="true or false" />
-                </div>
-            </fieldset> */}
-
-            {/* <fieldset>
-                <div className="form-group">
-                    <label htmlFor="puzzleStatus">Status*: </label>
-                    <input type="text" id="puzzleStatus" ref={status} required autoFocus className="form--control" placeholder="in-progress, up next, wishlist, trade" />
-                </div>
-            </fieldset> */}
 
 
             <button type="submit" className="btn btn--primary"

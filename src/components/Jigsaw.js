@@ -11,7 +11,7 @@ import "./Jigsaw.css"
 export const Jigsaw = () => (
     <>
         <Route render={() => {
-            if (localStorage.getItem("application_user")) {
+            if (localStorage.getItem("app_user")) {
                 return (
                     <>
                         <Route render={props => <Header {...props} />} />
@@ -30,19 +30,3 @@ export const Jigsaw = () => (
 
     </>
 )
-
-
-// export const Jigsaw = () => (
-//     <>
-//         <div>
-//             <h1>puzzl</h1>
-//             <small>an app for avid jigsaw puzzlers</small>
-//             <br></br>
-//             {/* <small>log. plan. trade.</small> */}
-//         </div>
-
-//          <NavBar />
-//          <ApplicationViews />
-
-//      </>
-//  )
