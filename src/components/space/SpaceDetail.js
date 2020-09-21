@@ -35,7 +35,7 @@ export const SpaceDetail = (props) => {
                     <text>
                     Standard
                         {/* <br></br>
-                        <small>(cannot be edited)</small> */}
+                        <small>(standard boards cannot be edited)</small> */}
                     </text>
                 }
             </div>

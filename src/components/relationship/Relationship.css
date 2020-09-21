@@ -1,0 +1,4 @@
+.addPuzzleboard {
+    display: flex;
+    flex-direction: row;
+}

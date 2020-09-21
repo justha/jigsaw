@@ -54,28 +54,29 @@ export const PuzzleForm = (props) => {
     const name = useRef(null)
     const brand = useRef(null)
     const count = useRef(null)
-    const assembled = useRef(null)
-    const status = useRef(null)
     const poster = useRef(null)
     const box = useRef(null)
+    const length = useRef(null)
+    const width = useRef(null)
     const texture = useRef(null)
     const dust = useRef(null)
     const note = useRef(null)
-    const length = useRef(null)
-    const width = useRef(null)
+    const assembled = useRef(null)
+    const status = useRef(null)
+    const trade = useRef(null)
     const activeId = parseInt(localStorage.getItem("app_user"))
     
 
     const createNewPuzzle = () => {
         const puzzleName = (name.current.value)
         const brandId = parseInt(brand.current.value)
-        const statusId = parseInt(status.current.value)
-        const textureId = parseInt(texture.current.value)
-        const dustId = parseInt(dust.current.value)
+        const puzzleCount = parseInt(count.current.value)
         const boxId = parseInt(box.current.value)
         const puzzleLength = parseInt(length.current.value)
         const puzzleWidth = parseInt(width.current.value)
-        const puzzleCount = parseInt(count.current.value)
+        const textureId = parseInt(texture.current.value)
+        const dustId = parseInt(dust.current.value)
+        const statusId = parseInt(status.current.value)
 
         // if (puzzleName === ""){window.alert("please input a name or description")}
         // if (brandId === 0){window.alert("please select a brand")}
@@ -86,10 +87,10 @@ export const PuzzleForm = (props) => {
         if (
             puzzleName === "" || 
             brandId === 0 ||
-            statusId === 0 ||
             boxId === 0 ||
+            isNaN(puzzleWidth) === true ||
             isNaN(puzzleLength) === true ||
-            isNaN(puzzleWidth) === true 
+            statusId === 0
             )
             {window.alert("Please enter all required fields")}
         else if (
@@ -102,18 +103,18 @@ export const PuzzleForm = (props) => {
                     name: name.current.value,
                     brandId,
                     count: parseInt(count.current.value),
-                    assembled: assembled.current.value,
-                    statusId,
                     boxId,
+                    length: parseInt(length.current.value),
+                    width: parseInt(width.current.value),
+                    statusId,
+                    assembled: assembled.current.value,
+                    trade: JSON.parse(trade.current.value),
+                    note: note.current.value,
                     poster: JSON.parse(poster.current.value),
                     textureId,
                     dustId,
-                    note: note.current.value,
-                    length: parseInt(length.current.value),
-                    width: parseInt(width.current.value),
-                    favorite: false,
                     userId: activeId, 
-                    id: puzzle.id
+                    id: puzzle.id,
                 })
                 .then(() => props.history.push("/puzzles"))
             }
@@ -122,21 +123,23 @@ export const PuzzleForm = (props) => {
                     name: name.current.value,
                     brandId,
                     count: parseInt(count.current.value),
-                    assembled: assembled.current.value,
-                    statusId,
                     boxId,
+                    length: parseInt(length.current.value),
+                    width: parseInt(width.current.value),
+                    statusId,
+                    assembled: assembled.current.value,
+                    trade: JSON.parse(trade.current.value),
+                    note: note.current.value,
                     poster: JSON.parse(poster.current.value),
                     textureId,
                     dustId,
-                    note: note.current.value,
-                    length: parseInt(length.current.value),
-                    width: parseInt(width.current.value),
-                    favorite: false,
+                    favorite: false, //do not allow user to edit this field via form
                     userId: activeId
                 })
                 .then(() => props.history.push("/puzzles"))
             }
         }
+        console.log(assembled.current.value)
     }
 
     return (
@@ -222,18 +225,117 @@ export const PuzzleForm = (props) => {
                 </div>
             </fieldset>
 
+
             <fieldset>
                 <div className="form--group">
-                    <label htmlFor="posterId">
+                    <label htmlFor="puzzleLength">
+                        Puzzle Dimensions*: 
+                    </label>
+                    <div className="form__puzzleDimensions">
+                        <input 
+                            className="form--control" 
+                            ref={length} required autoFocus 
+                            id="puzzleLength" 
+                            proptype="int"
+                            type="text" 
+                            // placeholder="length" 
+                            defaultValue={puzzle.length} 
+                            onChange={handleControlledInputChange}
+                        />
+                        <div>x</div>
+                        <input 
+                            className="form--control" 
+                            ref={width} required autoFocus 
+                            id="puzzleWidth" 
+                            proptype="int"
+                            type="text" 
+                            // placeholder="width" 
+                            defaultValue={puzzle.width} 
+                            onChange={handleControlledInputChange}
+                        />
+                        <div>inches</div>
+                    </div>
+                </div>
+            </fieldset>
+
+
+            <fieldset>    
+                <div className="form--group">
+                <label htmlFor="statusId">
+                    Status*: 
+                </label>
+                <select 
+                    className="form--control" 
+                    ref={status} required
+                    id="statusId" 
+                    proptype="int"
+                    name="statusId" 
+                    value={puzzle.statusId}
+                    onChange={handleControlledInputChange} 
+                >
+                    <option value="0">select</option>
+                        {statuses.map(s => (
+                    <option key={s.id} value={s.id}>
+                        {s.desc}</option>))}    
+                </select>            
+                </div>
+            </fieldset>
+
+
+            <fieldset>
+                <div className="form--group">
+                    <label htmlFor="note">
+                        Notes: 
+                    </label>
+                    <textarea 
+                        className="form--control" 
+                        ref={note} autoFocus 
+                        id="note" 
+                        proptype="varchar"
+                        type="text" 
+                        placeholder="additional notes" 
+                        defaultValue={puzzle.note} 
+                        onChange={handleControlledInputChange}
+                    />
+                </div>
+            </fieldset>
+
+
+            <h3>Other Details (optional)</h3>
+
+            <fieldset>
+                <div className="form--group">
+                    <label htmlFor="trade">
+                        Available to Trade?: 
+                    </label>
+                    <select 
+                        className="form--control" 
+                        ref={trade} 
+                        id="trade" 
+                        proptype="bool"
+                        name="trade" 
+                        value={puzzle.trade}
+                        onChange={handleControlledInputChange}
+                    >
+                        <option value="false">No</option>
+                        <option value="true">Yes</option>
+                    </select>   
+                </div>
+            </fieldset>
+
+
+            <fieldset>
+                <div className="form--group">
+                    <label htmlFor="poster">
                         Poster Included: 
                     </label>
                     <select 
                         className="form--control" 
                         ref={poster} 
-                        id="posterId" 
-                        proptype="int"
-                        name="posterId" 
-                        value={puzzle.posterId}
+                        id="poster" 
+                        proptype="bool"
+                        name="poster" 
+                        value={puzzle.poster}
                         onChange={handleControlledInputChange}
                     >
                         <option value="false">No</option>
@@ -288,24 +390,6 @@ export const PuzzleForm = (props) => {
 
             <fieldset>
                 <div className="form--group">
-                    <label htmlFor="note">
-                        Note: 
-                    </label>
-                    <textarea 
-                        className="form--control" 
-                        ref={note} autoFocus 
-                        id="note" 
-                        proptype="varchar"
-                        type="text" 
-                        placeholder="additional notes" 
-                        defaultValue={puzzle.note} 
-                        onChange={handleControlledInputChange}
-                    />
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <div className="form--group">
                     <label htmlFor="assembled">
                         Date Assembled: 
                     </label>
@@ -322,59 +406,12 @@ export const PuzzleForm = (props) => {
                 </div>
             </fieldset>
 
-            <fieldset>    
-                <div className="form--group">
-                <label htmlFor="statusId">
-                    Status*: 
-                </label>
-                <select 
-                    className="form--control" 
-                    ref={status} required
-                    id="statusId" 
-                    proptype="int"
-                    name="statusId" 
-                    value={puzzle.statusId}
-                    onChange={handleControlledInputChange} 
-                >
-                    <option value="0">select</option>
-                        {statuses.map(s => (
-                    <option key={s.id} value={s.id}>
-                        {s.desc}</option>))}    
-                </select>            
-                </div>
-            </fieldset>
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="puzzleLength">
-                        Dimensions (Inches)*: 
-                    </label>
-                    <div className="form__puzzleDimensions">
-                        <input 
-                            className="form--control" 
-                            ref={length} required autoFocus 
-                            id="puzzleLength" 
-                            proptype="int"
-                            type="text" 
-                            // placeholder="length" 
-                            defaultValue={puzzle.length} 
-                            onChange={handleControlledInputChange}
-                        />
-                        <div>x</div>
-                        <input 
-                            className="form--control" 
-                            ref={width} required autoFocus 
-                            id="puzzleWidth" 
-                            proptype="int"
-                            type="text" 
-                            // placeholder="width" 
-                            defaultValue={puzzle.width} 
-                            onChange={handleControlledInputChange}
-                        />
-                    </div>
-                </div>
-            </fieldset>
+            
 
+
+            <br></br>
+            <br></br>
 
             <button type="submit" className="btn btn--primary"
                 onClick={evt => {
