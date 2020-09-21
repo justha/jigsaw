@@ -98,7 +98,7 @@ export const PuzzleForm = (props) => {
             )
             {window.alert("Puzzle count should be a number")}
         else {
-            if (editMode) {
+            if (editMode){
                 editPuzzle({
                     name: name.current.value,
                     brandId,
@@ -139,7 +139,6 @@ export const PuzzleForm = (props) => {
                 .then(() => props.history.push("/puzzles"))
             }
         }
-        console.log(assembled.current.value)
     }
 
     return (
@@ -228,10 +227,10 @@ export const PuzzleForm = (props) => {
 
             <fieldset>
                 <div className="form--group">
-                    <label htmlFor="puzzleLength">
+                    <label htmlFor="puzzleDimensions">
                         Puzzle Dimensions*: 
                     </label>
-                    <div className="form__puzzleDimensions">
+                    <div className="form__puzzleDimensionsInputGroup">
                         <input 
                             className="form--control" 
                             ref={length} required autoFocus 

@@ -1,125 +1,150 @@
-// import React, { useContext, useRef, useEffect, useState} from "react"
-// import { SpaceContext } from "./SpaceProvider"
+import React, { useContext, useRef, useEffect, useState} from "react"
+import { SpaceContext } from "./SpaceProvider"
 // import { RelationshipContext } from "../relationship/RelationshipProvider"
-// import "./Space.css"
+import "./Space.css"
 
-// export const SpaceForm = (props) => {
+export const SpaceForm = (props) => {
 
-//     const { addSpace, spaces, editSpace, getSpaces } = useContext(SpaceContext)
-//     const { relationships, editRelationship, getRelationships } = useContext(RelationshipContext)
+    const { addSpace, spaces, editSpace, getSpaces } = useContext(SpaceContext)
+    // const { relationships, editRelationship, getRelationships, addRelationship } = useContext(RelationshipContext)
 
-//     const [ space, setSpace ] = useState({})
-//     const [ relationship, setRelationship ] = useState({})
+    const [ space, setSpace ] = useState({})
+    // const [ relationship, setRelationship ] = useState({})
 
-//     const editMode = props.match.params.hasOwnProperty("spaceId")
+    const editMode = props.match.params.hasOwnProperty("spaceId")
 
-//     const handleControlledInputChangeSpace = (event) => {
-//         const newSpace = Object.assign({}, space)
-//         newSpace[event.target.name] = event.target.value 
-//         setSpace(newSpace)
-//     }
 
-//     const handleControlledInputChangeRelationship = (event) => {
-//         const newRelationship = Object.assign({}, relationship)
-//         newRelationship[event.target.name] = event.target.value 
-//         setRelationship(newRelationship)
-//     }
+    const handleControlledInputChange = (event) => {
+        const newSpace = Object.assign({}, space)
+        newSpace[event.target.name] = event.target.value 
+        setSpace(newSpace)
+    }
 
-//     const getSpaceInEditMode = () => {
-//         if (editMode) {
-//             const spaceId = parseInt(props.match.params.spaceId)
-//             const selectedSpace = spaces.find(s => s.id === spaceId) || {}
-//             setSpace(selectedSpace)
-//         }
-//     }
-    
-//     const getRelationshipInEditMode = () => {
-//         if (editMode) {
-//             const relationshipId = parseInt(props.match.params.relationshipId)
-//             const selectedRelationship = relationships.find(r => r.id === relationshipId) || {}
-//             setSpace(selectedRelationship)
-//         }
-//     }
+    const getSpaceInEditMode = () => {
+        if (editMode) {
+            const spaceId = parseInt(props.match.params.spaceId)
+            const selectedSpace = spaces.find(s => s.id === spaceId) || {}
+            setSpace(selectedSpace)
+        }
+    }
     
     
-//     useEffect(() => {
-//         getSpaces()
-//         getRelationships()
-//     }, [])
+    useEffect(() => {
+        getSpaces()
+        // getRelationships()
+    }, [])
 
 
-//     useEffect (() => {
-//         getSpaceInEditMode()
-//     }, [spaces])
+    useEffect (() => {
+        getSpaceInEditMode()
+    }, [spaces])
     
-
-//     useEffect (() => {
-//         getRelationshipInEditMode()
-//     }, [relationships])
     
+    const name = useRef(null)
+    const length = useRef(null)
+    const width = useRef(null)
+    const activeId = parseInt(localStorage.getItem("app_user"))
+    // const relationshipSpace = useRef(null)
 
-//     const relationshipSpace = useRef(null)
-//     const activeId = parseInt(localStorage.getItem("app_user"))
 
+    const createNewSpace = () => {
 
-//     const createNewRelationship = () => {
-//         const spaceId = parseInt(relationshipSpace.current.value)
+        if (editMode){
+            editSpace({
+                name: name.current.value,
+                length: parseInt(length.current.value),
+                width: parseInt(width.current.value),
+                custom: true,
+                id: space.id
 
-//         if (
-//             spaceId === 0
-//         )
-//             {window.alert("Please select a workspace")}
-//         else {
-//             if (editMode) {
-//                 editRelationship({
-//                     spaceId: parseInt(relationshipSpace.current.value),
-//                     userId: activeId, 
-//                     id: relationship.id
-//                 })
-//                 .then(() => props.history.push("/spaces"))
-//             }
-//             else {
-//                 addRelationship({
-//                     spaceId: parseInt(relationshipSpace.current.value),
-//                     userId: activeId
-//                 })
-//                 .then(() => props.history.push("/puzspaceszles"))
-//             }
-//         }
-//     }
-
-//     return (
-//         <form className="relationshipForm">
-//             <h3 className="relationshipForm__title">{editMode ? "Edit Space" : "Add a Space"}</h3>
-
-//             <fieldset>
-//                 <div className="form--group">
-//                     <label htmlFor="spaceId">
-//                         Space: 
-//                     </label>
-//                     <select 
-//                         className="form--control" 
-//                         ref={relationshipSpace} required
-//                         id="spaceId" 
-//                         proptype="int"
-//                         name="spaceId" 
-//                         value={relationship.spaceId}
-//                         onChange={handleControlledInputChangeRelationship}
-//                     >
-//                         <option value="0">select</option>
-//                             {spaces.map(s => (
-//                         <option key={s.id} value={s.id}>
-//                             {s.name} {s.length} {s.width}</option>))}    
-//                     </select>  
-//                 </div>
-//             </fieldset>
-
-//         </form>
-
-//     )
+            })
+        }
+        else{
+            addSpace({
+                name: name.current.value,
+                length: parseInt(length.current.value),
+                width: parseInt(width.current.value),
+                custom: true
+            })
+            .then(() => props.history.push("/relationships"))
+        }
+    }
 
 
 
+    return (
+        <form className="spaceForm">
+            <h3 className="spaceForm__title">{editMode ? "Edit Your Custom Space" : "Add a Custom Space"}</h3>
 
 
-// }
+            <fieldset>
+                <div className="form--group">
+                    <label htmlFor="name">Space Name or Description*: </label>
+                    <input 
+                        className="form--control" 
+                        ref={name} required autoFocus 
+                        id="name" 
+                        proptype="varchar"
+                        type="text" 
+                        placeholder="input desc" 
+                        defaultValue={space.name} 
+                        onChange={handleControlledInputChange}
+                    />
+                </div>
+            </fieldset>
+
+
+            <fieldset>
+                <div className="form--group">
+                    <label htmlFor="spaceDimensions">
+                        Space Dimensions*: 
+                    </label>
+                    <div className="form__spaceDimensionsInputGroup">
+                        <input 
+                            className="form--control" 
+                            ref={length} required autoFocus 
+                            id="spaceLength" 
+                            proptype="int"
+                            type="text" 
+                            // placeholder="length" 
+                            defaultValue={space.length} 
+                            onChange={handleControlledInputChange}
+                        />
+                        <div>x</div>
+                        <input 
+                            className="form--control" 
+                            ref={width} required autoFocus 
+                            id="spaceWidth" 
+                            proptype="int"
+                            type="text" 
+                            // placeholder="width" 
+                            defaultValue={space.width} 
+                            onChange={handleControlledInputChange}
+                        />
+                        <div>inches</div>
+                    </div>
+                </div>
+            </fieldset>
+
+
+            <br></br>
+            <br></br>
+
+            <button type="submit" className="btn btn--primary"
+                onClick={evt => {
+                    evt.preventDefault() 
+                    createNewSpace()
+                }}
+            >
+            Save
+            </button>
+
+        </form>
+
+    )
+
+
+
+
+
+}

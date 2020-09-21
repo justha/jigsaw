@@ -5,12 +5,10 @@ import "./Relationship.css"
 
 export const RelationshipForm = (props) => {
 
-    const { addRelationship, relationships, editRelationship, getRelationships } = useContext(RelationshipContext)
+    const { relationships, getRelationships, addRelationship } = useContext(RelationshipContext)
     const { spaces, getSpaces } = useContext(SpaceContext)
 
     const [ relationship, setRelationship ] = useState({})
-
-    const editMode = props.match.params.hasOwnProperty("relationshipId")
 
     const handleControlledInputChangeRelationship = (event) => {
         const newRelationship = Object.assign({}, relationship)
@@ -18,55 +16,36 @@ export const RelationshipForm = (props) => {
         setRelationship(newRelationship)
     }
     
-    // const getRelationshipInEditMode = () => {
-    //     if (editMode) {
-    //         const relationshipId = parseInt(props.match.params.relationshipId)
-    //         const selectedRelationship = relationships.find(r => r.id === relationshipId) || {}
-    //         setRelationship(selectedRelationship)
-    //     }
-    // }
-    
     
     useEffect(() => {
         getRelationships()
         getSpaces()
     }, [])
-    
+       
 
-    // useEffect (() => {
-    //     getRelationshipInEditMode()
-    // }, [relationships])
-    
-
-    const relationshipSpace = useRef(null)
+    const space = useRef(null)
     const activeId = parseInt(localStorage.getItem("app_user"))
 
 
     const createNewRelationship = () => {
-        const relationshipId = parseInt(relationshipSpace.current.value)
+        const spaceId = parseInt(space.current.value)
+        
+        const relationshipsActiveUser = relationships.filter(r => r.userId === activeId)
+        const matchingObj = relationshipsActiveUser.filter(r => r.spaceId === spaceId)
 
-        if (
-            relationshipId === 0
-        )
-            {window.alert("Select a puzzle board from the drop-down or create a custom space")}
-        // else {
-            // if (editMode) {
-            //     editRelationship({
-                //         userId: activeId, 
-            //         spaceId: parseInt(relationshipSpace.current.value),
-            //         id: relationship.id
-            //     })
-            //     .then(() => props.history.push("/spaces"))
-            // }
-            else {
+        console.log(matchingObj.length)
+
+        if (spaceId === 0){window.alert("Please select or create a custom space.")}
+        else if (matchingObj.length > 0){window.alert("This has already been added. Please select another.")}
+        else {
                 addRelationship({
                     userId: activeId,
-                    spaceId: parseInt(relationshipSpace.current.value)
+                    spaceId
                 })
-                .then(() => props.history.push("/spaces"))
+                .then(() => props.history.push("/relationships"))
             }
-        // }
     }
+
 
     return (
         <form className="relationshipForm">
@@ -80,7 +59,7 @@ export const RelationshipForm = (props) => {
                         </label>
                         <select 
                             className="form--control" 
-                            ref={relationshipSpace} required
+                            ref={space} required
                             id="spaceId" 
                             proptype="int"
                             name="spaceId" 

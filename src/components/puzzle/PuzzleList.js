@@ -27,9 +27,10 @@ export const PuzzleList = (props) => {
     
     return (
         <>
-            <h3>My Collection</h3>
             
             <div className="puzzleList">
+            <h2>My Collection</h2>
+            
                 {
                 filteredPuzzles.map(p => {
                     return (
@@ -49,6 +50,7 @@ export const PuzzleList = (props) => {
                         </article>   
                     )
                 })}
+
             </div> 
 
 

@@ -22,6 +22,11 @@ export const RelationshipProvider = (props) => {
             .then(getRelationships)
     }
 
+    const getRelationshipById = (id) => {
+        return fetch(`http://localhost:8088/relationships/${ id }?_expand=space`)
+        .then(res => res.json())
+    }
+
     const deleteRelationship = relationshipId => {
         return fetch(`http://localhost:8088/relationships/${relationshipId}`, {
             method: "DELETE"
@@ -43,7 +48,7 @@ export const RelationshipProvider = (props) => {
 
     return (
         <RelationshipContext.Provider value={{
-            relationships, addRelationship, getRelationships, setRelationships, deleteRelationship, editRelationship
+            relationships, addRelationship, getRelationships, setRelationships, deleteRelationship, editRelationship, getRelationshipById
         }}>
             {props.children}
         </RelationshipContext.Provider>
