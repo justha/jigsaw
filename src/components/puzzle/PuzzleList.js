@@ -64,29 +64,3 @@ export const PuzzleList = (props) => {
     )
 
 }
-
-
-
-
-
-{/* <div className="puzzleList">
-                {puzzles.map(puzzle => {
-                    const puzzleBrand = brands.find(b => b.id === puzzle.brandId) || {}
-                    const puzzleStatus = statuses.find(s => s.id === puzzle.statusId) || {}
-
-                    return (
-                        <article className="puzzle">
-                            <div><b>{puzzle.name}</b></div>
-                            <div>by {puzzleBrand.name}</div>
-
-                            <Link to={{
-                                    pathname: `/puzzles/${puzzle.id}`,
-                                    state: { chosenPuzzle: puzzle }
-                                    }}
-                            >
-                                <button className="btn btn--primary" id="btnPuzzleDetail">ℹ︎</button>
-                            </Link>
-                        </article>                        
-                    )
-                })}
-            </div>  */}

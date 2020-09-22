@@ -65,22 +65,22 @@ export const RelationshipDetail = (props) => {
                     : 
                         (
                             <>
-                            <button 
-                            className="btn btn--primary" 
-                            id="btnSpaceEdit" 
-                            onClick={() => {
-                                props.history.push(`/spaces/edit/${space.id}`)
-                            }}
-                            >✎</button> 
-
-                            <button className="btn btn--primary" id="btnDeleteRelationship"
-                                onClick={() => {
-                                    deleteSpace(space.id)
-                                    deleteRelationship(relationship.id)
-                                    props.history.push("/relationships")
+                                <button className="btn btn--primary" id="btnDeleteRelationship"
+                                    onClick={() => {
+                                        deleteSpace(space.id)
+                                        deleteRelationship(relationship.id)
+                                        props.history.push("/relationships")
+                                    }
                                 }
-                                }
-                            >X</button> 
+                                >X</button> 
+                                
+                                <button 
+                                    className="btn btn--primary" 
+                                    id="btnSpaceEdit" 
+                                    onClick={() => {
+                                        props.history.push(`/spaces/edit/${space.id}`)
+                                    }}
+                                >✎</button> 
                             </>
                         )
                         

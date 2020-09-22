@@ -92,7 +92,7 @@ export const PuzzleForm = (props) => {
             isNaN(puzzleLength) === true ||
             statusId === 0
             )
-            {window.alert("Please enter all required fields")}
+            {window.alert("Please complete all required fields")}
         else if (
             isNaN(puzzleCount) === true 
             )
