@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { PuzzleContext } from "./PuzzleProvider"
 import { BrandContext } from "../brand/BrandProvider"
@@ -8,14 +8,20 @@ import "./Puzzle.css"
 
 
 export const PuzzleList = (props) => {
-    const { puzzles, getPuzzles } = useContext(PuzzleContext)
+    const { puzzles, getPuzzles, searchTerms } = useContext(PuzzleContext)
     const { getBrands } = useContext(BrandContext)
     const { getStatuses } = useContext(StatusContext)
+
+    // const [ filteredPuzzles, setFiltered ] = useState([])
     
     //filter list by active user
     const activeId = parseInt(localStorage.getItem("app_user"))
-    const puzzlesActiveUser = puzzles.filter(p => p.userId === activeId)
-    let filteredPuzzles = puzzlesActiveUser
+
+    const puzzlesActiveUser = 
+        puzzles.filter(p => p.userId === activeId)
+        .sort((a,b) => (a.statusId > b.statusId) ? 1 : -1)
+
+    // let filteredPuzzles = puzzlesActiveUser
 
     useEffect(() => {
         console.log("PuzzleList: Initial render before data")
@@ -23,6 +29,17 @@ export const PuzzleList = (props) => {
         getBrands()
         getStatuses()
     }, [])
+
+
+    // useEffect(() => {
+    //     if (searchTerms !== ""){
+    //         const subset = puzzlesActiveUser.filter(p => p.name.toLowerCase().includes(searchTerms))
+    //         setFiltered(subset)
+    //     }
+    //     else {
+    //         setFiltered(puzzlesActiveUser)
+    //     }
+    // }, [searchTerms, puzzles])
     
     
     return (
@@ -32,7 +49,7 @@ export const PuzzleList = (props) => {
             <h2>My Collection</h2>
             
                 {
-                filteredPuzzles.map(p => {
+                puzzlesActiveUser.map(p => {
                     return (
                         <article key={p.id}>
 
