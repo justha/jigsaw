@@ -1,0 +1,17 @@
+.relationshipList {
+    margin: 1em;
+}
+
+.addPuzzleboard {
+    display: flex;
+    flex-direction: row;
+}
+
+.link__toRelationshipDetails {
+    text-decoration: none;
+    color: inherit;
+}
+
+.relationshipForm {
+    margin: 1em;
+}

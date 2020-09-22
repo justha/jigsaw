@@ -110,16 +110,16 @@ export const PuzzleDetail = (props) => {
 
             <div className="puzzle__title">Status</div>
             <div className="puzzle__status">{status.desc}</div>
-            <div className="puzzle__dust">{ 
-                    (puzzle.assembled === 0)
-                    ? ``
-                    : `Completed: ${puzzle.assembled}`
+            <div className="puzzle__assembled">{ 
+                    (status.id === 1)
+                    ? `${puzzle.assembled}`
+                    : ``
                 }
             </div>
             <br></br>
 
 
-            <button className="btn btn--primary" id="btnPuzzleDelete"
+            <button className="btn btn--primary" id="btnDeletePuzzle"
                 onClick={() => {
                     deletePuzzle(puzzle.id)
                     props.history.push("/puzzles")

@@ -13,10 +13,9 @@ import { PuzzleDetail } from "./puzzle/PuzzleDetail"
 import { RelationshipProvider } from "./relationship/RelationshipProvider"
 import { RelationshipForm } from "./relationship/RelationshipForm"
 import { SpaceProvider } from "./space/SpaceProvider"
-import { SpaceList } from "./space/SpaceList"
 import { SpaceForm } from "./space/SpaceForm"
-import { SpaceDetail } from "./space/SpaceDetail"
-
+import { RelationshipList } from "./relationship/RelationshipList"
+import { RelationshipDetail } from "./relationship/RelationshipDetail"
 
 export const ApplicationViews = (props) => {
     return (
@@ -60,31 +59,29 @@ export const ApplicationViews = (props) => {
             
             <RelationshipProvider>
                 <SpaceProvider>
-                    <Route exact path="/spaces" render={ 
-                        props => <SpaceList {...props}/>
+
+                    <Route exact path="/relationships" render={ 
+                        props => <RelationshipList {...props}/>
                     } />
 
-                    <Route exact path="/spaces/relationships/create" 
+                    <Route exact path="/relationships/create" 
                         render={props => 
                             <RelationshipForm {...props} />
                     } />
 
-                    {/* <Route exact path="/spaces/create" 
+                    <Route path="/relationships/:relationshipId(\d+)" render={
+                        props => <RelationshipDetail {...props}/>
+                    } /> 
+
+                    <Route exact path="/spaces/create" 
                         render={props => 
                             <SpaceForm {...props} />
-                    } /> */}
+                    } />
 
-                    <Route path="/spaces/:spaceId(\d+)" render={
-                        props => <SpaceDetail {...props}/>
-                    } /> 
-
-                    <Route path="/relationships/edit/:relationshipId(\d+)" render={
-                        props => <RelationshipForm {...props}/>
-                    } /> 
-
-                    {/* <Route path="/spaces/edit/:spaceId(\d+)" render={
+                    <Route path="/spaces/edit/:spaceId(\d+)" render={
                         props => <SpaceForm {...props}/>
-                    } />  */}
+                    } /> 
+
                 </SpaceProvider>
             </RelationshipProvider>
 

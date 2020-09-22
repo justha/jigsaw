@@ -27,13 +27,14 @@ export const PuzzleList = (props) => {
     
     return (
         <>
-            <h3>My Collection</h3>
             
             <div className="puzzleList">
+            <h2>My Collection</h2>
+            
                 {
                 filteredPuzzles.map(p => {
                     return (
-                        <article>
+                        <article key={p.id}>
 
                             <Link className="link__toPuzzleDetails" 
                                 to={{
@@ -41,7 +42,7 @@ export const PuzzleList = (props) => {
                                     state: { chosenPuzzle: p }
                                 }}
                             >
-                                <Puzzle key={p.id} puzzle={p} />
+                                <Puzzle puzzle={p} />
                                 <br></br>
 
                             </Link>
@@ -49,6 +50,7 @@ export const PuzzleList = (props) => {
                         </article>   
                     )
                 })}
+
             </div> 
 
 

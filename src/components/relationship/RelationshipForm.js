@@ -5,12 +5,10 @@ import "./Relationship.css"
 
 export const RelationshipForm = (props) => {
 
-    const { addRelationship, relationships, editRelationship, getRelationships } = useContext(RelationshipContext)
+    const { relationships, getRelationships, addRelationship } = useContext(RelationshipContext)
     const { spaces, getSpaces } = useContext(SpaceContext)
 
     const [ relationship, setRelationship ] = useState({})
-
-    const editMode = props.match.params.hasOwnProperty("relationshipId")
 
     const handleControlledInputChangeRelationship = (event) => {
         const newRelationship = Object.assign({}, relationship)
@@ -18,101 +16,87 @@ export const RelationshipForm = (props) => {
         setRelationship(newRelationship)
     }
     
-    const getRelationshipInEditMode = () => {
-        if (editMode) {
-            const relationshipId = parseInt(props.match.params.relationshipId)
-            const selectedRelationship = relationships.find(r => r.id === relationshipId) || {}
-            setRelationship(selectedRelationship)
-        }
-    }
-    
     
     useEffect(() => {
         getRelationships()
         getSpaces()
     }, [])
-    
+       
 
-    useEffect (() => {
-        getRelationshipInEditMode()
-    }, [relationships])
-    
-
-    const relationshipSpace = useRef(null)
+    const space = useRef(null)
     const activeId = parseInt(localStorage.getItem("app_user"))
 
 
     const createNewRelationship = () => {
-        const relationshipId = parseInt(relationshipSpace.current.value)
+        const spaceId = parseInt(space.current.value)
+        
+        const relationshipsActiveUser = relationships.filter(r => r.userId === activeId)
+        const matchingObj = relationshipsActiveUser.filter(r => r.spaceId === spaceId)
 
-        if (
-            relationshipId === 0
-        )
-            {window.alert("Select a workspace to add")}
+        console.log(matchingObj.length)
+
+        if (spaceId === 0){window.alert("Please select or create a custom space.")}
+        else if (matchingObj.length > 0){window.alert("This has already been added. Please select another.")}
         else {
-            if (editMode) {
-                editRelationship({
-                    spaceId: parseInt(relationshipSpace.current.value),
-                    userId: activeId, 
-                    id: relationship.id
-                })
-                .then(() => props.history.push("/spaces"))
-            }
-            else {
                 addRelationship({
-                    spaceId: parseInt(relationshipSpace.current.value),
-                    userId: activeId
+                    userId: activeId,
+                    spaceId
                 })
-                .then(() => props.history.push("/spaces"))
+                .then(() => props.history.push("/relationships"))
             }
-        }
     }
+
 
     return (
         <form className="relationshipForm">
-            <h3 className="relationshipForm__title">Select a puzzle board</h3>
+            <h3 className="relationshipForm__title">Add Puzzle Boards to Your Workspace</h3>
 
-            <fieldset>
-                <div className="form--group">
-                    {/* <label htmlFor="spaceId">
-                        Puzzle boards: 
-                    </label> */}
-                    <select 
-                        className="form--control" 
-                        ref={relationshipSpace} required
-                        id="spaceId" 
-                        proptype="int"
-                        name="spaceId" 
-                        value={relationship.spaceId}
-                        onChange={handleControlledInputChangeRelationship}
-                    >
-                        <option value="0">...</option>{
+            <article className="addPuzzleboard">
+                <fieldset>
+                    <div className="form--group">
+                        <label htmlFor="spaceId">
+                            Select a standard puzzle board
+                        </label>
+                        <select 
+                            className="form--control" 
+                            ref={space} required
+                            id="spaceId" 
+                            proptype="int"
+                            name="spaceId" 
+                            value={relationship.spaceId}
+                            onChange={handleControlledInputChangeRelationship}
+                        >
+                            <option value="0">...</option>{
 
-                            spaces.filter(s => s.custom === false)
-                            .map(s => (
-                        <option key={s.id} value={s.id}>
-                            {s.name}:  {s.length} x {s.width} (inches)
-                        </option>))}    
+                                spaces.filter(s => s.custom === false)
+                                .map(s => (
+                            <option key={s.id} value={s.id}>
+                                {s.name}:  {s.length} x {s.width} (inches)
+                            </option>))}    
+                        </select>  
+                    </div>
+                </fieldset>
 
-                    </select>  
-                </div>
-            </fieldset>
+                <button type="submit" className="btn btn--primary"
+                    onClick={evt => {
+                        evt.preventDefault() 
+                        createNewRelationship()
+                    }}
+                >
+                Add
+                </button>
 
-
-            <button type="submit" className="btn btn--primary"
-                onClick={evt => {
-                    evt.preventDefault() 
-                    createNewRelationship()
-                }}
-            >
-            Add
-            </button>
+            </article>
             <br></br>
+
+            <div>or</div>
+            <br></br>
+
 
             <button className="btn btn--primary" id="btnAddSpace"
                 onClick={() => {props.history.push("/spaces/create")}}
             >
-            Or Create a Custom Workspace
+            Create a Custom Space
             </button>  
 
         </form>
