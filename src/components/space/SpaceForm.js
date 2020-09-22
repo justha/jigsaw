@@ -56,8 +56,8 @@ export const SpaceForm = (props) => {
                 width: parseInt(width.current.value),
                 custom: true,
                 id: space.id
-
             })
+            .then(() => props.history.push("/relationships"))
         }
         else{
             addSpace({

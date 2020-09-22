@@ -13,10 +13,9 @@ import { PuzzleDetail } from "./puzzle/PuzzleDetail"
 import { RelationshipProvider } from "./relationship/RelationshipProvider"
 import { RelationshipForm } from "./relationship/RelationshipForm"
 import { SpaceProvider } from "./space/SpaceProvider"
-import { SpaceList } from "./space/SpaceList--DELETE"
 import { SpaceForm } from "./space/SpaceForm"
-import { SpaceDetail } from "./space/SpaceDetail"
-import { RelationshipList } from "./relationship/RelationshipList";
+import { RelationshipList } from "./relationship/RelationshipList"
+import { RelationshipDetail } from "./relationship/RelationshipDetail"
 
 export const ApplicationViews = (props) => {
     return (
@@ -70,14 +69,14 @@ export const ApplicationViews = (props) => {
                             <RelationshipForm {...props} />
                     } />
 
+                    <Route path="/relationships/:relationshipId(\d+)" render={
+                        props => <RelationshipDetail {...props}/>
+                    } /> 
+
                     <Route exact path="/spaces/create" 
                         render={props => 
                             <SpaceForm {...props} />
                     } />
-
-                    <Route path="/spaces/:spaceId(\d+)" render={
-                        props => <SpaceDetail {...props}/>
-                    } /> 
 
                     <Route path="/spaces/edit/:spaceId(\d+)" render={
                         props => <SpaceForm {...props}/>

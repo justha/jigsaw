@@ -119,7 +119,7 @@ export const PuzzleDetail = (props) => {
             <br></br>
 
 
-            <button className="btn btn--primary" id="btnPuzzleDelete"
+            <button className="btn btn--primary" id="btnDeletePuzzle"
                 onClick={() => {
                     deletePuzzle(puzzle.id)
                     props.history.push("/puzzles")

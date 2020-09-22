@@ -18,10 +18,6 @@ export const NavBar = (props) => {
                 <Link className="navbar__link" to="/relationships">Workspaces</Link>
             </li>
             
-            {/* <li className="navbar__item active">
-                <Link className="navbar__link" to="/spaces">Space</Link>
-            </li> */}
-            
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/logout">Logout</Link>
             </li>
