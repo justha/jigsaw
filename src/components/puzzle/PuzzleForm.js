@@ -52,9 +52,6 @@ export const PuzzleForm = (props) => {
     useEffect (() => {
         getPuzzleInEditMode()
     }, [puzzles])
-
-
-    
     
     
     
@@ -435,7 +432,7 @@ export const PuzzleForm = (props) => {
                     <label htmlFor="image">Upload Image: </label>
                     <input 
                         className="form--control" 
-                        // ref={image} 
+                        ref={image} 
                         // autoFocus 
                         // id="image" 
                         // proptype="image"

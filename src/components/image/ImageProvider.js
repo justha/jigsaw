@@ -5,7 +5,6 @@ export const ImageContext = React.createContext()
 
 export const ImageProvider = (props) => {
     const [ images, setImages ] = useState([])
-
     const [ image, setImage ] = useState({})
     const [ loading, setLoading ] = useState(false)
 
@@ -28,6 +27,36 @@ export const ImageProvider = (props) => {
         setLoading(false)
     }
 
+    const getImages = () => {
+        return fetch("http://localhost:8088/images")
+        .then(res => res.json())
+        .then(setImages)
+    }
+
+    const addImage = image => {
+        return fetch("http://localhost:8088/images", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(image)
+        })
+            .then(getImages)
+    }
+
+    const getImageById = (id) => {
+        return fetch(`http://localhost:8088/images/${ id }?_expand=brand&_expand=status`)
+            .then(res => res.json())
+    }
+
+    const deleteImage = imageId => {
+        return fetch(`http://localhost:8088/images/${imageId}`, {
+            method: "DELETE"
+        })
+            .then(getImages)
+    }
+
+
 
     return (
         <ImageContext.Provider value={{
@@ -36,6 +65,5 @@ export const ImageProvider = (props) => {
             {props.children}
         </ImageContext.Provider>
     )
-
 
 }
