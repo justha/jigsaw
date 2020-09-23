@@ -30,8 +30,8 @@ export const PuzzleProvider = (props) => {
             .then(res => res.json())
     }
 
-    const deletePuzzle = puzzleId => {
-        return fetch(`http://localhost:8088/puzzles/${puzzleId}`, {
+    const deletePuzzle = id => {
+        return fetch(`http://localhost:8088/puzzles/${id}`, {
             method: "DELETE"
         })
             .then(getPuzzles)

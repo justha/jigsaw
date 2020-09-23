@@ -27,8 +27,8 @@ export const RelationshipProvider = (props) => {
         .then(res => res.json())
     }
 
-    const deleteRelationship = relationshipId => {
-        return fetch(`http://localhost:8088/relationships/${relationshipId}`, {
+    const deleteRelationship = id => {
+        return fetch(`http://localhost:8088/relationships/${id}`, {
             method: "DELETE"
         })
             .then(getRelationships)

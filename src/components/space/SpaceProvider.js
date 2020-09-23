@@ -19,11 +19,11 @@ export const SpaceProvider = (props) => {
             },
             body: JSON.stringify(space)
         })
-            .then(getSpaces)
+            // .then(getSpaces)
     }
 
-    const deleteSpace = spaceId => {
-        return fetch(`http://localhost:8088/spaces/${spaceId}`, {
+    const deleteSpace = id => {
+        return fetch(`http://localhost:8088/spaces/${id}`, {
             method: "DELETE"
         })
             .then(getSpaces)
