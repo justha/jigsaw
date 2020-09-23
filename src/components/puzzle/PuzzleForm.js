@@ -54,8 +54,10 @@ export const PuzzleForm = (props) => {
     }, [puzzles])
 
 
-
-
+    
+    
+    
+    
     const name = useRef(null)
     const brand = useRef(null)
     const count = useRef(null)
@@ -70,6 +72,12 @@ export const PuzzleForm = (props) => {
     const status = useRef(null)
     const trade = useRef(null)
     const activeId = parseInt(localStorage.getItem("app_user"))
+    
+
+    useEffect(() => {
+        name.current.focus()
+    }, [name])
+    
     
     const createNewPuzzle = () => {
         const puzzleName = (name.current.value)

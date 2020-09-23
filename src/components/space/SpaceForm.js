@@ -1,15 +1,12 @@
 import React, { useContext, useRef, useEffect, useState} from "react"
 import { SpaceContext } from "./SpaceProvider"
-// import { RelationshipContext } from "../relationship/RelationshipProvider"
 import "./Space.css"
 
 export const SpaceForm = (props) => {
 
     const { addSpace, spaces, editSpace, getSpaces } = useContext(SpaceContext)
-    // const { relationships, editRelationship, getRelationships, addRelationship } = useContext(RelationshipContext)
 
     const [ space, setSpace ] = useState({})
-    // const [ relationship, setRelationship ] = useState({})
 
     const editMode = props.match.params.hasOwnProperty("spaceId")
 
@@ -31,7 +28,6 @@ export const SpaceForm = (props) => {
     
     useEffect(() => {
         getSpaces()
-        // getRelationships()
     }, [])
 
 
@@ -44,11 +40,14 @@ export const SpaceForm = (props) => {
     const length = useRef(null)
     const width = useRef(null)
     const activeId = parseInt(localStorage.getItem("app_user"))
-    // const relationshipSpace = useRef(null)
+
+    
+    useEffect(() => {
+        name.current.focus()
+    }, [name])
 
 
     const createNewSpace = () => {
-
         if (editMode){
             editSpace({
                 name: name.current.value,
