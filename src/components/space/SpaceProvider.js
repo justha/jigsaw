@@ -19,7 +19,7 @@ export const SpaceProvider = (props) => {
             },
             body: JSON.stringify(space)
         })
-            .then(getSpaces)
+            // .then(getSpaces)
     }
 
     const deleteSpace = id => {

@@ -27,7 +27,6 @@ export const SpaceForm = (props) => {
         }
     }
     
-    
     useEffect(() => {
         getSpaces()
     }, [])
@@ -78,12 +77,13 @@ export const SpaceForm = (props) => {
                     width: parseInt(width.current.value),
                     custom: true
                 })
-                .then( 
+                .then( res => res.json())
+                .then(parsedObj => {
                     addRelationship({
                         userId: activeId,
-                        spaceId: space.id
+                        spaceId: parsedObj.id
                     })
-                )
+                })
                 .then(() => props.history.push("/relationships"))
             }
         }
