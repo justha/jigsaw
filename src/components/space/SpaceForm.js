@@ -1,10 +1,12 @@
 import React, { useContext, useRef, useEffect, useState} from "react"
 import { SpaceContext } from "./SpaceProvider"
+import { RelationshipContext } from "../relationship/RelationshipProvider"
 import "./Space.css"
 
 export const SpaceForm = (props) => {
 
     const { addSpace, spaces, editSpace, getSpaces } = useContext(SpaceContext)
+    const { addRelationship } = useContext(RelationshipContext)
 
     const [ space, setSpace ] = useState({})
 
@@ -41,32 +43,52 @@ export const SpaceForm = (props) => {
     const width = useRef(null)
     const activeId = parseInt(localStorage.getItem("app_user"))
 
-    
+    // sets form cursor to first input field 
     useEffect(() => {
         name.current.focus()
     }, [name])
 
 
     const createNewSpace = () => {
-        if (editMode){
-            editSpace({
-                name: name.current.value,
-                length: parseInt(length.current.value),
-                width: parseInt(width.current.value),
-                custom: true,
-                id: space.id
-            })
-            .then(() => props.history.push("/relationships"))
+        const spaceName = (name.current.value)
+        const spaceLength = parseInt(length.current.value)
+        const spaceWidth = parseInt(width.current.value)
+
+        if (
+            spaceName === "" || 
+            isNaN(spaceLength) === true ||
+            isNaN(spaceWidth) === true
+            )
+            {window.alert("Please complete all fields and confirm that dimensions are entered as numbers")}
+        else {
+            if (editMode){
+                editSpace({
+                    name: name.current.value,
+                    length: parseInt(length.current.value),
+                    width: parseInt(width.current.value),
+                    custom: true,
+                    id: space.id
+                })
+                .then(() => props.history.push("/relationships"))
+            }
+            else {
+                addSpace({
+                    name: name.current.value,
+                    length: parseInt(length.current.value),
+                    width: parseInt(width.current.value),
+                    custom: true
+                })
+                .then( 
+                    addRelationship({
+                        userId: activeId,
+                        spaceId: space.id
+                    })
+                )
+                .then(() => props.history.push("/relationships"))
+            }
         }
-        else{
-            addSpace({
-                name: name.current.value,
-                length: parseInt(length.current.value),
-                width: parseInt(width.current.value),
-                custom: true
-            })
-            .then(() => props.history.push("/relationships"))
-        }
+
+
     }
 
 

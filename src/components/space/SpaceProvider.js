@@ -22,8 +22,8 @@ export const SpaceProvider = (props) => {
             .then(getSpaces)
     }
 
-    const deleteSpace = spaceId => {
-        return fetch(`http://localhost:8088/spaces/${spaceId}`, {
+    const deleteSpace = id => {
+        return fetch(`http://localhost:8088/spaces/${id}`, {
             method: "DELETE"
         })
             .then(getSpaces)
