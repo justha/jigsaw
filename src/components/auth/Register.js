@@ -3,8 +3,8 @@ import "./Auth.css"
 
 export const Register = (props) => {
     const name = useRef()
-    // const firstName = useRef()
-    // const lastName = useRef()
+    const firstName = useRef()
+    const lastName = useRef()
     const email = useRef()
     const password = useRef()
     const verifyPassword = useRef()
@@ -30,7 +30,9 @@ export const Register = (props) => {
                         body: JSON.stringify({
                             email: email.current.value,
                             password: password.current.value,
-                            name: name.current.value
+                            firstName: firstName.current.value,
+                            lastName: lastName.current.value
+                            // name: name.current.value
                             // name: `${firstName.current.value} ${lastName.current.value}`
                         })
                     })
@@ -56,17 +58,17 @@ export const Register = (props) => {
             </dialog>
 
             <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Please Register</h1>
-                <fieldset>
+                <h1 className="h3 mb-3 font-weight-normal">CREATE AN ACCOUNT</h1>
+                {/* <fieldset>
                     <label htmlFor="name"> Name </label>
                     <input ref={name} type="text"
                         name="name"
                         className="form--controlAuth"
-                        placeholder="Name"
+                        placeholder="name"
                         required autoFocus />
-                </fieldset>
-                {/* <fieldset>
-                    <label htmlFor="firstName"> First Name </label>
+                </fieldset> */}
+                <fieldset>
+                    {/* <label htmlFor="firstName"> First Name </label> */}
                     <input ref={firstName} type="text"
                         name="firstName"
                         className="form--controlAuth"
@@ -74,40 +76,40 @@ export const Register = (props) => {
                         required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="lastName"> Last Name </label>
+                    {/* <label htmlFor="lastName"> Last Name </label> */}
                     <input ref={lastName} type="text"
                         name="lastName"
                         className="form--controlAuth"
                         placeholder="last name"
                         required />
-                </fieldset> */}
+                </fieldset>
                 <fieldset>
-                    <label htmlFor="inputEmail"> Email Address </label>
+                    {/* <label htmlFor="inputEmail"> Email Address </label> */}
                     <input ref={email} type="email"
                         name="email"
                         className="form--controlAuth"
-                        placeholder="Email Address"
+                        placeholder="email address"
                         required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="inputPassword"> Password </label>
+                    {/* <label htmlFor="inputPassword"> Password </label> */}
                     <input ref={password} type="password"
                         name="password"
                         className="form--controlAuth"
-                        placeholder="Password"
+                        placeholder="password"
                         required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
+                    {/* <label htmlFor="verifyPassword"> Verify Password </label> */}
                     <input ref={verifyPassword} type="password"
                         name="verifyPassword"
                         className="form--controlAuth"
-                        placeholder="Verify Password"
+                        placeholder="verify password"
                         required />
                 </fieldset>
                 <fieldset>
                     <button type="submit">
-                        Register
+                        SIGN UP
                     </button>
                 </fieldset>
             </form>

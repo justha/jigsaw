@@ -43,13 +43,13 @@ export const Login = props => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h2>Please sign in</h2>
+                    {/* <h2>Please sign in</h2> */}
                     <fieldset>
                         {/* <label htmlFor="inputEmail"> Email Address </label> */}
                         <input ref={email} type="email"
                             id="email"
                             className="form--controlAuth"
-                            placeholder="Email address"
+                            placeholder="email"
                             required autoFocus />
                     </fieldset>
                     <fieldset>
@@ -57,18 +57,18 @@ export const Login = props => {
                         <input ref={password} type="password"
                             id="password"
                             className="form--controlAuth"
-                            placeholder="Password"
+                            placeholder="password"
                             required />
                     </fieldset>
                     <fieldset>
                         <button type="submit">
-                            Sign in
+                            SIGN IN
                         </button>
                     </fieldset>
                 </form>
             </section>
             <section className="link--register">
-                <Link className="linkRegister" to="/register">Register</Link> as a new user
+                <Link className="linkRegister" to="/register">Sign Up</Link> as a new user
             </section>
         </main>
     )

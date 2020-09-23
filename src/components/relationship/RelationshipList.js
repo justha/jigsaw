@@ -7,10 +7,13 @@ import { Relationship } from "./Relationship"
 
 export const RelationshipList = (props) => {
     const {relationships, getRelationships} = useContext(RelationshipContext)
-    const {spaces, getSpaces} = useContext(SpaceContext)
+    const {getSpaces} = useContext(SpaceContext)
 
     const activeId = parseInt(localStorage.getItem("app_user"))
-    const relationshipsActiveUser = relationships.filter(r => r.userId === activeId)
+    
+    const relationshipsActiveUser = 
+        relationships.filter(r => r.userId === activeId)
+        .sort((a,b) => (a.spaceId > b.spaceId) ? 1 : -1)
     
 
     useEffect(() => {
@@ -42,7 +45,7 @@ export const RelationshipList = (props) => {
 
                             </article>
                         )
-                    }) 
+                    })
                 }
                 
             </div>

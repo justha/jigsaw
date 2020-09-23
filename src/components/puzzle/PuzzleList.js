@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { PuzzleContext } from "./PuzzleProvider"
 import { BrandContext } from "../brand/BrandProvider"
@@ -11,11 +11,14 @@ export const PuzzleList = (props) => {
     const { puzzles, getPuzzles } = useContext(PuzzleContext)
     const { getBrands } = useContext(BrandContext)
     const { getStatuses } = useContext(StatusContext)
+
+    // const [ filteredPuzzles, setFiltered ] = useState([])
     
-    //filter list by active user
     const activeId = parseInt(localStorage.getItem("app_user"))
-    const puzzlesActiveUser = puzzles.filter(p => p.userId === activeId)
-    let filteredPuzzles = puzzlesActiveUser
+    const puzzlesActiveUser = 
+        puzzles.filter(p => p.userId === activeId)
+        .sort((a,b) => (a.statusId > b.statusId) ? 1 : -1)
+
 
     useEffect(() => {
         console.log("PuzzleList: Initial render before data")
@@ -23,6 +26,17 @@ export const PuzzleList = (props) => {
         getBrands()
         getStatuses()
     }, [])
+
+
+    // useEffect(() => {
+    //     const subset = puzzles.filter(p => p.brand.toLowerCase().includes(searchTerms.toLowerCase()))
+    //     setFiltered(subset)
+    // }, [searchTerms])
+
+
+    // useEffect(() => {
+    //     setFiltered(puzzles)
+    // }, [puzzles])
     
     
     return (
@@ -32,7 +46,7 @@ export const PuzzleList = (props) => {
             <h2>My Collection</h2>
             
                 {
-                filteredPuzzles.map(p => {
+                puzzlesActiveUser.map(p => {
                     return (
                         <article key={p.id}>
 
@@ -64,29 +78,3 @@ export const PuzzleList = (props) => {
     )
 
 }
-
-
-
-
-
-{/* <div className="puzzleList">
-                {puzzles.map(puzzle => {
-                    const puzzleBrand = brands.find(b => b.id === puzzle.brandId) || {}
-                    const puzzleStatus = statuses.find(s => s.id === puzzle.statusId) || {}
-
-                    return (
-                        <article className="puzzle">
-                            <div><b>{puzzle.name}</b></div>
-                            <div>by {puzzleBrand.name}</div>
-
-                            <Link to={{
-                                    pathname: `/puzzles/${puzzle.id}`,
-                                    state: { chosenPuzzle: puzzle }
-                                    }}
-                            >
-                                <button className="btn btn--primary" id="btnPuzzleDetail">ℹ︎</button>
-                            </Link>
-                        </article>                        
-                    )
-                })}
-            </div>  */}

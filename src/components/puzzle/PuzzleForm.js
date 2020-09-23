@@ -5,6 +5,7 @@ import { BoxContext } from "../box/BoxProvider"
 import { TextureContext } from "../texture/TextureProvider"
 import { DustContext } from "../dust/DustProvider"
 import { StatusContext } from "../status/StatusProvider"
+import { ImageContext } from "../image/ImageProvider"
 import "./Puzzle.css"
 
 export const PuzzleForm = (props) => {
@@ -15,9 +16,11 @@ export const PuzzleForm = (props) => {
     const { boxes, getBoxes } = useContext(BoxContext)
     const { textures, getTextures } = useContext(TextureContext)
     const { dusts, getDusts } = useContext(DustContext)
+    const { uploadImage, image, loading } = useContext(ImageContext)
 
     // component state
-    const [puzzle, setPuzzle] = useState({})
+    const [ puzzle, setPuzzle ] = useState({})
+    
 
     const editMode = props.match.params.hasOwnProperty("puzzleId")
 
@@ -50,7 +53,8 @@ export const PuzzleForm = (props) => {
         getPuzzleInEditMode()
     }, [puzzles])
     
-
+    
+    
     const name = useRef(null)
     const brand = useRef(null)
     const count = useRef(null)
@@ -67,6 +71,11 @@ export const PuzzleForm = (props) => {
     const activeId = parseInt(localStorage.getItem("app_user"))
     
 
+    useEffect(() => {
+        name.current.focus()
+    }, [name])
+    
+    
     const createNewPuzzle = () => {
         const puzzleName = (name.current.value)
         const brandId = parseInt(brand.current.value)
@@ -92,7 +101,7 @@ export const PuzzleForm = (props) => {
             isNaN(puzzleLength) === true ||
             statusId === 0
             )
-            {window.alert("Please enter all required fields")}
+            {window.alert("Please complete all required fields")}
         else if (
             isNaN(puzzleCount) === true 
             )
@@ -150,7 +159,9 @@ export const PuzzleForm = (props) => {
                     <label htmlFor="name">Puzzle Name*: </label>
                     <input 
                         className="form--control" 
-                        ref={name} required autoFocus 
+                        ref={name} 
+                        required 
+                        autoFocus 
                         id="name" 
                         proptype="varchar"
                         type="text" 
@@ -168,7 +179,8 @@ export const PuzzleForm = (props) => {
                     </label>
                     <select 
                         className="form--control" 
-                        ref={brand} required
+                        ref={brand} 
+                        required
                         id="brandId" 
                         proptype="int"
                         name="brandId" 
@@ -190,7 +202,8 @@ export const PuzzleForm = (props) => {
                     </label>
                     <input 
                         className="form--control" 
-                        ref={count} autoFocus 
+                        ref={count} 
+                        autoFocus 
                         id="count" 
                         proptype="int"
                         type="text" 
@@ -209,7 +222,8 @@ export const PuzzleForm = (props) => {
                     </label>
                     <select 
                         className="form--control" 
-                        ref={box} required
+                        ref={box} 
+                        required
                         id="boxId" 
                         proptype="int"
                         name="boxId" 
@@ -233,7 +247,9 @@ export const PuzzleForm = (props) => {
                     <div className="form__puzzleDimensionsInputGroup">
                         <input 
                             className="form--control" 
-                            ref={length} required autoFocus 
+                            ref={length} 
+                            required 
+                            autoFocus 
                             id="puzzleLength" 
                             proptype="int"
                             type="text" 
@@ -244,7 +260,9 @@ export const PuzzleForm = (props) => {
                         <div>x</div>
                         <input 
                             className="form--control" 
-                            ref={width} required autoFocus 
+                            ref={width} 
+                            required 
+                            autoFocus 
                             id="puzzleWidth" 
                             proptype="int"
                             type="text" 
@@ -265,7 +283,8 @@ export const PuzzleForm = (props) => {
                 </label>
                 <select 
                     className="form--control" 
-                    ref={status} required
+                    ref={status} 
+                    required
                     id="statusId" 
                     proptype="int"
                     name="statusId" 
@@ -288,7 +307,8 @@ export const PuzzleForm = (props) => {
                     </label>
                     <textarea 
                         className="form--control" 
-                        ref={note} autoFocus 
+                        ref={note} 
+                        autoFocus 
                         id="note" 
                         proptype="varchar"
                         type="text" 
@@ -394,7 +414,8 @@ export const PuzzleForm = (props) => {
                     </label>
                     <input 
                         className="form--control" 
-                        ref={assembled} autoFocus 
+                        ref={assembled} 
+                        autoFocus 
                         id="assembled" 
                         proptype="date"
                         type="date" 
@@ -406,7 +427,27 @@ export const PuzzleForm = (props) => {
             </fieldset>
 
 
-            
+            <fieldset>
+                <div className="form--group">
+                    <label htmlFor="image">Upload Image: </label>
+                    <input 
+                        className="form--control" 
+                        ref={image} 
+                        // autoFocus 
+                        // id="image" 
+                        // proptype="image"
+                        name="file"
+                        type="file" 
+                        placeholder="upload an image" 
+                        // defaultValue={} 
+                        onChange={uploadImage}
+                    />
+                    {loading 
+                    ? (<h3>Loading...</h3>)
+                    : (<img src={image} style={{width: `300px`}} />)
+                    }
+                </div>
+            </fieldset>
 
 
             <br></br>
