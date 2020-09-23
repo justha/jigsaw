@@ -59,7 +59,8 @@ export const RelationshipForm = (props) => {
                         </label>
                         <select 
                             className="form--control" 
-                            ref={space} required
+                            ref={space} 
+                            required
                             id="spaceId" 
                             proptype="int"
                             name="spaceId" 

@@ -82,7 +82,9 @@ export const SpaceForm = (props) => {
                     <label htmlFor="name">Space Name or Description*: </label>
                     <input 
                         className="form--control" 
-                        ref={name} required autoFocus 
+                        ref={name} 
+                        required 
+                        autoFocus 
                         id="name" 
                         proptype="varchar"
                         type="text" 
@@ -102,7 +104,9 @@ export const SpaceForm = (props) => {
                     <div className="form__spaceDimensionsInputGroup">
                         <input 
                             className="form--control" 
-                            ref={length} required autoFocus 
+                            ref={length} 
+                            required 
+                            autoFocus 
                             id="spaceLength" 
                             proptype="int"
                             type="text" 
@@ -113,7 +117,9 @@ export const SpaceForm = (props) => {
                         <div>x</div>
                         <input 
                             className="form--control" 
-                            ref={width} required autoFocus 
+                            ref={width} 
+                            required 
+                            autoFocus 
                             id="spaceWidth" 
                             proptype="int"
                             type="text" 

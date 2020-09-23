@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 
+
 export const PuzzleContext = React.createContext()
 
 
-
-
 export const PuzzleProvider = (props) => {
-    const [puzzles, setPuzzles] = useState([])
+    const [ puzzles, setPuzzles ] = useState([])
+    const [ searchTerms, setTerms ] = useState([])
     
     const getPuzzles = () => {
         return fetch("http://localhost:8088/puzzles")
@@ -51,7 +51,7 @@ export const PuzzleProvider = (props) => {
 
     return (
         <PuzzleContext.Provider value={{
-            puzzles, addPuzzle, getPuzzles, setPuzzles, getPuzzleById, deletePuzzle, editPuzzle
+            puzzles, addPuzzle, getPuzzles, setPuzzles, getPuzzleById, deletePuzzle, editPuzzle, searchTerms, setTerms
         }}>
             {props.children}
         </PuzzleContext.Provider>

@@ -8,20 +8,17 @@ import "./Puzzle.css"
 
 
 export const PuzzleList = (props) => {
-    const { puzzles, getPuzzles, searchTerms } = useContext(PuzzleContext)
+    const { puzzles, getPuzzles } = useContext(PuzzleContext)
     const { getBrands } = useContext(BrandContext)
     const { getStatuses } = useContext(StatusContext)
 
     // const [ filteredPuzzles, setFiltered ] = useState([])
     
-    //filter list by active user
     const activeId = parseInt(localStorage.getItem("app_user"))
-
     const puzzlesActiveUser = 
         puzzles.filter(p => p.userId === activeId)
         .sort((a,b) => (a.statusId > b.statusId) ? 1 : -1)
 
-    // let filteredPuzzles = puzzlesActiveUser
 
     useEffect(() => {
         console.log("PuzzleList: Initial render before data")
@@ -32,14 +29,14 @@ export const PuzzleList = (props) => {
 
 
     // useEffect(() => {
-    //     if (searchTerms !== ""){
-    //         const subset = puzzlesActiveUser.filter(p => p.name.toLowerCase().includes(searchTerms))
-    //         setFiltered(subset)
-    //     }
-    //     else {
-    //         setFiltered(puzzlesActiveUser)
-    //     }
-    // }, [searchTerms, puzzles])
+    //     const subset = puzzles.filter(p => p.brand.toLowerCase().includes(searchTerms.toLowerCase()))
+    //     setFiltered(subset)
+    // }, [searchTerms])
+
+
+    // useEffect(() => {
+    //     setFiltered(puzzles)
+    // }, [puzzles])
     
     
     return (

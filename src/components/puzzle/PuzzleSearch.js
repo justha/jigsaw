@@ -1,23 +1,22 @@
 // import React, { useContext } from "react"
-// import { Puzzle } from "./Puzzle"
 // import { PuzzleContext } from "./PuzzleProvider"
 // import "./Puzzle.css"
 
 
-// export const PuzzleSearch = (props) => {
-//     const { setSearch } = useContext(PuzzleContext)
+// export const PuzzleSearch = () => {
+//     const { setTerms } = useContext(PuzzleContext)
 
 //     return (
-//         <section className="puzzle__search">
-//             <div className="puzzle__searchTitle">Search</div>
+//         // <section className="puzzle__search">
+//             // <div className="puzzle__searchTitle">Search</div> 
 //                 <input type="text">
 //                     onChange={
 //                         (changeEvent) => {
-//                             setSearch(changeEvent.target.value)
+//                             setTerms(changeEvent.target.value)
 //                         }
 //                     }
 //                     placeholder="brand"
 //                 </input>
-//         </section>
+//         // </section>
 //     )
 // }
