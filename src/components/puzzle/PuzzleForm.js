@@ -85,20 +85,14 @@ export const PuzzleForm = (props) => {
         const textureId = parseInt(texture.current.value)
         const dustId = parseInt(dust.current.value)
         const statusId = parseInt(status.current.value)
-        const defaultImage = "http://res.cloudinary.com/djxxamywv/image/upload/v1600972086/puzl/ytyff89cctmzim0gfsns.jpg"
-        const imageLink = (
-            imageURL === ""
-            ? defaultImage
-            : imageURL
-        )
+        // const defaultImage = "http://res.cloudinary.com/djxxamywv/image/upload/v1600972086/puzl/ytyff89cctmzim0gfsns.jpg"
+        // const imageLink = (
+        //     imageURL === ""
+        //     ? defaultImage
+        //     : imageURL
+        // )
        
 
-        // if (puzzleName === ""){window.alert("please input a name or description")}
-        // if (brandId === 0){window.alert("please select a brand")}
-        // if (statusId === 0){window.alert("please select a status")}
-        // if (boxId === 0){window.alert("please select a box size")}
-        // if (isNaN(puzzleLength) === true){window.alert("please input a length")}
-        // if (isNaN(puzzleWidth) === true){window.alert("please input a width")}
         if (
             puzzleName === "" || 
             brandId === 0 ||
@@ -129,7 +123,7 @@ export const PuzzleForm = (props) => {
                     dustId,
                     assembled: assembled.current.value,
                     trade: JSON.parse(trade.current.value),
-                    image: imageLink,
+                    image: imageURL,
                     userId: activeId, 
                     id: puzzle.id,
                 })
@@ -150,7 +144,7 @@ export const PuzzleForm = (props) => {
                     dustId,
                     assembled: assembled.current.value,
                     trade: JSON.parse(trade.current.value),
-                    image: imageLink,
+                    image: imageURL,
                     favorite: false, //do not allow user to edit this field via form
                     userId: activeId
                 })

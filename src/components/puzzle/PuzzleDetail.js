@@ -66,6 +66,15 @@ export const PuzzleDetail = (props) => {
 
     return (
         <section className="puzzle__detail">
+            <button 
+                className="btn btn--primary" 
+                id="btnPuzzleBack" 
+                onClick={() => {
+                    props.history.push(`/puzzles`)
+                }}
+            >⇦</button>
+
+
             <div className="puzzle__name">{puzzle.name}</div>
             <div className="puzzle__brand">by {brand.name}</div>
             <br></br>
