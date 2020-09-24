@@ -20,7 +20,6 @@ import { SpaceForm } from "./space/SpaceForm"
 import { ImageProvider } from "./image/ImageProvider"
 
 
-
 export const ApplicationViews = (props) => {
     return (
         <>
@@ -67,31 +66,33 @@ export const ApplicationViews = (props) => {
 
             
             <RelationshipProvider>
-                <SpaceProvider>
+                <ImageProvider>
+                    <SpaceProvider>
 
-                    <Route exact path="/relationships" render={ 
-                        props => <RelationshipList {...props}/>
-                    } />
+                        <Route exact path="/relationships" render={ 
+                            props => <RelationshipList {...props}/>
+                        } />
 
-                    <Route exact path="/relationships/create" 
-                        render={props => 
-                            <RelationshipForm {...props} />
-                    } />
+                        <Route exact path="/relationships/create" 
+                            render={props => 
+                                <RelationshipForm {...props} />
+                        } />
 
-                    <Route path="/relationships/:relationshipId(\d+)" render={
-                        props => <RelationshipDetail {...props}/>
-                    } /> 
+                        <Route path="/relationships/:relationshipId(\d+)" render={
+                            props => <RelationshipDetail {...props}/>
+                        } /> 
 
-                    <Route exact path="/spaces/create" 
-                        render={props => 
-                            <SpaceForm {...props} />
-                    } />
+                        <Route exact path="/spaces/create" 
+                            render={props => 
+                                <SpaceForm {...props} />
+                        } />
 
-                    <Route path="/spaces/edit/:spaceId(\d+)" render={
-                        props => <SpaceForm {...props}/>
-                    } /> 
+                        <Route path="/spaces/edit/:spaceId(\d+)" render={
+                            props => <SpaceForm {...props}/>
+                        } /> 
 
-                </SpaceProvider>
+                    </SpaceProvider>
+                </ImageProvider>
             </RelationshipProvider>
 
 

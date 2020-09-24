@@ -2,6 +2,11 @@
     margin: 1em;
 }
 
+.relationshipForm {
+    font-size: small;
+    margin: 1rem;
+}
+
 .addPuzzleboard {
     display: flex;
     flex-direction: row;
@@ -15,3 +20,13 @@
 .relationshipForm {
     margin: 1em;
 }
+
+.relationship__name {
+    font-size: large;
+    font-weight: bold;
+}
+
+.relationship__detail {
+    font-size: small;
+}
+

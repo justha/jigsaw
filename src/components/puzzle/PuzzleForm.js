@@ -11,16 +11,36 @@ import "./Puzzle.css"
 export const PuzzleForm = (props) => {
     // context providers
     const { addPuzzle, puzzles, editPuzzle, getPuzzles } = useContext(PuzzleContext)
+    const { uploadImage, loading, imageURL } = useContext(ImageContext)
     const { brands, getBrands } = useContext(BrandContext)
     const { statuses, getStatuses } = useContext(StatusContext)
     const { boxes, getBoxes } = useContext(BoxContext)
     const { textures, getTextures } = useContext(TextureContext)
     const { dusts, getDusts } = useContext(DustContext)
-    const { uploadImage, image, loading } = useContext(ImageContext)
 
     // component state
     const [ puzzle, setPuzzle ] = useState({})
-    
+    // const [ loading, setLoading ] = useState(false)
+    // const [ imageURL, setImageURL ] = useState({})
+
+    // const uploadImage = async e => {
+    //     const files = e.target.files
+    //     const data = new FormData()
+    //     data.append(`file`, files[0])
+    //     data.append(`upload_preset`, `puzl_app`)
+    //     setLoading(true)
+    //     const res = 
+    //         await fetch(`https://api.cloudinary.com/v1_1/djxxamywv/image/upload`, {
+    //             method: `POST`, 
+    //             body: data
+    //         })
+    //     await res.json().then(
+    //         parsedObj => {
+    //             setImageURL(parsedObj.url)
+    //             setLoading(false)
+    //         })
+    // }
+
 
     const editMode = props.match.params.hasOwnProperty("puzzleId")
 
@@ -70,7 +90,7 @@ export const PuzzleForm = (props) => {
     const trade = useRef(null)
     const activeId = parseInt(localStorage.getItem("app_user"))
     
-
+    // positions cursor to initial input field 
     useEffect(() => {
         name.current.focus()
     }, [name])
@@ -86,6 +106,7 @@ export const PuzzleForm = (props) => {
         const textureId = parseInt(texture.current.value)
         const dustId = parseInt(dust.current.value)
         const statusId = parseInt(status.current.value)
+       
 
         // if (puzzleName === ""){window.alert("please input a name or description")}
         // if (brandId === 0){window.alert("please select a brand")}
@@ -96,6 +117,7 @@ export const PuzzleForm = (props) => {
         if (
             puzzleName === "" || 
             brandId === 0 ||
+            puzzleCount === "" || 
             boxId === 0 ||
             isNaN(puzzleWidth) === true ||
             isNaN(puzzleLength) === true ||
@@ -116,12 +138,13 @@ export const PuzzleForm = (props) => {
                     length: parseInt(length.current.value),
                     width: parseInt(width.current.value),
                     statusId,
-                    assembled: assembled.current.value,
-                    trade: JSON.parse(trade.current.value),
                     note: note.current.value,
                     poster: JSON.parse(poster.current.value),
                     textureId,
                     dustId,
+                    assembled: assembled.current.value,
+                    image: imageURL,
+                    trade: JSON.parse(trade.current.value),
                     userId: activeId, 
                     id: puzzle.id,
                 })
@@ -136,12 +159,13 @@ export const PuzzleForm = (props) => {
                     length: parseInt(length.current.value),
                     width: parseInt(width.current.value),
                     statusId,
-                    assembled: assembled.current.value,
-                    trade: JSON.parse(trade.current.value),
                     note: note.current.value,
                     poster: JSON.parse(poster.current.value),
                     textureId,
                     dustId,
+                    assembled: assembled.current.value,
+                    image: imageURL,
+                    trade: JSON.parse(trade.current.value),
                     favorite: false, //do not allow user to edit this field via form
                     userId: activeId
                 })
@@ -165,7 +189,7 @@ export const PuzzleForm = (props) => {
                         id="name" 
                         proptype="varchar"
                         type="text" 
-                        placeholder="input name or desc" 
+                        placeholder="name or desc" 
                         defaultValue={puzzle.name} 
                         onChange={handleControlledInputChange}
                     />
@@ -198,7 +222,7 @@ export const PuzzleForm = (props) => {
             <fieldset>
                 <div className="form--group">
                     <label htmlFor="count">
-                        Number of Pieces: 
+                        Number of Pieces*: 
                     </label>
                     <input 
                         className="form--control" 
@@ -207,7 +231,7 @@ export const PuzzleForm = (props) => {
                         id="count" 
                         proptype="int"
                         type="text" 
-                        placeholder="input piece count" 
+                        placeholder="puzzle count" 
                         defaultValue={puzzle.count} 
                         onChange={handleControlledInputChange}
                     />
@@ -312,15 +336,16 @@ export const PuzzleForm = (props) => {
                         id="note" 
                         proptype="varchar"
                         type="text" 
-                        placeholder="additional notes" 
+                        // placeholder="additional notes" 
                         defaultValue={puzzle.note} 
                         onChange={handleControlledInputChange}
                     />
                 </div>
             </fieldset>
+            <br></br>
 
 
-            <h3>Other Details (optional)</h3>
+            <h3>Other Details (Optional)</h3>
 
             <fieldset>
                 <div className="form--group">
@@ -432,20 +457,21 @@ export const PuzzleForm = (props) => {
                     <label htmlFor="image">Upload Image: </label>
                     <input 
                         className="form--control" 
-                        ref={image} 
-                        // autoFocus 
-                        // id="image" 
-                        // proptype="image"
+                        // ref={image}
+                        autoFocus 
+                        id="image" 
                         name="file"
-                        type="file" 
-                        placeholder="upload an image" 
-                        // defaultValue={} 
+                        type="file"  // renders "Choose File" button & file input field
                         onChange={uploadImage}
                     />
-                    {loading 
-                    ? (<h3>Loading...</h3>)
-                    : (<img src={image} style={{width: `300px`}} />)
-                    }
+                        {loading 
+                        ? (<h4>Loading...</h4>)
+                        : (<img src={imageURL} style={{width: `300px`}} />)
+                        }
+                        {(editMode) 
+                        ? (<img src={puzzle.image} style={{width: `300px`}} />)
+                        : ``
+                        }
                 </div>
             </fieldset>
 
