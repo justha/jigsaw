@@ -20,27 +20,6 @@ export const PuzzleForm = (props) => {
 
     // component state
     const [ puzzle, setPuzzle ] = useState({})
-    // const [ loading, setLoading ] = useState(false)
-    // const [ imageURL, setImageURL ] = useState({})
-
-    // const uploadImage = async e => {
-    //     const files = e.target.files
-    //     const data = new FormData()
-    //     data.append(`file`, files[0])
-    //     data.append(`upload_preset`, `puzl_app`)
-    //     setLoading(true)
-    //     const res = 
-    //         await fetch(`https://api.cloudinary.com/v1_1/djxxamywv/image/upload`, {
-    //             method: `POST`, 
-    //             body: data
-    //         })
-    //     await res.json().then(
-    //         parsedObj => {
-    //             setImageURL(parsedObj.url)
-    //             setLoading(false)
-    //         })
-    // }
-
 
     const editMode = props.match.params.hasOwnProperty("puzzleId")
 
@@ -106,6 +85,12 @@ export const PuzzleForm = (props) => {
         const textureId = parseInt(texture.current.value)
         const dustId = parseInt(dust.current.value)
         const statusId = parseInt(status.current.value)
+        const defaultImage = "http://res.cloudinary.com/djxxamywv/image/upload/v1600972086/puzl/ytyff89cctmzim0gfsns.jpg"
+        const imageLink = (
+            imageURL === ""
+            ? defaultImage
+            : imageURL
+        )
        
 
         // if (puzzleName === ""){window.alert("please input a name or description")}
@@ -143,8 +128,8 @@ export const PuzzleForm = (props) => {
                     textureId,
                     dustId,
                     assembled: assembled.current.value,
-                    image: imageURL,
                     trade: JSON.parse(trade.current.value),
+                    image: imageLink,
                     userId: activeId, 
                     id: puzzle.id,
                 })
@@ -164,8 +149,8 @@ export const PuzzleForm = (props) => {
                     textureId,
                     dustId,
                     assembled: assembled.current.value,
-                    image: imageURL,
                     trade: JSON.parse(trade.current.value),
+                    image: imageLink,
                     favorite: false, //do not allow user to edit this field via form
                     userId: activeId
                 })

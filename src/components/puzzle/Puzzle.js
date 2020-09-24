@@ -15,10 +15,15 @@ export const Puzzle = ({ puzzle }) => {
     return (
         <section className="puzzle">
             <div className="puzzle__name"><b>{puzzle.name}</b></div>
-            <div className="puzzle__brand">by {puzzleBrand.name}</div>
+            <div className="puzzle__brand">
+                {
+                (puzzleBrand.name === "other")
+                ? ``
+                : `by ${puzzleBrand.name}`
+                }
+            </div>
             <img className="puzzle__image" src={puzzle.image} style={{width: `200px`}}></img>
             {/* <div className="puzzle__status"><small>{puzzleStatus.message}</small></div> */}
         </section>
     )
 }
-

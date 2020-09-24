@@ -14,11 +14,14 @@ export const PuzzleList = (props) => {
 
     // const [ filteredPuzzles, setFiltered ] = useState([])
     
+    //filter list by active user
     const activeId = parseInt(localStorage.getItem("app_user"))
+
     const puzzlesActiveUser = 
         puzzles.filter(p => p.userId === activeId)
         .sort((a,b) => (a.statusId > b.statusId) ? 1 : -1)
 
+    // let filteredPuzzles = puzzlesActiveUser
 
     useEffect(() => {
         console.log("PuzzleList: Initial render before data")

@@ -4,7 +4,8 @@ export const ImageContext = React.createContext()
 
 export const ImageProvider = (props) => {
     const [ loading, setLoading ] = useState(false)
-    const [ imageURL, setImageURL ] = useState({})
+    const [ imageURL, setImageURL ] = useState("")
+    
 
     const uploadImage = async e => {
         const files = e.target.files

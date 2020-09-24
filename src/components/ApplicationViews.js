@@ -37,7 +37,8 @@ export const ApplicationViews = (props) => {
                                     <DustProvider>
 
                                         <Route exact path="/puzzles" render={ 
-                                            props => <> 
+                                            props => 
+                                            <> 
                                                 {/* <PuzzleSearch /> */}
                                                 <PuzzleList {...props}/>
                                             </>
