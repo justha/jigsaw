@@ -77,7 +77,7 @@ export const SpaceForm = (props) => {
                     width: parseInt(width.current.value),
                     custom: true
                 })
-                .then( res => res.json()) 
+                .then(res => res.json()) 
                 .then(parsedObj => {
                     addRelationship({
                         userId: activeId,
