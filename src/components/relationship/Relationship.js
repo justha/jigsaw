@@ -10,9 +10,8 @@ export const Relationship = ({ relationship }) => {
 
     return (
         <section className="relationship">
-            {/* <div className="relationship__spaceId"><b>{relationship.spaceId}</b></div> */}
-            <div className="relationship__spaceName"><b>{relationshipSpace.name}</b></div>
+            <div className="relationship__name"><b>{relationshipSpace.name}</b></div>
+            <img className="relationship__image" src={relationshipSpace.image} style={{width: `200px`}}></img>
         </section>
     )
-
 }

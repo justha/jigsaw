@@ -16,9 +16,9 @@ export const Puzzle = ({ puzzle }) => {
         <section className="puzzle">
             <div className="puzzle__name"><b>{puzzle.name}</b></div>
             <div className="puzzle__brand">by {puzzleBrand.name}</div>
-            <small className="puzzle__status">{puzzleStatus.message}</small>
+            <img className="puzzle__image" src={puzzle.image} style={{width: `200px`}}></img>
+            {/* <div className="puzzle__status"><small>{puzzleStatus.message}</small></div> */}
         </section>
     )
-
 }
 

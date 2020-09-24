@@ -5,41 +5,41 @@ import { BoxContext } from "../box/BoxProvider"
 import { TextureContext } from "../texture/TextureProvider"
 import { DustContext } from "../dust/DustProvider"
 import { StatusContext } from "../status/StatusProvider"
-// import { ImageContext } from "../image/ImageProvider"
+import { ImageContext } from "../image/ImageProvider"
 import "./Puzzle.css"
 
 export const PuzzleForm = (props) => {
     // context providers
     const { addPuzzle, puzzles, editPuzzle, getPuzzles } = useContext(PuzzleContext)
+    const { uploadImage, loading, imageURL } = useContext(ImageContext)
     const { brands, getBrands } = useContext(BrandContext)
     const { statuses, getStatuses } = useContext(StatusContext)
     const { boxes, getBoxes } = useContext(BoxContext)
     const { textures, getTextures } = useContext(TextureContext)
     const { dusts, getDusts } = useContext(DustContext)
-    // const { uploadImage, loading, image } = useContext(ImageContext)
 
     // component state
     const [ puzzle, setPuzzle ] = useState({})
-    const [ loading, setLoading ] = useState(false)
-    const [ imageURL, setImageURL ] = useState({})
+    // const [ loading, setLoading ] = useState(false)
+    // const [ imageURL, setImageURL ] = useState({})
 
-    const uploadImage = async e => {
-        const files = e.target.files
-        const data = new FormData()
-        data.append(`file`, files[0])
-        data.append(`upload_preset`, `puzl_app`)
-        setLoading(true)
-        const res = 
-            await fetch(`https://api.cloudinary.com/v1_1/djxxamywv/image/upload`, {
-                method: `POST`, 
-                body: data
-            })
-        await res.json().then(
-            parsedObj => {
-                setImageURL(parsedObj.url)
-                setLoading(false)
-            })
-    }
+    // const uploadImage = async e => {
+    //     const files = e.target.files
+    //     const data = new FormData()
+    //     data.append(`file`, files[0])
+    //     data.append(`upload_preset`, `puzl_app`)
+    //     setLoading(true)
+    //     const res = 
+    //         await fetch(`https://api.cloudinary.com/v1_1/djxxamywv/image/upload`, {
+    //             method: `POST`, 
+    //             body: data
+    //         })
+    //     await res.json().then(
+    //         parsedObj => {
+    //             setImageURL(parsedObj.url)
+    //             setLoading(false)
+    //         })
+    // }
 
 
     const editMode = props.match.params.hasOwnProperty("puzzleId")
@@ -462,7 +462,6 @@ export const PuzzleForm = (props) => {
                         id="image" 
                         name="file"
                         type="file"  // renders "Choose File" button & file input field
-                        // defaultValue={puzzle.image} 
                         onChange={uploadImage}
                     />
                         {loading 

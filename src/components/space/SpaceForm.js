@@ -1,14 +1,37 @@
 import React, { useContext, useRef, useEffect, useState} from "react"
 import { SpaceContext } from "./SpaceProvider"
 import { RelationshipContext } from "../relationship/RelationshipProvider"
+import { ImageContext } from "../image/ImageProvider"
 import "./Space.css"
 
 export const SpaceForm = (props) => {
 
     const { addSpace, spaces, editSpace, getSpaces } = useContext(SpaceContext)
+    const { uploadImage, loading, imageURL } = useContext(ImageContext)
     const { addRelationship } = useContext(RelationshipContext)
 
     const [ space, setSpace ] = useState({})
+    // const [ loading, setLoading ] = useState(false)
+    // const [ imageURL, setImageURL ] = useState({})
+
+    // const uploadImage = async e => {
+    //     const files = e.target.files
+    //     const data = new FormData()
+    //     data.append(`file`, files[0])
+    //     data.append(`upload_preset`, `puzl_app`)
+    //     setLoading(true)
+    //     const res = 
+    //         await fetch(`https://api.cloudinary.com/v1_1/djxxamywv/image/upload`, {
+    //             method: `POST`, 
+    //             body: data
+    //         })
+    //     await res.json().then(
+    //         parsedObj => {
+    //             setImageURL(parsedObj.url)
+    //             setLoading(false)
+    //         })
+    // }
+
 
     const editMode = props.match.params.hasOwnProperty("spaceId")
 
@@ -65,6 +88,7 @@ export const SpaceForm = (props) => {
                     name: name.current.value,
                     length: parseInt(length.current.value),
                     width: parseInt(width.current.value),
+                    image: imageURL,
                     custom: true,
                     id: space.id
                 })
@@ -75,6 +99,7 @@ export const SpaceForm = (props) => {
                     name: name.current.value,
                     length: parseInt(length.current.value),
                     width: parseInt(width.current.value),
+                    image: imageURL,
                     custom: true
                 })
                 .then(res => res.json()) 
@@ -150,6 +175,30 @@ export const SpaceForm = (props) => {
                         />
                         <div>inches</div>
                     </div>
+                </div>
+            </fieldset>
+
+
+            <fieldset>
+                <div className="form--group">
+                    <label htmlFor="image">Upload Image: </label>
+                    <input 
+                        className="form--control" 
+                        // ref={image}
+                        autoFocus 
+                        id="image" 
+                        name="file"
+                        type="file"  // renders "Choose File" button & file input field
+                        onChange={uploadImage}
+                    />
+                        {loading 
+                        ? (<h4>Loading...</h4>)
+                        : (<img src={imageURL} style={{width: `300px`}} />)
+                        }
+                        {(editMode) 
+                        ? (<img src={space.image} style={{width: `300px`}} />)
+                        : ``
+                        }
                 </div>
             </fieldset>
 
