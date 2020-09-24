@@ -175,7 +175,7 @@ export const SpaceForm = (props) => {
                         ? (<h4>Loading...</h4>)
                         : (<img src={imageURL} style={{width: `300px`}} />)
                         }
-                        {(editMode) 
+                        {editMode 
                         ? (<img src={space.image} style={{width: `300px`}} />)
                         : ``
                         }

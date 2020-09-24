@@ -11,7 +11,7 @@ import "./Puzzle.css"
 export const PuzzleForm = (props) => {
     // context providers
     const { addPuzzle, puzzles, editPuzzle, getPuzzles } = useContext(PuzzleContext)
-    const { uploadImage, loading, imageURL } = useContext(ImageContext)
+    const { uploadImage, loading, imageURL, setImageURL } = useContext(ImageContext)
     const { brands, getBrands } = useContext(BrandContext)
     const { statuses, getStatuses } = useContext(StatusContext)
     const { boxes, getBoxes } = useContext(BoxContext)
@@ -33,6 +33,7 @@ export const PuzzleForm = (props) => {
         if (editMode) {
             const puzzleId = parseInt(props.match.params.puzzleId)
             const selectedPuzzle = puzzles.find(p => p.id === puzzleId) || {}
+            setImageURL(selectedPuzzle.image)
             setPuzzle(selectedPuzzle)
         }
     }
@@ -436,20 +437,36 @@ export const PuzzleForm = (props) => {
                     <label htmlFor="image">Upload Image: </label>
                     <input 
                         className="form--control" 
-                        // ref={image}
                         autoFocus 
                         id="image" 
                         name="file"
                         type="file"  // renders "Choose File" button & file input field
                         onChange={uploadImage}
                     />
-                        {loading 
-                        ? (<h4>Loading...</h4>)
-                        : (<img src={imageURL} style={{width: `300px`}} />)
-                        }
-                        {(editMode) 
-                        ? (<img src={puzzle.image} style={{width: `300px`}} />)
-                        : ``
+                        {                           
+                            editMode
+                            ?  
+                                (imageURL === ""
+                                    ? ``
+                                    : (
+                                        <div>
+                                            <img src={imageURL} style={{width: `300px`}} />
+                                            <br></br>
+                                            <button 
+                                                onClick={() => {
+                                                    setImageURL("")
+                                                }}
+                                            >
+                                                Delete Image
+                                            </button>
+                                        </div>
+                                    )
+                                )
+                            : 
+                                (loading 
+                                ? (<h4>Loading...</h4>)
+                                : (<img src={imageURL} style={{width: `300px`}} />)
+                                )
                         }
                 </div>
             </fieldset>
