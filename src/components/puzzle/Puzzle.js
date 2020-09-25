@@ -12,8 +12,11 @@ export const Puzzle = ({ puzzle }) => {
     const puzzleBrand = brands.find(b => b.id === puzzle.brandId) || {}
     const puzzleStatus = statuses.find(s => s.id === puzzle.statusId) || {}
 
+    // const [puzzleMax, puzzleMin] = [puzzle.length, puzzle.width].sort((a, b) => b - a)
+
+
     return (
-        <section className="puzzle">
+        <section className="puzzle__card">
             <div className="puzzle__name"><b>{puzzle.name}</b></div>
             <div className="puzzle__brand">
                 {
@@ -31,7 +34,8 @@ export const Puzzle = ({ puzzle }) => {
                 } 
                 style={{width: `200px`}}>                
             </img>
-            {/* <div className="puzzle__status"><small>{puzzleStatus.message}</small></div> */}
+            <div className="puzzle__status"><small>{puzzleStatus.desc}</small></div>
+            <div className="puzzle__fit"><small></small></div>
         </section>
     )
 }

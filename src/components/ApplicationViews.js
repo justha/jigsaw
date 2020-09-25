@@ -11,6 +11,7 @@ import { PuzzleForm } from "./puzzle/PuzzleForm"
 import { PuzzleList } from "./puzzle/PuzzleList"
 import { PuzzleDetail } from "./puzzle/PuzzleDetail"
 // import { PuzzleSearch } from "./puzzle/PuzzleSearch"
+import { PuzzleFilter } from "./puzzle/PuzzleFilter"
 import { RelationshipProvider } from "./relationship/RelationshipProvider"
 import { RelationshipForm } from "./relationship/RelationshipForm"
 import { RelationshipList } from "./relationship/RelationshipList"
@@ -24,44 +25,49 @@ export const ApplicationViews = (props) => {
     return (
         <>
             <Route exact path="/">
-                Hello there jigsaw puzzler! 
+                Hello jigsaw puzzler! 
             </Route>
 
 
             <ImageProvider>
                 <PuzzleProvider>
-                    <BrandProvider>
-                        <StatusProvider>
-                            <BoxProvider>
-                                <TextureProvider>
-                                    <DustProvider>
+                    <RelationshipProvider>   
+                        <SpaceProvider>
+                            <BrandProvider>
+                                <StatusProvider>
+                                    <BoxProvider>
+                                        <TextureProvider>
+                                            <DustProvider>
 
-                                        <Route exact path="/puzzles" render={ 
-                                            props => 
-                                            <> 
-                                                {/* <PuzzleSearch /> */}
-                                                <PuzzleList {...props}/>
-                                            </>
-                                        } />
+                                                <Route exact path="/puzzles" render={ 
+                                                    props => 
+                                                    <> 
+                                                        {/* <PuzzleSearch /> */}
+                                                        <PuzzleFilter />
+                                                        <PuzzleList {...props}/>
+                                                    </>
+                                                } />
 
-                                        <Route exact path="/puzzles/create" 
-                                            render={props => 
-                                                <PuzzleForm {...props} />
-                                        } />
+                                                <Route exact path="/puzzles/create" 
+                                                    render={props => 
+                                                        <PuzzleForm {...props} />
+                                                } />
 
-                                        <Route path="/puzzles/:puzzleId(\d+)" render={
-                                            props => <PuzzleDetail {...props}/>
-                                        } /> 
+                                                <Route path="/puzzles/:puzzleId(\d+)" render={
+                                                    props => <PuzzleDetail {...props}/>
+                                                } /> 
 
-                                        <Route path="/puzzles/edit/:puzzleId(\d+)" render={
-                                            props => <PuzzleForm {...props}/>
-                                        } /> 
-                                    
-                                    </DustProvider>
-                                </TextureProvider>
-                            </BoxProvider>
-                        </StatusProvider>
-                    </BrandProvider>
+                                                <Route path="/puzzles/edit/:puzzleId(\d+)" render={
+                                                    props => <PuzzleForm {...props}/>
+                                                } /> 
+                                            
+                                            </DustProvider>
+                                        </TextureProvider>
+                                    </BoxProvider>
+                                </StatusProvider>
+                            </BrandProvider>
+                        </SpaceProvider>                     
+                    </RelationshipProvider>
                 </PuzzleProvider>
             </ImageProvider>
 

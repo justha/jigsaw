@@ -19,6 +19,7 @@ h2 {
   /* color: rosybrown; */
 }
 
+
 .btn {
   margin: 1%;
   color: dimgrey;
@@ -33,7 +34,8 @@ h2 {
 
 .form--control {
   display: block;
-  width: 50%;
+  /* width: 50%; */
+  width: 300px;
   /* height: calc(1.5em + .75rem + 2px); */
   /* padding: .375rem .75rem; */
   font-size: small;

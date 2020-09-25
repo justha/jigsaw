@@ -94,11 +94,22 @@ export const PuzzleDetail = (props) => {
                     : "No"
                 }
             </div>
-            <div className="puzzle__texture">Texture: {texture.desc}</div>
+            <div className="puzzle__texture">{ 
+                    (puzzle.textureId === 0)
+                    ? ``
+                    : `Texture: ${texture.desc}`
+                }
+            </div>
             <div className="puzzle__dust">{ 
                     (puzzle.dustId === 0)
                     ? ``
                     : `Puzzledust: ${dust.amount}`
+                }
+            </div>
+            <div className="puzzle__assembled">{ 
+                    (status.id === 4 && puzzle.assembledId !== "")
+                    ? `Assembled: ${puzzle.assembled}`
+                    : ``
                 }
             </div>
             <br></br>
@@ -117,15 +128,6 @@ export const PuzzleDetail = (props) => {
             <br></br>
 
 
-            <div className="puzzle__title">Status</div>
-            <div className="puzzle__status">{status.desc}</div>
-            <div className="puzzle__assembled">{ 
-                    (status.id === 1)
-                    ? `${puzzle.assembled}`
-                    : ``
-                }
-            </div>
-            <br></br>
 
 
             <button className="btn btn--primary" id="btnDeletePuzzle"

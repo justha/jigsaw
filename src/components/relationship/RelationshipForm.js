@@ -51,7 +51,7 @@ export const RelationshipForm = (props) => {
         <form className="relationshipForm">
             <h3 className="relationshipForm__title">Add Puzzle Boards to Your Workspace</h3>
 
-            <article className="addPuzzleboard">
+            <article className="addRelationship">
                 <fieldset>
                     <div className="form--group">
                         <label htmlFor="spaceId">

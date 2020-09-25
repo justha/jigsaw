@@ -9,9 +9,9 @@ export const Relationship = ({ relationship }) => {
     const relationshipSpace = spaces.find(s => s.id === relationship.spaceId) || {}
 
     return (
-        <section className="relationship">
+        <section className="relationship__card">
             <div className="relationship__name"><b>{relationshipSpace.name}</b></div>
-            <img className="relationship__image" src={relationshipSpace.image} style={{width: `200px`}}></img>
+            <img className="relationship__image" src={relationshipSpace.image} style={{width: `200px`}} alt="user workspace"></img>
         </section>
     )
 }

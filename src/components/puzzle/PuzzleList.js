@@ -8,50 +8,59 @@ import "./Puzzle.css"
 
 
 export const PuzzleList = (props) => {
-    const { puzzles, getPuzzles } = useContext(PuzzleContext)
+    const { puzzles, getPuzzles} = useContext(PuzzleContext)
     const { getBrands } = useContext(BrandContext)
     const { getStatuses } = useContext(StatusContext)
 
-    // const [ filteredPuzzles, setFiltered ] = useState([])
+    const [ filteredPuzzles, setFilteredPuzzles ] = useState([])
     
     //filter list by active user
     const activeId = parseInt(localStorage.getItem("app_user"))
 
     const puzzlesActiveUser = 
-        puzzles.filter(p => p.userId === activeId)
+    puzzles.filter(p => p.userId === activeId)
         .sort((a,b) => (a.statusId > b.statusId) ? 1 : -1)
 
-    // let filteredPuzzles = puzzlesActiveUser
-
+        
     useEffect(() => {
-        console.log("PuzzleList: Initial render before data")
         getPuzzles()
         getBrands()
         getStatuses()
+        setFilteredPuzzles(puzzlesActiveUser)
     }, [])
 
+    // listens for a change to `puzzles` >> invokes setFitleredPuzzeles() 
+    useEffect(() => {
+        setFilteredPuzzles(puzzlesActiveUser)
+    }, [puzzles])
 
-    // useEffect(() => {
-    //     const subset = puzzles.filter(p => p.brand.toLowerCase().includes(searchTerms.toLowerCase()))
-    //     setFiltered(subset)
-    // }, [searchTerms])
+    useEffect(() => {
+        const subset = 1
+        setFilteredPuzzles(subset)
+    }, [filteredPuzzles])
 
-
-    // useEffect(() => {
-    //     setFiltered(puzzles)
-    // }, [puzzles])
     
     
     return (
         <>
-            
-            <div className="puzzleList">
             <h2>My Collection</h2>
+
+            <button className="btn btn--primary" id="btnAddPuzzle"
+                onClick={() => {props.history.push("/puzzles/create")}}
+            >
+            +
+            </button>
+
+
+            <div className="puzzleList">            
             
                 {
-                puzzlesActiveUser.map(p => {
-                    return (
-                        <article key={p.id}>
+                    puzzlesActiveUser.map(p => {
+                        return (
+                            <article 
+                            key={p.id} 
+                            className="puzzle__item"
+                            >
 
                             <Link className="link__toPuzzleDetails" 
                                 to={{
@@ -67,17 +76,11 @@ export const PuzzleList = (props) => {
                         </article>   
                     )
                 })}
-
             </div> 
 
 
-            <button className="btn btn--primary" id="btnAddPuzzle"
-                onClick={() => {props.history.push("/puzzles/create")}}
-            >
-            +
-            </button>  
-        
         </>
+
     )
 
 }

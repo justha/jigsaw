@@ -2,14 +2,24 @@
     margin: 1em;
 }
 
+.relationship__card {
+    background-color: whitesmoke;
+    width: 250px;
+    padding: 1em;
+}
+
+.relationship__item {
+    width: 250px;  
+}
+
 .relationshipForm {
     font-size: small;
     margin: 1rem;
 }
 
-.addPuzzleboard {
-    display: flex;
-    flex-direction: row;
+.addRelationship {
+    /* display: flex; */
+    /* flex-direction: row; */
 }
 
 .link__toRelationshipDetails {

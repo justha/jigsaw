@@ -156,7 +156,10 @@ export const PuzzleForm = (props) => {
 
     return (
         <form className="puzzleForm">            
-            <h3 className="puzzleForm__title">{editMode ? "Edit Puzzle" : "Add a Puzzle"}</h3>
+            <h2 className="puzzleForm__title">{editMode ? "Edit Puzzle" : "Add a Puzzle"}</h2>
+
+            <h3>Basic Details</h3>
+
 
             <fieldset>
                 <div className="form--group">
@@ -280,6 +283,27 @@ export const PuzzleForm = (props) => {
             </fieldset>
 
 
+            <fieldset>
+                <div className="form--group">
+                    <label htmlFor="note">
+                        Notes: 
+                    </label>
+                    <textarea 
+                        className="form--control" 
+                        ref={note} 
+                        autoFocus 
+                        id="note" 
+                        proptype="varchar"
+                        type="text" 
+                        // placeholder="additional notes" 
+                        defaultValue={puzzle.note} 
+                        onChange={handleControlledInputChange}
+                    />
+                </div>
+            </fieldset>
+            <br></br>
+
+
             <fieldset>    
                 <div className="form--group">
                 <label htmlFor="statusId">
@@ -304,28 +328,7 @@ export const PuzzleForm = (props) => {
             </fieldset>
 
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="note">
-                        Notes: 
-                    </label>
-                    <textarea 
-                        className="form--control" 
-                        ref={note} 
-                        autoFocus 
-                        id="note" 
-                        proptype="varchar"
-                        type="text" 
-                        // placeholder="additional notes" 
-                        defaultValue={puzzle.note} 
-                        onChange={handleControlledInputChange}
-                    />
-                </div>
-            </fieldset>
-            <br></br>
-
-
-            <h3>Other Details (Optional)</h3>
+            <h3>Optional</h3>
 
             <fieldset>
                 <div className="form--group">
