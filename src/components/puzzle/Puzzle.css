@@ -1,6 +1,64 @@
- .puzzleList {
+  .searchbar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    background-color: dimgrey;
+    color: whitesmoke;
+    font-size: small;
+    font-weight: bold;
+    padding: .5em 3em .5em 3em;
+}
+
+.searchbar__containerFilters {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.searchbar__viewBySpace {
+    padding: 0 0em 0 1em;
+}
+
+.searchbar__viewByStatus {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    padding: 0 0em 0 1em;
+}
+
+.btn--searchbar {
+}
+ 
+
+.puzzleList__container {
+    /* display: flex;
+    flex-direction: row; */
+}
+
+.puzzleList {
     margin: 1rem;
 }
+
+.btnAddPuzzle {
+    /* display: inline-block;
+    text-align: center; */
+}
+
+
+.puzzle__card {
+    background-color: whitesmoke;
+    width: 210px;
+    padding: 1em;
+}
+
+.puzzle__item {
+    width: 225px;
+}
+
+.puzzle__status {
+    text-align: right;
+}
+
 
 .puzzleForm {
     font-size: small;

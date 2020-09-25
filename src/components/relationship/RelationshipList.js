@@ -25,38 +25,45 @@ export const RelationshipList = (props) => {
     return (
         <>
 
-            <div className="relationshipList">
             <h2>My Workspaces</h2>
-
-                {
-                    relationshipsActiveUser.map(r => {
-                        return (
-                            <article key={r.id}>
-                                <Link 
-                                    className="link__toRelationshipDetails"
-                                    to={{
-                                        pathname: `/relationships/${r.id}`,
-                                        state: {chosenRelationship: r }
-                                    }}
-                                >
-                                    <Relationship relationship={r} />
-                                    <br></br>
-                                </Link>
-
-                            </article>
-                        )
-                    })
-                }
-                
-            </div>
-
-
-            {/* button routes to  */}
+            
             <button className="btn btn--primary" id="btnAddSpace"
                 onClick={() => {props.history.push("/relationships/create")}}
             >
             +
             </button> 
+            
+
+            <div className="relationshipList">
+                
+
+
+                <div className="relationshipList">
+                    {
+                        relationshipsActiveUser.map(r => {
+                            return (
+                                <article 
+                                    key={r.id}
+                                    className="relationship__item"
+                                >
+                                    <Link 
+                                        className="link__toRelationshipDetails"
+                                        to={{
+                                            pathname: `/relationships/${r.id}`,
+                                            state: {chosenRelationship: r }
+                                        }}
+                                    >
+                                        <Relationship relationship={r} />
+                                        <br></br>
+                                    </Link>
+
+                                </article>
+                            )
+                        })
+                    }
+                </div>
+                
+            </div>
 
             
         </>
