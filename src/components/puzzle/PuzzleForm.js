@@ -11,7 +11,7 @@ import "./Puzzle.css"
 export const PuzzleForm = (props) => {
     // context providers
     const { addPuzzle, puzzles, editPuzzle, getPuzzles } = useContext(PuzzleContext)
-    const { uploadImage, loading, imageURL } = useContext(ImageContext)
+    const { uploadImage, loading, imageURL, setImageURL } = useContext(ImageContext)
     const { brands, getBrands } = useContext(BrandContext)
     const { statuses, getStatuses } = useContext(StatusContext)
     const { boxes, getBoxes } = useContext(BoxContext)
@@ -20,27 +20,6 @@ export const PuzzleForm = (props) => {
 
     // component state
     const [ puzzle, setPuzzle ] = useState({})
-    // const [ loading, setLoading ] = useState(false)
-    // const [ imageURL, setImageURL ] = useState({})
-
-    // const uploadImage = async e => {
-    //     const files = e.target.files
-    //     const data = new FormData()
-    //     data.append(`file`, files[0])
-    //     data.append(`upload_preset`, `puzl_app`)
-    //     setLoading(true)
-    //     const res = 
-    //         await fetch(`https://api.cloudinary.com/v1_1/djxxamywv/image/upload`, {
-    //             method: `POST`, 
-    //             body: data
-    //         })
-    //     await res.json().then(
-    //         parsedObj => {
-    //             setImageURL(parsedObj.url)
-    //             setLoading(false)
-    //         })
-    // }
-
 
     const editMode = props.match.params.hasOwnProperty("puzzleId")
 
@@ -54,6 +33,7 @@ export const PuzzleForm = (props) => {
         if (editMode) {
             const puzzleId = parseInt(props.match.params.puzzleId)
             const selectedPuzzle = puzzles.find(p => p.id === puzzleId) || {}
+            setImageURL(selectedPuzzle.image)
             setPuzzle(selectedPuzzle)
         }
     }
@@ -106,14 +86,14 @@ export const PuzzleForm = (props) => {
         const textureId = parseInt(texture.current.value)
         const dustId = parseInt(dust.current.value)
         const statusId = parseInt(status.current.value)
+        // const defaultImage = "http://res.cloudinary.com/djxxamywv/image/upload/v1600972086/puzl/ytyff89cctmzim0gfsns.jpg"
+        // const imageLink = (
+        //     imageURL === ""
+        //     ? defaultImage
+        //     : imageURL
+        // )
        
 
-        // if (puzzleName === ""){window.alert("please input a name or description")}
-        // if (brandId === 0){window.alert("please select a brand")}
-        // if (statusId === 0){window.alert("please select a status")}
-        // if (boxId === 0){window.alert("please select a box size")}
-        // if (isNaN(puzzleLength) === true){window.alert("please input a length")}
-        // if (isNaN(puzzleWidth) === true){window.alert("please input a width")}
         if (
             puzzleName === "" || 
             brandId === 0 ||
@@ -143,8 +123,8 @@ export const PuzzleForm = (props) => {
                     textureId,
                     dustId,
                     assembled: assembled.current.value,
-                    image: imageURL,
                     trade: JSON.parse(trade.current.value),
+                    image: imageURL,
                     userId: activeId, 
                     id: puzzle.id,
                 })
@@ -164,8 +144,8 @@ export const PuzzleForm = (props) => {
                     textureId,
                     dustId,
                     assembled: assembled.current.value,
-                    image: imageURL,
                     trade: JSON.parse(trade.current.value),
+                    image: imageURL,
                     favorite: false, //do not allow user to edit this field via form
                     userId: activeId
                 })
@@ -457,20 +437,36 @@ export const PuzzleForm = (props) => {
                     <label htmlFor="image">Upload Image: </label>
                     <input 
                         className="form--control" 
-                        // ref={image}
                         autoFocus 
                         id="image" 
                         name="file"
                         type="file"  // renders "Choose File" button & file input field
                         onChange={uploadImage}
                     />
-                        {loading 
-                        ? (<h4>Loading...</h4>)
-                        : (<img src={imageURL} style={{width: `300px`}} />)
-                        }
-                        {(editMode) 
-                        ? (<img src={puzzle.image} style={{width: `300px`}} />)
-                        : ``
+                        {                           
+                            editMode
+                            ?  
+                                (imageURL === ""
+                                    ? ``
+                                    : (
+                                        <div>
+                                            <img src={imageURL} style={{width: `300px`}} />
+                                            <br></br>
+                                            <button 
+                                                onClick={() => {
+                                                    setImageURL("")
+                                                }}
+                                            >
+                                                Delete Image
+                                            </button>
+                                        </div>
+                                    )
+                                )
+                            : 
+                                (loading 
+                                ? (<h4>Loading...</h4>)
+                                : (<img src={imageURL} style={{width: `300px`}} />)
+                                )
                         }
                 </div>
             </fieldset>

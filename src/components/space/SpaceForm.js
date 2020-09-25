@@ -7,30 +7,10 @@ import "./Space.css"
 export const SpaceForm = (props) => {
 
     const { addSpace, spaces, editSpace, getSpaces } = useContext(SpaceContext)
-    const { uploadImage, loading, imageURL } = useContext(ImageContext)
+    const { uploadImage, loading, imageURL, setImageURL } = useContext(ImageContext)
     const { addRelationship } = useContext(RelationshipContext)
 
     const [ space, setSpace ] = useState({})
-    // const [ loading, setLoading ] = useState(false)
-    // const [ imageURL, setImageURL ] = useState({})
-
-    // const uploadImage = async e => {
-    //     const files = e.target.files
-    //     const data = new FormData()
-    //     data.append(`file`, files[0])
-    //     data.append(`upload_preset`, `puzl_app`)
-    //     setLoading(true)
-    //     const res = 
-    //         await fetch(`https://api.cloudinary.com/v1_1/djxxamywv/image/upload`, {
-    //             method: `POST`, 
-    //             body: data
-    //         })
-    //     await res.json().then(
-    //         parsedObj => {
-    //             setImageURL(parsedObj.url)
-    //             setLoading(false)
-    //         })
-    // }
 
 
     const editMode = props.match.params.hasOwnProperty("spaceId")
@@ -46,6 +26,7 @@ export const SpaceForm = (props) => {
         if (editMode) {
             const spaceId = parseInt(props.match.params.spaceId)
             const selectedSpace = spaces.find(s => s.id === spaceId) || {}
+            setImageURL(selectedSpace.image)
             setSpace(selectedSpace)
         }
     }
@@ -191,13 +172,30 @@ export const SpaceForm = (props) => {
                         type="file"  // renders "Choose File" button & file input field
                         onChange={uploadImage}
                     />
-                        {loading 
-                        ? (<h4>Loading...</h4>)
-                        : (<img src={imageURL} style={{width: `300px`}} />)
-                        }
-                        {(editMode) 
-                        ? (<img src={space.image} style={{width: `300px`}} />)
-                        : ``
+                        {                           
+                            editMode
+                            ?  
+                                (imageURL === ""
+                                    ? ``
+                                    : (
+                                        <div>
+                                            <img src={imageURL} style={{width: `300px`}} />
+                                            <br></br>
+                                            <button 
+                                                onClick={() => {
+                                                    setImageURL("")
+                                                }}
+                                            >
+                                                Delete Image
+                                            </button>
+                                        </div>
+                                    )
+                                )
+                            : 
+                                (loading 
+                                ? (<h4>Loading...</h4>)
+                                : (<img src={imageURL} style={{width: `300px`}} />)
+                                )
                         }
                 </div>
             </fieldset>
@@ -218,9 +216,6 @@ export const SpaceForm = (props) => {
         </form>
 
     )
-
-
-
 
 
 }

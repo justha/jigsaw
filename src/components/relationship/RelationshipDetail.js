@@ -29,6 +29,15 @@ export const RelationshipDetail = (props) => {
 
     return (
         <section className="relationship__detail">
+            <button 
+                className="btn btn--primary" 
+                id="btnSpaceBack" 
+                onClick={() => {
+                    props.history.push(`/relationships`)
+                }}
+            >⇦</button>
+
+
             <div className="space__name">{space.name}</div>
             <br></br>
            
@@ -86,6 +95,8 @@ export const RelationshipDetail = (props) => {
                         
                 }
             </div>
+
+             
         </section>
     )
 
