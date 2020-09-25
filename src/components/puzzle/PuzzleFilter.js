@@ -7,9 +7,9 @@ import { StatusContext } from "../status/StatusProvider"
 
 export const PuzzleFilter = () => {
     const { relationships, getRelationships } = useContext(RelationshipContext)
-    const { chosenSpace, setChosenSpace, filterTerms, setFilterTerms } = useContext(PuzzleContext)
+    const { chosenSpace, setChosenSpace, setFilterTerms } = useContext(PuzzleContext)
     const { spaces, getSpaces } = useContext(SpaceContext)
-    const { statuses, getStatuses } = useContext(StatusContext)
+    const { statuses } = useContext(StatusContext)
     const activeId = parseInt(localStorage.getItem("app_user"))
 
     useEffect(() => {
@@ -45,9 +45,8 @@ export const PuzzleFilter = () => {
     return (
         <>
             <section className="searchbar">
-                
+
                 <div className="searchbar__containerFilters">
-                
                     <div className="searchbar__viewByStatus">
                         {statuses.map(s => {
                             return (
@@ -60,35 +59,34 @@ export const PuzzleFilter = () => {
                             )
                         })}
                     </div>
-
-                    
-                    <article className="searchbar__viewBySpace">
-                        <fieldset>
-                            <div className="form--group">
-                                <label htmlFor="spaceId">
-                                    Will it fit?
-                                </label>
-                                <select 
-                                    className="form--control" 
-                                    // ref={space} 
-                                    required
-                                    id="spaceId" 
-                                    proptype="int"
-                                    name="spaceId" 
-                                    // value={relationship.spaceId}
-                                    onChange={handleChange}
-                                >
-                                    <option value="0">select to view</option>
-                                    {                                   
-                                        relationshipsActiveUser.map(r => matchingSpaceObj(r))
-                                    }
-                                </select>  
-                            </div>
-                        </fieldset>
-                    </article>
-
                 </div>
+                    
 
+                <article className="searchbar__viewBySpace">
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="spaceId">
+                                Will it fit?
+                            </label>
+                            <select 
+                                className="form--control" 
+                                // ref={space} 
+                                required
+                                id="spaceId" 
+                                proptype="int"
+                                name="spaceId" 
+                                // value={relationship.spaceId}
+                                onChange={handleChange}
+                            >
+                                <option value="0">select to view</option>
+                                {                                   
+                                    relationshipsActiveUser.map(r => matchingSpaceObj(r))
+                                }
+                            </select>  
+                        </div>
+                    </fieldset>
+                </article>
+                
             </section>
 
         </>

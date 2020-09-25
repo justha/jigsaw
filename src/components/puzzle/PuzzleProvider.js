@@ -55,7 +55,8 @@ export const PuzzleProvider = (props) => {
 
     return (
         <PuzzleContext.Provider value={{
-            puzzles, addPuzzle, getPuzzles, setPuzzles, getPuzzleById, deletePuzzle, editPuzzle, searchTerms, setTerms, filterTerms, setFilterTerms, chosenSpace, setChosenSpace
+            puzzles, addPuzzle, getPuzzles, setPuzzles, getPuzzleById, deletePuzzle, editPuzzle, 
+            filterTerms, setFilterTerms, filteredPuzzles, setFilteredPuzzles, chosenSpace, setChosenSpace
         }}>
             {props.children}
         </PuzzleContext.Provider>
