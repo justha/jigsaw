@@ -50,7 +50,7 @@ export const RelationshipList = (props) => {
                                         className="link__toRelationshipDetails"
                                         to={{
                                             pathname: `/relationships/${r.id}`,
-                                            state: {chosenRelationship: r }
+                                            state: {chosenRelationship: r}
                                         }}
                                     >
                                         <Relationship relationship={r} />

@@ -8,7 +8,7 @@ import "./Puzzle.css"
 
 
 export const PuzzleList = (props) => {
-    const { puzzles, getPuzzles, chosenStatus } = useContext(PuzzleContext)
+    const { puzzles, getPuzzles, chosenStatusId, chosenSpaceSize } = useContext(PuzzleContext)
     const { getBrands } = useContext(BrandContext)
     const { getStatuses } = useContext(StatusContext)
 
@@ -38,11 +38,22 @@ export const PuzzleList = (props) => {
 
 
     useEffect(() => {
-        const subset = puzzles.filter(p => p.statusId === chosenStatus)
-        // console.log("chosenStatus >>",chosenStatus)
-        // console.log("subset",subset)
+        console.log('chosenStatusId >>',chosenStatusId)
+        const subset = 
+            chosenStatusId !== 0
+            ? puzzles.filter(p => p.statusId === chosenStatusId)
+            : puzzles            
         setFilteredPuzzles(subset)
-    }, [chosenStatus])
+
+    }, [chosenStatusId])
+
+
+    useEffect(() => {
+
+
+        console.log('chosenSpaceSize >>',chosenSpaceSize)
+
+    }, [chosenSpaceSize])
 
     
     

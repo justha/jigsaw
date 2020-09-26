@@ -10,7 +10,6 @@ import { DustProvider } from "./dust/DustProvider"
 import { PuzzleForm } from "./puzzle/PuzzleForm"
 import { PuzzleList } from "./puzzle/PuzzleList"
 import { PuzzleDetail } from "./puzzle/PuzzleDetail"
-// import { PuzzleSearch } from "./puzzle/PuzzleSearch"
 import { PuzzleFilter } from "./puzzle/PuzzleFilter"
 import { RelationshipProvider } from "./relationship/RelationshipProvider"
 import { RelationshipForm } from "./relationship/RelationshipForm"
@@ -40,26 +39,19 @@ export const ApplicationViews = (props) => {
                                             <DustProvider>
 
                                                 <Route exact path="/puzzles" render={ 
-                                                    props => 
-                                                    <> 
-                                                        {/* <PuzzleSearch /> */}
-                                                        <PuzzleFilter />
-                                                        <PuzzleList {...props}/>
-                                                    </>
-                                                } />
+                                                    props => <> 
+                                                            <PuzzleFilter />
+                                                            <PuzzleList {...props}/>
+                                                            </>} />
 
-                                                <Route exact path="/puzzles/create" 
-                                                    render={props => 
-                                                        <PuzzleForm {...props} />
-                                                } />
+                                                <Route exact path="/puzzles/create" render={
+                                                    props => <PuzzleForm {...props} />} />
 
                                                 <Route path="/puzzles/:puzzleId(\d+)" render={
-                                                    props => <PuzzleDetail {...props}/>
-                                                } /> 
+                                                    props => <PuzzleDetail {...props}/>} /> 
 
                                                 <Route path="/puzzles/edit/:puzzleId(\d+)" render={
-                                                    props => <PuzzleForm {...props}/>
-                                                } /> 
+                                                    props => <PuzzleForm {...props}/>} /> 
                                             
                                             </DustProvider>
                                         </TextureProvider>
@@ -77,26 +69,19 @@ export const ApplicationViews = (props) => {
                     <SpaceProvider>
 
                         <Route exact path="/relationships" render={ 
-                            props => <RelationshipList {...props}/>
-                        } />
+                            props => <RelationshipList {...props}/>} />
 
-                        <Route exact path="/relationships/create" 
-                            render={props => 
-                                <RelationshipForm {...props} />
-                        } />
+                        <Route exact path="/relationships/create" render={
+                            props => <RelationshipForm {...props} />} />
 
                         <Route path="/relationships/:relationshipId(\d+)" render={
-                            props => <RelationshipDetail {...props}/>
-                        } /> 
+                            props => <RelationshipDetail {...props}/>} /> 
 
-                        <Route exact path="/spaces/create" 
-                            render={props => 
-                                <SpaceForm {...props} />
-                        } />
+                        <Route exact path="/spaces/create" render={
+                            props => <SpaceForm {...props} />} />
 
                         <Route path="/spaces/edit/:spaceId(\d+)" render={
-                            props => <SpaceForm {...props}/>
-                        } /> 
+                            props => <SpaceForm {...props}/>} /> 
 
                     </SpaceProvider>
                 </ImageProvider>

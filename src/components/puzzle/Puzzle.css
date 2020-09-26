@@ -1,4 +1,4 @@
-  .searchbar {
+.searchbar {
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -9,26 +9,24 @@
     padding: .5em 3em .5em 3em;
 }
 
-.searchbar__containerFilters {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-}
-
-.searchbar__viewBySpace {
-    padding: 0 0em 0 1em;
-}
-
-.searchbar__viewByStatus {
+.searchbar__container {
     display: flex;
     flex-direction: column;
-    white-space: nowrap;
-    padding: 0 0em 0 1em;
+    align-items: flex-start;
 }
 
-.btn--searchbar {
+.searchbar__status {
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    padding: 0 0 0 1em;
+}
+
+.searchbar__space {
+    padding: 0 0 0 1em;
 }
  
+
 
 .puzzleList__container {
     /* display: flex;
