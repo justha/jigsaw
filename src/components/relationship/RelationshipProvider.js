@@ -48,7 +48,7 @@ export const RelationshipProvider = (props) => {
 
     return (
         <RelationshipContext.Provider value={{
-            relationships, addRelationship, getRelationships, setRelationships, deleteRelationship, editRelationship, getRelationshipById
+            getRelationships, relationships, setRelationships, addRelationship, deleteRelationship, editRelationship, getRelationshipById
         }}>
             {props.children}
         </RelationshipContext.Provider>
