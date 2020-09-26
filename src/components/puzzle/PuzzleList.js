@@ -8,7 +8,7 @@ import "./Puzzle.css"
 
 
 export const PuzzleList = (props) => {
-    const { puzzles, getPuzzles} = useContext(PuzzleContext)
+    const { puzzles, getPuzzles, chosenStatus } = useContext(PuzzleContext)
     const { getBrands } = useContext(BrandContext)
     const { getStatuses } = useContext(StatusContext)
 
@@ -18,7 +18,8 @@ export const PuzzleList = (props) => {
     const activeId = parseInt(localStorage.getItem("app_user"))
 
     const puzzlesActiveUser = 
-    puzzles.filter(p => p.userId === activeId)
+        filteredPuzzles
+        .filter(p => p.userId === activeId)
         .sort((a,b) => (a.statusId > b.statusId) ? 1 : -1)
 
         
@@ -26,18 +27,22 @@ export const PuzzleList = (props) => {
         getPuzzles()
         getBrands()
         getStatuses()
-        setFilteredPuzzles(puzzlesActiveUser)
+        setFilteredPuzzles(puzzles)
     }, [])
 
+    
     // listens for a change to `puzzles` >> invokes setFitleredPuzzeles() 
     useEffect(() => {
-        setFilteredPuzzles(puzzlesActiveUser)
+        setFilteredPuzzles(puzzles)
     }, [puzzles])
 
+
     useEffect(() => {
-        const subset = 1
+        const subset = puzzles.filter(p => p.statusId === chosenStatus)
+        // console.log("chosenStatus >>",chosenStatus)
+        // console.log("subset",subset)
         setFilteredPuzzles(subset)
-    }, [filteredPuzzles])
+    }, [chosenStatus])
 
     
     

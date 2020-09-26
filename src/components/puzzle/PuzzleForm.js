@@ -10,7 +10,7 @@ import "./Puzzle.css"
 
 export const PuzzleForm = (props) => {
     // context providers
-    const { addPuzzle, puzzles, editPuzzle, getPuzzles } = useContext(PuzzleContext)
+    const { addPuzzle, puzzles, editPuzzle, getPuzzlesActiveUser, getPuzzles } = useContext(PuzzleContext)
     const { uploadImage, loading, imageURL, setImageURL } = useContext(ImageContext)
     const { brands, getBrands } = useContext(BrandContext)
     const { statuses, getStatuses } = useContext(StatusContext)
@@ -40,7 +40,7 @@ export const PuzzleForm = (props) => {
     
     
     useEffect(() => {
-        getPuzzles()
+        getPuzzlesActiveUser()
         getBrands()
         getStatuses()
         getBoxes()

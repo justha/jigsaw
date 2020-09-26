@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { RelationshipContext } from "../relationship/RelationshipProvider"
 import { PuzzleContext } from "../puzzle/PuzzleProvider"
 import { SpaceContext } from "../space/SpaceProvider"
@@ -7,16 +7,17 @@ import { StatusContext } from "../status/StatusProvider"
 
 export const PuzzleFilter = () => {
     const { relationships, getRelationships } = useContext(RelationshipContext)
-    const { chosenSpace, setChosenSpace, setFilterTerms } = useContext(PuzzleContext)
+    const { chosenStatus, setChosenStatus, chosenSpace, setChosenSpace } = useContext(PuzzleContext)
     const { spaces, getSpaces } = useContext(SpaceContext)
-    const { statuses } = useContext(StatusContext)
-    const activeId = parseInt(localStorage.getItem("app_user"))
-
+    const { statuses } = useContext(StatusContext)   
+    
     useEffect(() => {
         getRelationships()
         getSpaces()
     }, [])
-
+    
+    
+    const activeId = parseInt(localStorage.getItem("app_user"))
     const relationshipsActiveUser = relationships.filter(r => r.userId === activeId)
 
     const matchingSpaceObj = (relationshipObj) => {
@@ -34,9 +35,9 @@ export const PuzzleFilter = () => {
     // sets deimension terms when dropdown selection is chosen
     const handleChange = (event) => {
         const chosenSpaceId = parseInt(event.target.value)
-        const matchingSpaceObj = spaces.find(s => s.id === chosenSpaceId)
+        const matchingSpaceObj = spaces.find(s => s.id === chosenSpaceId) || {}
         setChosenSpace(matchingSpaceObj)
-        // console.log("chosenSpaceId>>event.target.value>>", parseInt(event.target.value))
+        // console.log("chosenSpaceId >> event.target.value >>", parseInt(event.target.value))
         console.log("chosenSpace.id", chosenSpace.id)
     }
 
@@ -52,7 +53,9 @@ export const PuzzleFilter = () => {
                             return (
                                 <button 
                                     className="btn btn--searchbar" 
-                                    onClick={() => {setFilterTerms(s.id)}}
+                                    value={s.id}
+                                    onClick={clickEvent => {setChosenStatus(parseInt(clickEvent.target.value))
+                                    }}
                                     >
                                         {s.desc}
                                 </button>
