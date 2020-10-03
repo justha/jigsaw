@@ -42,7 +42,7 @@ export const RelationshipDetail = (props) => {
             <br></br>
            
             <div className="space__title">Dimensions</div>
-            <div className="space__dimensions">{space.length} in. x {space.width} in.</div>
+            <div className="space__dimensions">{space.lengthLong} in. x {space.lengthShort} in.</div>
             <br></br>
 
             <div className="space__title">Type</div>
