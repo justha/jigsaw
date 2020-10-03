@@ -66,8 +66,8 @@ export const RelationshipDetail = (props) => {
                             <>
                                 <button className="btn btn--primary" id="btnDeleteRelationship"
                                     onClick={() => {
-                                        deleteSpace(space.id)
                                         deleteRelationship(relationship.id)
+                                        deleteSpace(space.id)
                                         props.history.push("/relationships")
                                     }
                                 }

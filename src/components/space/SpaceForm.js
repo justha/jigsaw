@@ -33,6 +33,7 @@ export const SpaceForm = (props) => {
     
     useEffect(() => {
         getSpaces()
+        setImageURL("")
     }, [])
 
 

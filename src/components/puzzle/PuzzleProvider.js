@@ -8,7 +8,6 @@ export const PuzzleProvider = (props) => {
     const [ puzzles, setPuzzles ] = useState([])
     const [ chosenStatusId, setChosenStatusId ] = useState({})
     const [ chosenSpaceId, setChosenSpaceId ] = useState({})
-    const [ chosenSpaceSize, setChosenSpaceSize ] = useState([])
     // const [ searchTerms, setSearchTerms ] = useState([])
 
     
@@ -30,7 +29,7 @@ export const PuzzleProvider = (props) => {
     }
 
     const getPuzzleById = (id) => {
-        return fetch(`http://localhost:8088/puzzles/${ id }?_expand=brand&_expand=status`)
+        return fetch(`http://localhost:8088/puzzles/${id}?_expand=brand&_expand=status`)
             .then(res => res.json())
     }
 
@@ -56,7 +55,7 @@ export const PuzzleProvider = (props) => {
     return (
         <PuzzleContext.Provider value={{
             getPuzzles, puzzles, setPuzzles, addPuzzle, editPuzzle, deletePuzzle, getPuzzleById, 
-            chosenStatusId, setChosenStatusId, chosenSpaceId, setChosenSpaceId, chosenSpaceSize, setChosenSpaceSize
+            chosenStatusId, setChosenStatusId, chosenSpaceId, setChosenSpaceId
         }}>
             {props.children}
         </PuzzleContext.Provider>

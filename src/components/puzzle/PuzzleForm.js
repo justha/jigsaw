@@ -10,7 +10,7 @@ import "./Puzzle.css"
 
 export const PuzzleForm = (props) => {
     // context providers
-    const { addPuzzle, puzzles, editPuzzle, getPuzzlesActiveUser, getPuzzles } = useContext(PuzzleContext)
+    const { addPuzzle, puzzles, editPuzzle } = useContext(PuzzleContext)
     const { uploadImage, loading, imageURL, setImageURL } = useContext(ImageContext)
     const { brands, getBrands } = useContext(BrandContext)
     const { statuses, getStatuses } = useContext(StatusContext)
@@ -45,6 +45,7 @@ export const PuzzleForm = (props) => {
         getBoxes()
         getTextures()
         getDusts()
+        setImageURL("")
     }, [])
 
 
@@ -131,6 +132,7 @@ export const PuzzleForm = (props) => {
                     userId: activeId, 
                     id: puzzle.id,
                 })
+                .then(setImageURL(""))
                 .then(() => props.history.push("/puzzles"))
             }
             else {
@@ -152,6 +154,7 @@ export const PuzzleForm = (props) => {
                     favorite: false, //do not allow user to edit this field via form
                     userId: activeId
                 })
+                .then(setImageURL(""))
                 .then(() => props.history.push("/puzzles"))
             }
         }

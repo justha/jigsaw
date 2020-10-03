@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { RelationshipContext } from "../relationship/RelationshipProvider"
 import { PuzzleContext } from "../puzzle/PuzzleProvider"
@@ -8,7 +8,7 @@ import { StatusContext } from "../status/StatusProvider"
 
 export const PuzzleFilter = () => {
     const { relationships, getRelationships } = useContext(RelationshipContext)
-    const { setChosenStatusId, chosenSpaceId, setChosenSpaceId, setChosenSpaceSize } = useContext(PuzzleContext)
+    const { setChosenStatusId, chosenSpaceId, setChosenSpaceId } = useContext(PuzzleContext)
     const { spaces, getSpaces } = useContext(SpaceContext)
     const { statuses } = useContext(StatusContext)   
     
@@ -26,7 +26,6 @@ export const PuzzleFilter = () => {
         chosenSpaceId === 0
         ? []
         : ``
-        setChosenSpaceSize(spaceDimensions)
     }, [chosenSpaceId])
     
     

@@ -32,7 +32,8 @@ export const Puzzle = ({ puzzle }) => {
                     ? "http://res.cloudinary.com/djxxamywv/image/upload/v1600972086/puzl/ytyff89cctmzim0gfsns.jpg"
                     : `${puzzle.image}`
                 } 
-                style={{width: `200px`}}>                
+                style={{width: `200px`}}
+                alt="user puzzle">                
             </img>
             <div className="puzzle__status"><small>{puzzleStatus.desc}</small></div>
             <div className="puzzle__fit"><small></small></div>
