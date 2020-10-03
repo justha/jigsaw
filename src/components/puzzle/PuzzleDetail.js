@@ -82,7 +82,7 @@ export const PuzzleDetail = (props) => {
 
             <div className="puzzle__title"></div>
             <div className="puzzle__count">{puzzle.count} pieces</div>
-            <div className="puzzle__dimensions">{puzzle.length} in. x {puzzle.width} in.</div>
+            <div className="puzzle__dimensions">{puzzle.lengthLong} in. x {puzzle.lengthShort} in.</div>
             <div className="puzzle__box">Box Size: {box.size}</div> 
             <br></br>
             
