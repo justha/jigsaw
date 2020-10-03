@@ -60,18 +60,8 @@ export const RelationshipDetail = (props) => {
             if custom space: user can edit space OR delete space obj (also removes relationship obj)*/}
             <div>
                 {
-                    (space.custom === false)
+                    (space.custom === true)
                     ? 
-                        (
-                            <button className="btn btn--primary" id="btnDeleteRelationship"
-                                onClick={() => {
-                                    deleteRelationship(relationship.id)
-                                    props.history.push("/relationships")
-                                }
-                                }
-                            >X</button> 
-                        )
-                    : 
                         (
                             <>
                                 <button className="btn btn--primary" id="btnDeleteRelationship"
@@ -91,6 +81,16 @@ export const RelationshipDetail = (props) => {
                                     }}
                                 >✎</button> 
                             </>
+                        )
+                    : 
+                        (
+                            <button className="btn btn--primary" id="btnDeleteRelationship"
+                                onClick={() => {
+                                    deleteRelationship(relationship.id)
+                                    props.history.push("/relationships")
+                                }
+                                }
+                            >X</button> 
                         )
                         
                 }

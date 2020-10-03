@@ -46,7 +46,7 @@ export const SpaceForm = (props) => {
     const width = useRef(null)
     const activeId = parseInt(localStorage.getItem("app_user"))
 
-    // sets form cursor to first input field 
+    // positions cursor to initial input field 
     useEffect(() => {
         name.current.focus()
     }, [name])

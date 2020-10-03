@@ -18,36 +18,27 @@ export const PuzzleFilter = () => {
         getSpaces()
     }, [])
     
-    
-    const activeId = parseInt(localStorage.getItem("app_user"))
-    const relationshipsActiveUser = relationships.filter(r => r.userId === activeId)
-
-
-    const spaceName = (relationshipObj) => {
-        const matchingSpaceObj = spaces.find(s => s.id === relationshipObj.spaceId) || {}
-        return (
-            <option 
-                key={matchingSpaceObj.id} 
-                value={matchingSpaceObj.id}
-            > 
-                {matchingSpaceObj.name}
-            </option> 
-        )
-    }
 
     useEffect(() => {
         console.log('chosenSpaceId >>',chosenSpaceId)
-
+        
         const spaceDimensions = 
         chosenSpaceId === 0
-            ? []
-            : ``
-        
+        ? []
+        : ``
         setChosenSpaceSize(spaceDimensions)
-
     }, [chosenSpaceId])
-
     
+    
+    
+
+    const activeId = parseInt(localStorage.getItem("app_user"))
+    const relationshipsActiveUser = relationships.filter(r => r.userId === activeId)
+    const spaceName = relationshipObj => {
+        const matchingSpaceObj = spaces.find(s => s.id === relationshipObj.spaceId) || {}
+        return (matchingSpaceObj.name)
+    }
+
     return (
         <>
             <div className="searchbar">
@@ -66,6 +57,7 @@ export const PuzzleFilter = () => {
                             return (
                                 <button 
                                     className="btn btn--searchbar" 
+                                    key={s.id}
                                     value={s.id}
                                     onClick={clickEvent => {setChosenStatusId(parseInt(clickEvent.target.value))}}
                                     >
@@ -76,7 +68,7 @@ export const PuzzleFilter = () => {
                     </article>
                     
 
-                    <article className="searchbar__space">
+                    <article className="searchbar__workspace">
                         <fieldset>
                             <div className="form--group">
                                 <label htmlFor="spaceId">
@@ -93,15 +85,13 @@ export const PuzzleFilter = () => {
                                     onChange={changeEvent => {setChosenSpaceId(parseInt(changeEvent.target.value))}}
                                 >
                                     <option value="0">select a workspace...</option>
-                                    {                                   
-                                        relationshipsActiveUser.map(r => spaceName(r))
-                                    }
-                                    {/* <option 
-                                        value="add"
-                                        onClick={(props) => {props.history.push("/relationships/create")}}
-                                    >
-                                    add a new workspace
-                                    </option> */}
+                                        {   
+                                            relationshipsActiveUser.map(r => 
+                                                <option key={r.id} value={r.id}> 
+                                                    {spaceName(r)}
+                                                </option> 
+                                            )
+                                        }
                                 </select> 
                             </div>
                         </fieldset>
