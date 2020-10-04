@@ -8,7 +8,7 @@ import { StatusContext } from "../status/StatusProvider"
 
 export const PuzzleFilter = () => {
     const { relationships, getRelationships } = useContext(RelationshipContext)
-    const { setChosenStatusId, chosenSpace, setChosenSpace } = useContext(PuzzleContext)
+    const { setChosenStatusId, setChosenSpace } = useContext(PuzzleContext)
     const { spaces, getSpaces } = useContext(SpaceContext)
     const { statuses } = useContext(StatusContext)   
     
@@ -18,9 +18,7 @@ export const PuzzleFilter = () => {
         getSpaces()
     }, [])
   
-    // useEffect(() => {
-    //     console.log('chosenSpace >>',chosenSpace)
-    // }, [chosenSpace])
+
 
 
     const activeId = parseInt(localStorage.getItem("app_user"))
@@ -73,7 +71,11 @@ export const PuzzleFilter = () => {
                                     proptype="int"
                                     name="spaceId" 
                                     value={relationshipsActiveUser.spaceId}
-                                    onChange={changeEvent => {setChosenSpace(spaces.find(s => s.id === parseInt(changeEvent.target.value)) || {})}}
+                                    onChange={changeEvent => {
+                                        (parseInt(changeEvent.target.value) === 0)
+                                        ? setChosenSpace("none")
+                                        : setChosenSpace(spaces.find(s => s.id === parseInt(changeEvent.target.value)) || {})}
+                                    }
                                 >
                                     <option value="0">select a workspace...</option>
                                         {   

@@ -8,7 +8,7 @@ import "./Puzzle.css"
 
 
 export const PuzzleList = (props) => {
-    const { puzzles, getPuzzles, chosenStatusId, chosenSpace, setSpaceLong, setSpaceShort } = useContext(PuzzleContext)
+    const { puzzles, getPuzzles, chosenStatusId, chosenSpace, setSpaceLong, setSpaceShort, spaceLong, spaceShort } = useContext(PuzzleContext)
     const { getBrands } = useContext(BrandContext)
     const { getStatuses } = useContext(StatusContext)
 
@@ -39,24 +39,15 @@ export const PuzzleList = (props) => {
 
     useEffect(() => {
         console.log('chosenStatusId >>',chosenStatusId)
-        const subset = 
-            chosenStatusId !== 0
-            ? puzzles.filter(p => p.statusId === chosenStatusId)
-            : puzzles            
+        const subset = (chosenStatusId === 0) ? puzzles : puzzles.filter(p => p.statusId === chosenStatusId)            
         setFilteredPuzzles(subset)
     }, [chosenStatusId])
 
 
     useEffect(() => {
         console.log('chosenSpace >>',chosenSpace)
-        const chosenLengthLong = 
-            chosenSpace === 0
-            ? 0
-            : chosenSpace.lengthLong 
-        const chosenLengthShort = 
-            chosenSpace === 0
-            ? 0
-            : chosenSpace.lengthShort 
+        const chosenLengthLong = (chosenSpace === "none") ? `` : chosenSpace.lengthLong 
+        const chosenLengthShort = (chosenSpace === "none") ? `` : chosenSpace.lengthShort 
         setSpaceLong(chosenLengthLong)
         setSpaceShort(chosenLengthShort)
     }, [chosenSpace])

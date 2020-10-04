@@ -11,14 +11,18 @@ export const Puzzle = ({ puzzle }) => {
     
     const { brands } = useContext(BrandContext)
     const { statuses } = useContext(StatusContext)
-    const { spaceLong, spaceShort } = useContext(PuzzleContext)
+    const { chosenSpace, spaceLong, spaceShort } = useContext(PuzzleContext)
     
     const puzzleBrand = brands.find(b => b.id === puzzle.brandId) || {}
-    const puzzleStatus = statuses.find(s => s.id === puzzle.statusId) || {}
+    const puzzleStatus = statuses.find(s => s.id === puzzle.statusId) || {}  
+
+    const fit = (spaceLong && puzzle.lengthShort <= spaceShort) ? true : false
 
 
     return (
-        <section className="puzzle__card">
+        <section className="puzzle__card"
+            style={fit ? {backgroundColor: "PaleGreen"} : {backgroundColor: "whitesmoke"}}
+        >
             <div className="puzzle__name"><b>{puzzle.name}</b></div>
             <div className="puzzle__brand">
                 {
@@ -38,17 +42,7 @@ export const Puzzle = ({ puzzle }) => {
                 alt="user puzzle">                
             </img>
             <div className="puzzle__status"><small>{puzzleStatus.desc}</small></div>
-            <div className="puzzle__fit">
-                <small>
-                    {
-                        (spaceLong === undefined || spaceShort === undefined)
-                        ? ``
-                        : (puzzle.lengthLong < spaceLong && puzzle.lengthShort < spaceShort)
-                            ? "Yes"
-                            : "No"
-                    }
-                </small>
-            </div>
+            {/* <div className="puzzle__fit"><small>{fit ? "Yes" : ""}</small></div> */}
         </section>
     )
 }
