@@ -1,18 +1,20 @@
-import React, {useContext} from "react"
+import React, {useContext, useEffect} from "react"
 import { BrandContext } from "../brand/BrandProvider"
 import { StatusContext } from "../status/StatusProvider"
+import { PuzzleContext } from "../puzzle/PuzzleProvider"
 import "./Puzzle.css"
 
 
-export const Puzzle = ({ puzzle }) => {
 
+
+export const Puzzle = ({ puzzle }) => {
+    
     const { brands } = useContext(BrandContext)
     const { statuses } = useContext(StatusContext)
-
+    const { spaceLong, spaceShort } = useContext(PuzzleContext)
+    
     const puzzleBrand = brands.find(b => b.id === puzzle.brandId) || {}
     const puzzleStatus = statuses.find(s => s.id === puzzle.statusId) || {}
-
-    // const [puzzleMax, puzzleMin] = [puzzle.length, puzzle.width].sort((a, b) => b - a)
 
 
     return (
@@ -36,7 +38,17 @@ export const Puzzle = ({ puzzle }) => {
                 alt="user puzzle">                
             </img>
             <div className="puzzle__status"><small>{puzzleStatus.desc}</small></div>
-            <div className="puzzle__fit"><small></small></div>
+            <div className="puzzle__fit">
+                <small>
+                    {
+                        (spaceLong === undefined || spaceShort === undefined)
+                        ? ``
+                        : (puzzle.lengthLong < spaceLong && puzzle.lengthShort < spaceShort)
+                            ? "Yes"
+                            : "No"
+                    }
+                </small>
+            </div>
         </section>
     )
 }

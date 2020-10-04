@@ -56,7 +56,6 @@ export const RelationshipList = (props) => {
                                         <Relationship relationship={r} />
                                         <br></br>
                                     </Link>
-
                                 </article>
                             )
                         })

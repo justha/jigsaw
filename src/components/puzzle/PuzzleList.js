@@ -8,7 +8,7 @@ import "./Puzzle.css"
 
 
 export const PuzzleList = (props) => {
-    const { puzzles, getPuzzles, chosenStatusId, chosenSpaceSize } = useContext(PuzzleContext)
+    const { puzzles, getPuzzles, chosenStatusId, chosenSpace, setSpaceLong, setSpaceShort } = useContext(PuzzleContext)
     const { getBrands } = useContext(BrandContext)
     const { getStatuses } = useContext(StatusContext)
 
@@ -44,18 +44,24 @@ export const PuzzleList = (props) => {
             ? puzzles.filter(p => p.statusId === chosenStatusId)
             : puzzles            
         setFilteredPuzzles(subset)
-
     }, [chosenStatusId])
 
 
     useEffect(() => {
+        console.log('chosenSpace >>',chosenSpace)
+        const chosenLengthLong = 
+            chosenSpace === 0
+            ? 0
+            : chosenSpace.lengthLong 
+        const chosenLengthShort = 
+            chosenSpace === 0
+            ? 0
+            : chosenSpace.lengthShort 
+        setSpaceLong(chosenLengthLong)
+        setSpaceShort(chosenLengthShort)
+    }, [chosenSpace])
 
 
-        console.log('chosenSpaceSize >>',chosenSpaceSize)
-
-    }, [chosenSpaceSize])
-
-    
     
     return (
         <>
@@ -74,22 +80,19 @@ export const PuzzleList = (props) => {
                     puzzlesActiveUser.map(p => {
                         return (
                             <article 
-                            key={p.id} 
-                            className="puzzle__item"
+                                key={p.id} 
+                                className="puzzle__item"
                             >
-
-                            <Link className="link__toPuzzleDetails" 
-                                to={{
-                                    pathname: `/puzzles/${p.id}`,
-                                    state: { chosenPuzzle: p }
-                                }}
-                            >
-                                <Puzzle puzzle={p} />
-                                <br></br>
-
-                            </Link>
-
-                        </article>   
+                                <Link className="link__toPuzzleDetails" 
+                                    to={{
+                                        pathname: `/puzzles/${p.id}`,
+                                        state: { chosenPuzzle: p }
+                                    }}
+                                >
+                                    <Puzzle puzzle={p} />
+                                    <br></br>
+                                </Link>
+                            </article>   
                     )
                 })}
             </div> 

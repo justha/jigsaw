@@ -7,7 +7,9 @@ export const PuzzleContext = React.createContext()
 export const PuzzleProvider = (props) => {
     const [ puzzles, setPuzzles ] = useState([])
     const [ chosenStatusId, setChosenStatusId ] = useState({})
-    const [ chosenSpaceId, setChosenSpaceId ] = useState({})
+    const [ chosenSpace, setChosenSpace ] = useState({})
+    const [ spaceLong, setSpaceLong ] = useState({})
+    const [ spaceShort, setSpaceShort ] = useState({})
     // const [ searchTerms, setSearchTerms ] = useState([])
 
     
@@ -55,7 +57,8 @@ export const PuzzleProvider = (props) => {
     return (
         <PuzzleContext.Provider value={{
             getPuzzles, puzzles, setPuzzles, addPuzzle, editPuzzle, deletePuzzle, getPuzzleById, 
-            chosenStatusId, setChosenStatusId, chosenSpaceId, setChosenSpaceId
+            chosenStatusId, setChosenStatusId, chosenSpace, setChosenSpace, 
+            spaceLong, setSpaceLong, spaceShort, setSpaceShort
         }}>
             {props.children}
         </PuzzleContext.Provider>

@@ -8,7 +8,7 @@ import { StatusContext } from "../status/StatusProvider"
 
 export const PuzzleFilter = () => {
     const { relationships, getRelationships } = useContext(RelationshipContext)
-    const { setChosenStatusId, chosenSpaceId, setChosenSpaceId } = useContext(PuzzleContext)
+    const { setChosenStatusId, chosenSpace, setChosenSpace } = useContext(PuzzleContext)
     const { spaces, getSpaces } = useContext(SpaceContext)
     const { statuses } = useContext(StatusContext)   
     
@@ -17,19 +17,11 @@ export const PuzzleFilter = () => {
         getRelationships()
         getSpaces()
     }, [])
-    
+  
+    // useEffect(() => {
+    //     console.log('chosenSpace >>',chosenSpace)
+    // }, [chosenSpace])
 
-    useEffect(() => {
-        console.log('chosenSpaceId >>',chosenSpaceId)
-        
-        const spaceDimensions = 
-        chosenSpaceId === 0
-        ? []
-        : ``
-    }, [chosenSpaceId])
-    
-    
-    
 
     const activeId = parseInt(localStorage.getItem("app_user"))
     const relationshipsActiveUser = relationships.filter(r => r.userId === activeId)
@@ -81,12 +73,12 @@ export const PuzzleFilter = () => {
                                     proptype="int"
                                     name="spaceId" 
                                     value={relationshipsActiveUser.spaceId}
-                                    onChange={changeEvent => {setChosenSpaceId(parseInt(changeEvent.target.value))}}
+                                    onChange={changeEvent => {setChosenSpace(spaces.find(s => s.id === parseInt(changeEvent.target.value)) || {})}}
                                 >
                                     <option value="0">select a workspace...</option>
                                         {   
                                             relationshipsActiveUser.map(r => 
-                                                <option key={r.id} value={r.id}> 
+                                                <option key={r.spaceId} value={r.spaceId}> 
                                                     {spaceName(r)}
                                                 </option> 
                                             )
