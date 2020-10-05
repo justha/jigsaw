@@ -40,7 +40,8 @@ export const RelationshipForm = (props) => {
         else {
                 addRelationship({
                     userId: activeId,
-                    spaceId
+                    spaceId,
+                    occupied: false
                 })
                 .then(() => props.history.push("/relationships"))
             }

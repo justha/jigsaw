@@ -24,25 +24,20 @@ export const Puzzle = ({ puzzle }) => {
         <section className="puzzle__card"
             style={fit ? {backgroundColor: "PaleGreen"} : {backgroundColor: "whitesmoke"}}
         >
-            <div className="puzzle__name"><b>{puzzle.name}</b></div>
-            <div className="puzzle__brand">
-                {
-                (puzzleBrand.name === "other")
-                ? ``
-                : `by ${puzzleBrand.name}`
-                }
-            </div>
 
-            <Link className="link__toPuzzleDetails" 
-                to={{
-                    pathname: `/puzzles/${puzzle.id}`,
-                    state: { chosenPuzzle: puzzle }
-                }}
-            >
+            <Link className="link__toPuzzleDetails" to={{pathname: `/puzzles/${puzzle.id}`, state: { chosenPuzzle: puzzle }}}>
+                <div className="puzzle__name"><b>{puzzle.name}</b></div>
+                <div className="puzzle__brand">
+                    {
+                    (puzzleBrand.name === "other")
+                    ? ``
+                    : `by ${puzzleBrand.name}`
+                    }
+                </div>
                 <img 
                     className="puzzle__image" 
                     src={
-                        puzzle.image === ""
+                        puzzle.image === undefined
                         ? "http://res.cloudinary.com/djxxamywv/image/upload/v1600972086/puzl/ytyff89cctmzim0gfsns.jpg"
                         : `${puzzle.image}`
                     } 
