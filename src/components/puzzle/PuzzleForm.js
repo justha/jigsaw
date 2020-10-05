@@ -7,6 +7,7 @@ import { DustContext } from "../dust/DustProvider"
 import { StatusContext } from "../status/StatusProvider"
 import { ImageContext } from "../image/ImageProvider"
 import "./Puzzle.css"
+import { Link } from "react-router-dom"
 
 export const PuzzleForm = (props) => {
     // context providers
@@ -97,7 +98,8 @@ export const PuzzleForm = (props) => {
         //     : imageURL
         // )
        
-
+        //NOTE: addPuzzle function below 1)takes a copy of textureId, then 2) evaluates it to determine whether it is a truthy or falsy value (e.g., id 0 does not exist and therefore w/b falsy)
+        // if truthy, saves new property to the database, otherwise it does not save anything
         if (
             puzzleName === "" || 
             brandId === 0 ||
@@ -116,19 +118,19 @@ export const PuzzleForm = (props) => {
             if (editMode){
                 editPuzzle({
                     name: puzzleName,
-                    brandId,
+                    ...(brandId && {brandId}),
                     count: puzzleCount,
-                    boxId,
+                    ...(boxId && {boxId}),
                     lengthLong: Math.max(puzzleLength,puzzleWidth),
                     lengthShort: Math.min(puzzleLength,puzzleWidth),
-                    statusId,
-                    note: puzzleNote,
-                    poster: puzzlePoster,
-                    textureId,
-                    dustId,
-                    assembled: puzzleAssembled,
-                    trade: puzzleTrade,
-                    image: imageURL,
+                    ...(statusId && {statusId}),
+                    ...(puzzleNote && {note: puzzleNote}),
+                    ...(puzzlePoster && {poster: puzzlePoster}),
+                    ...(textureId && {textureId}),
+                    ...(dustId && {dustId}),
+                    ...(puzzleAssembled && {assembled: puzzleAssembled}),
+                    ...(puzzleTrade && {trade: puzzleTrade}),
+                    ...(imageURL && {image: imageURL}),
                     userId: activeId, 
                     id: puzzle.id,
                 })
@@ -138,19 +140,19 @@ export const PuzzleForm = (props) => {
             else {
                 addPuzzle({
                     name: puzzleName,
-                    brandId,
+                    ...(brandId && {brandId}),
                     count: puzzleCount,
-                    boxId,
+                    ...(boxId && {boxId}),
                     lengthLong: Math.max(puzzleLength,puzzleWidth),
                     lengthShort: Math.min(puzzleLength,puzzleWidth),
-                    statusId,
-                    note: puzzleNote,
-                    poster: puzzlePoster,
-                    textureId,
-                    dustId,
-                    assembled: puzzleAssembled,
-                    trade: puzzleTrade,
-                    image: imageURL,
+                    ...(statusId && {statusId}),
+                    ...(puzzleNote && {note: puzzleNote}),
+                    ...(puzzlePoster && {poster: puzzlePoster}),
+                    ...(textureId && {textureId}),
+                    ...(dustId && {dustId}),
+                    ...(puzzleAssembled && {assembled: puzzleAssembled}),
+                    ...(puzzleTrade && {trade: puzzleTrade}),
+                    ...(imageURL && {image: imageURL}),
                     favorite: false, //do not allow user to edit this field via form
                     userId: activeId
                 })
@@ -165,7 +167,6 @@ export const PuzzleForm = (props) => {
             <h2 className="puzzleForm__title">{editMode ? "Edit Puzzle" : "Add a Puzzle"}</h2>
 
             <h3>Basic Details</h3>
-
 
             <fieldset>
                 <div className="form--group">

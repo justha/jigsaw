@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { PuzzleContext } from "./PuzzleProvider"
 import { BrandContext } from "../brand/BrandProvider"
 import { BoxContext } from "../box/BoxProvider"
@@ -66,68 +67,61 @@ export const PuzzleDetail = (props) => {
 
     return (
         <section className="puzzle__detail">
-            <button 
-                className="btn btn--primary" 
-                id="btnPuzzleBack" 
-                onClick={() => {
-                    props.history.push(`/puzzles`)
-                }}
-            >⇦</button>
+            <Link className="link__toPuzzleDetails" to={{pathname: `/puzzles`}}>                
+                {/* <div className="puzzle__name">{puzzle.name}</div>
+                <div className="puzzle__brand">by {brand.name}</div>
+                
+                <br></br> */}
+                
+
+                <div className="puzzle__title">Basic Details</div>
+                <div className="puzzle__count">{puzzle.count} pieces</div>
+                <div className="puzzle__dimensions">{puzzle.lengthLong} in. x {puzzle.lengthShort} in.</div>
+                <div className="puzzle__box">Box Size: {box.size}</div> 
+                <br></br>
+                
+
+                <div className="puzzle__title">Other</div>
+                <div className="puzzle__poster">Poster Included: { 
+                        (puzzle.poster === true)
+                        ? "Yes"
+                        : "No"
+                    }
+                </div>
+                <div className="puzzle__texture">{ 
+                        (puzzle.textureId === undefined)
+                        ? ``
+                        : `Texture: ${texture.desc}`
+                    }
+                </div>
+                <div className="puzzle__dust">{ 
+                        (puzzle.dustId === undefined)
+                        ? ``
+                        : `Puzzledust: ${dust.amount}`
+                    }
+                </div>
+                <div className="puzzle__assembled">{ 
+                        (status.id === 4 && puzzle.assembledId !== "")
+                        ? `Assembled: ${puzzle.assembled}`
+                        : ``
+                    }
+                </div>
+                <br></br>
 
 
-            <div className="puzzle__name">{puzzle.name}</div>
-            <div className="puzzle__brand">by {brand.name}</div>
-            <br></br>
-            
-
-            <div className="puzzle__title"></div>
-            <div className="puzzle__count">{puzzle.count} pieces</div>
-            <div className="puzzle__dimensions">{puzzle.lengthLong} in. x {puzzle.lengthShort} in.</div>
-            <div className="puzzle__box">Box Size: {box.size}</div> 
-            <br></br>
-            
-
-            <div className="puzzle__title">Details</div>
-            <div className="puzzle__poster">Poster Included: { 
-                    (puzzle.poster === true)
-                    ? "Yes"
-                    : "No"
-                }
-            </div>
-            <div className="puzzle__texture">{ 
-                    (puzzle.textureId === 0)
+                { 
+                    (puzzle.note === undefined)
                     ? ``
-                    : `Texture: ${texture.desc}`
+                    : (
+                        <article>
+                            <div className="puzzle__title">Notes</div>
+                            <div className="puzzle__note">{puzzle.note}</div> 
+                        </article>
+                        )
                 }
-            </div>
-            <div className="puzzle__dust">{ 
-                    (puzzle.dustId === 0)
-                    ? ``
-                    : `Puzzledust: ${dust.amount}`
-                }
-            </div>
-            <div className="puzzle__assembled">{ 
-                    (status.id === 4 && puzzle.assembledId !== "")
-                    ? `Assembled: ${puzzle.assembled}`
-                    : ``
-                }
-            </div>
-            <br></br>
 
-
-            { 
-                (puzzle.note === "")
-                ? ``
-                : (
-                    <article>
-                        <div className="puzzle__title">Notes</div>
-                        <div className="puzzle__note">{puzzle.note}</div> 
-                    </article>
-                    )
-            }
-            <br></br>
-
-
+                <br></br>
+            </Link>
 
 
             <button className="btn btn--primary" id="btnDeletePuzzle"
@@ -147,8 +141,15 @@ export const PuzzleDetail = (props) => {
             >✎</button>
 
            
+            {/* <button 
+                className="btn btn--primary" 
+                id="btnPuzzleBack" 
+                onClick={() => {props.history.push(`/puzzles`)}}
+            >⇦</button> */}
+
+
         </section>
     )
-
+    
     
 }

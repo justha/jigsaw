@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { RelationshipContext } from "./RelationshipProvider"
 import { SpaceContext } from "../space/SpaceProvider"
 import "./Relationship.css"
@@ -28,33 +29,28 @@ export const RelationshipDetail = (props) => {
     }, [spaces])
 
     return (
+        
         <section className="relationship__detail">
-            <button 
-                className="btn btn--primary" 
-                id="btnSpaceBack" 
-                onClick={() => {
-                    props.history.push(`/relationships`)
-                }}
-            >⇦</button>
-
-
-            <div className="space__name">{space.name}</div>
-            <br></br>
-           
-            <div className="space__title">Dimensions</div>
-            <div className="space__dimensions">{space.lengthLong} in. x {space.lengthShort} in.</div>
-            <br></br>
-
-            <div className="space__title">Type</div>
-            <div className="space__custom">{
-                (space.custom === true) 
-                ? `Custom` 
-                : `Standard`
-                }
-            </div>
-            <br></br>
+            <Link className="link__toPuzzleDetails" to={{pathname: `/relationships`}}>
+                {/* <div className="space__name">{space.name}</div>
+                <br></br> */}
             
+                <div className="space__title">Dimensions</div>
+                <div className="space__dimensions">{space.lengthLong} in. x {space.lengthShort} in.</div>
+                <br></br>
 
+                <div className="space__title">Type</div>
+                <div className="space__custom">{
+                    (space.custom === true) 
+                    ? `Custom` 
+                    : `Standard`
+                }
+                </div>
+                
+                <br></br>
+            </Link>
+
+            
             {/* 
             if standard space: user can delete relationship obj (only)
             if custom space: user can edit space OR delete space obj (also removes relationship obj)*/}
@@ -62,8 +58,8 @@ export const RelationshipDetail = (props) => {
                 {
                     (space.custom === true)
                     ? 
-                        (
-                            <>
+                    (
+                        <>
                                 <button className="btn btn--primary" id="btnDeleteRelationship"
                                     onClick={() => {
                                         deleteRelationship(relationship.id)
@@ -79,25 +75,30 @@ export const RelationshipDetail = (props) => {
                                     onClick={() => {
                                         props.history.push(`/spaces/edit/${space.id}`)
                                     }}
-                                >✎</button> 
+                                    >✎</button> 
                             </>
                         )
-                    : 
+                        : 
                         (
                             <button className="btn btn--primary" id="btnDeleteRelationship"
-                                onClick={() => {
-                                    deleteRelationship(relationship.id)
-                                    props.history.push("/relationships")
-                                }
-                                }
-                            >X</button> 
+                            onClick={() => {
+                                deleteRelationship(relationship.id)
+                                props.history.push("/relationships")
+                            }
+                        }
+                        >X</button> 
                         )
-                        
-                }
+                    }
             </div>
 
              
-        </section>
-    )
+            {/* <button 
+                className="btn btn--primary" 
+                id="btnSpaceBack" 
+                onClick={() => {props.history.push(`/relationships`)}}
+            >⇦</button> */}
 
+        </section>        
+    )
+    
 }

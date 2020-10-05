@@ -70,7 +70,7 @@ export const SpaceForm = (props) => {
                     name: spaceName,
                     lengthLong: Math.max(spaceLength, spaceWidth),
                     lengthShort: Math.min(spaceLength, spaceWidth),
-                    image: imageURL,
+                    ...(imageURL && {image: imageURL}),
                     custom: true,
                     id: space.id
                 })
@@ -81,14 +81,15 @@ export const SpaceForm = (props) => {
                     name: spaceName,
                     lengthLong: Math.max(spaceLength, spaceWidth),
                     lengthShort: Math.min(spaceLength, spaceWidth),
-                    image: imageURL,
+                    ...(imageURL && {image: imageURL}),
                     custom: true
                 })
                 .then(res => res.json()) 
                 .then(parsedObj => {
                     addRelationship({
                         userId: activeId,
-                        spaceId: parsedObj.id
+                        spaceId: parsedObj.id, 
+                        occupied: false
                     })
                 })
                 .then(() => props.history.push("/relationships"))
