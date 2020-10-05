@@ -7,10 +7,10 @@ import { StatusProvider } from "./status/StatusProvider"
 import { BoxProvider } from "./box/BoxProvider"
 import { TextureProvider } from "./texture/TextureProvider"
 import { DustProvider } from "./dust/DustProvider"
+import { PuzzleSearch } from "./search/PuzzleSearch"
 import { PuzzleForm } from "./puzzle/PuzzleForm"
 import { PuzzleList } from "./puzzle/PuzzleList"
 import { PuzzleDetail } from "./puzzle/PuzzleDetail"
-import { PuzzleFilter } from "./puzzle/PuzzleFilter"
 import { RelationshipProvider } from "./relationship/RelationshipProvider"
 import { RelationshipForm } from "./relationship/RelationshipForm"
 import { RelationshipList } from "./relationship/RelationshipList"
@@ -40,7 +40,7 @@ export const ApplicationViews = (props) => {
 
                                                 <Route exact path="/puzzles" render={ 
                                                     props => <> 
-                                                            <PuzzleFilter />
+                                                            <PuzzleSearch />
                                                             <PuzzleList {...props}/>
                                                             </>} />
 

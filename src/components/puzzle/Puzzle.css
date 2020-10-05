@@ -31,6 +31,7 @@
 .puzzleList__container {
     /* display: flex;
     flex-direction: row; */
+    overflow-y: auto;
 }
 
 .puzzleList {

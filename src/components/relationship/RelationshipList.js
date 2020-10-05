@@ -24,46 +24,32 @@ export const RelationshipList = (props) => {
 
     return (
         <>
+            <div className="container__main">
 
-            <h2>My Workspaces</h2>
-            
-            <button className="btn btn--primary" id="btnAddSpace"
-                onClick={() => {props.history.push("/relationships/create")}}
-            >
-            +
-            </button> 
-            
-
-            <div className="relationshipList">
-                
-
-
-                <div className="relationshipList">
-                    {
-                        relationshipsActiveUser.map(r => {
-                            return (
-                                <article 
-                                    key={r.id}
-                                    className="relationship__item"
-                                >
-                                    <Link 
-                                        className="link__toRelationshipDetails"
-                                        to={{
-                                            pathname: `/relationships/${r.id}`,
-                                            state: {chosenRelationship: r}
-                                        }}
-                                    >
+                <div className="container__mainLeft">
+                    <h2>My Workspaces</h2>
+                    <section className="relationshipList">
+                        {
+                            relationshipsActiveUser.map(r => {
+                                return (
+                                    <article key={r.id} className="relationship__item">
                                         <Relationship relationship={r} />
                                         <br></br>
-                                    </Link>
-                                </article>
-                            )
-                        })
-                    }
+                                    </article>
+                                )
+                            })}
+                    </section>
                 </div>
-                
-            </div>
 
+                <div className="container__mainRight">
+                    <button className="btn btn--primary" id="btnAddSpace"
+                        onClick={() => {props.history.push("/relationships/create")}}
+                    >
+                    +
+                    </button> 
+                </div>
+
+            </div>
             
         </>
     )

@@ -1,4 +1,5 @@
-import React, {useContext, useEffect} from "react"
+import React, {useContext} from "react"
+import { Link } from "react-router-dom"
 import { BrandContext } from "../brand/BrandProvider"
 import { StatusContext } from "../status/StatusProvider"
 import { PuzzleContext } from "../puzzle/PuzzleProvider"
@@ -31,16 +32,25 @@ export const Puzzle = ({ puzzle }) => {
                 : `by ${puzzleBrand.name}`
                 }
             </div>
-            <img 
-                className="puzzle__image" 
-                src={
-                    puzzle.image === ""
-                    ? "http://res.cloudinary.com/djxxamywv/image/upload/v1600972086/puzl/ytyff89cctmzim0gfsns.jpg"
-                    : `${puzzle.image}`
-                } 
-                style={{width: `200px`}}
-                alt="user puzzle">                
-            </img>
+
+            <Link className="link__toPuzzleDetails" 
+                to={{
+                    pathname: `/puzzles/${puzzle.id}`,
+                    state: { chosenPuzzle: puzzle }
+                }}
+            >
+                <img 
+                    className="puzzle__image" 
+                    src={
+                        puzzle.image === ""
+                        ? "http://res.cloudinary.com/djxxamywv/image/upload/v1600972086/puzl/ytyff89cctmzim0gfsns.jpg"
+                        : `${puzzle.image}`
+                    } 
+                    style={{width: `200px`}}
+                    alt="user puzzle">                
+                </img>
+            </Link>
+
             <div className="puzzle__status"><small>{puzzleStatus.desc}</small></div>
             {/* <div className="puzzle__fit"><small>{fit ? "Yes" : ""}</small></div> */}
         </section>

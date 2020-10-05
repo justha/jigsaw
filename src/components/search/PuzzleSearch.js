@@ -1,12 +1,11 @@
 import React, { useContext, useEffect } from "react"
-import { Link } from "react-router-dom"
 import { RelationshipContext } from "../relationship/RelationshipProvider"
 import { PuzzleContext } from "../puzzle/PuzzleProvider"
 import { SpaceContext } from "../space/SpaceProvider"
 import { StatusContext } from "../status/StatusProvider"
 
 
-export const PuzzleFilter = () => {
+export const PuzzleSearch = () => {
     const { relationships, getRelationships } = useContext(RelationshipContext)
     const { setChosenStatusId, setChosenSpace } = useContext(PuzzleContext)
     const { spaces, getSpaces } = useContext(SpaceContext)
@@ -61,7 +60,7 @@ export const PuzzleFilter = () => {
                         <fieldset>
                             <div className="form--group">
                                 <label htmlFor="spaceId">
-                                    Will it fit?
+                                    Does it fit?
                                 </label>
                                 <select 
                                     className="form--control" 
@@ -77,7 +76,7 @@ export const PuzzleFilter = () => {
                                         : setChosenSpace(spaces.find(s => s.id === parseInt(changeEvent.target.value)) || {})}
                                     }
                                 >
-                                    <option value="0">select a workspace...</option>
+                                    <option value="0">select...</option>
                                         {   
                                             relationshipsActiveUser.map(r => 
                                                 <option key={r.spaceId} value={r.spaceId}> 

@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.container__main {
+    display: flex;
+    flex-direction: row;
+    overflow-y: scroll;
+}
+
+.container__mainLeft {
+    margin: 1rem;
+}
+
+.container__mainRight {
+    margin: 1rem;
+}
