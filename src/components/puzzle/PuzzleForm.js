@@ -10,7 +10,7 @@ import "./Puzzle.css"
 
 export const PuzzleForm = (props) => {
     // context providers
-    const { addPuzzle, puzzles, editPuzzle, getPuzzlesActiveUser, getPuzzles } = useContext(PuzzleContext)
+    const { addPuzzle, puzzles, editPuzzle } = useContext(PuzzleContext)
     const { uploadImage, loading, imageURL, setImageURL } = useContext(ImageContext)
     const { brands, getBrands } = useContext(BrandContext)
     const { statuses, getStatuses } = useContext(StatusContext)
@@ -40,12 +40,12 @@ export const PuzzleForm = (props) => {
     
     
     useEffect(() => {
-        getPuzzlesActiveUser()
         getBrands()
         getStatuses()
         getBoxes()
         getTextures()
         getDusts()
+        setImageURL("")
     }, [])
 
 
@@ -86,6 +86,10 @@ export const PuzzleForm = (props) => {
         const textureId = parseInt(texture.current.value)
         const dustId = parseInt(dust.current.value)
         const statusId = parseInt(status.current.value)
+        const puzzleNote = note.current.value
+        const puzzlePoster = JSON.parse(poster.current.value)
+        const puzzleAssembled = assembled.current.value
+        const puzzleTrade = JSON.parse(trade.current.value)
         // const defaultImage = "http://res.cloudinary.com/djxxamywv/image/upload/v1600972086/puzl/ytyff89cctmzim0gfsns.jpg"
         // const imageLink = (
         //     imageURL === ""
@@ -111,44 +115,46 @@ export const PuzzleForm = (props) => {
         else {
             if (editMode){
                 editPuzzle({
-                    name: name.current.value,
+                    name: puzzleName,
                     brandId,
-                    count: parseInt(count.current.value),
+                    count: puzzleCount,
                     boxId,
-                    length: parseInt(length.current.value),
-                    width: parseInt(width.current.value),
+                    lengthLong: Math.max(puzzleLength,puzzleWidth),
+                    lengthShort: Math.min(puzzleLength,puzzleWidth),
                     statusId,
-                    note: note.current.value,
-                    poster: JSON.parse(poster.current.value),
+                    note: puzzleNote,
+                    poster: puzzlePoster,
                     textureId,
                     dustId,
-                    assembled: assembled.current.value,
-                    trade: JSON.parse(trade.current.value),
+                    assembled: puzzleAssembled,
+                    trade: puzzleTrade,
                     image: imageURL,
                     userId: activeId, 
                     id: puzzle.id,
                 })
+                .then(setImageURL(""))
                 .then(() => props.history.push("/puzzles"))
             }
             else {
                 addPuzzle({
-                    name: name.current.value,
+                    name: puzzleName,
                     brandId,
-                    count: parseInt(count.current.value),
+                    count: puzzleCount,
                     boxId,
-                    length: parseInt(length.current.value),
-                    width: parseInt(width.current.value),
+                    lengthLong: Math.max(puzzleLength,puzzleWidth),
+                    lengthShort: Math.min(puzzleLength,puzzleWidth),
                     statusId,
-                    note: note.current.value,
-                    poster: JSON.parse(poster.current.value),
+                    note: puzzleNote,
+                    poster: puzzlePoster,
                     textureId,
                     dustId,
-                    assembled: assembled.current.value,
-                    trade: JSON.parse(trade.current.value),
+                    assembled: puzzleAssembled,
+                    trade: puzzleTrade,
                     image: imageURL,
                     favorite: false, //do not allow user to edit this field via form
                     userId: activeId
                 })
+                .then(setImageURL(""))
                 .then(() => props.history.push("/puzzles"))
             }
         }
@@ -261,7 +267,7 @@ export const PuzzleForm = (props) => {
                             proptype="int"
                             type="text" 
                             // placeholder="length" 
-                            defaultValue={puzzle.length} 
+                            defaultValue={puzzle.lengthLong} 
                             onChange={handleControlledInputChange}
                         />
                         <div>x</div>
@@ -274,7 +280,7 @@ export const PuzzleForm = (props) => {
                             proptype="int"
                             type="text" 
                             // placeholder="width" 
-                            defaultValue={puzzle.width} 
+                            defaultValue={puzzle.lengthShort} 
                             onChange={handleControlledInputChange}
                         />
                         <div>inches</div>

@@ -42,7 +42,7 @@ export const RelationshipDetail = (props) => {
             <br></br>
            
             <div className="space__title">Dimensions</div>
-            <div className="space__dimensions">{space.length} in. x {space.width} in.</div>
+            <div className="space__dimensions">{space.lengthLong} in. x {space.lengthShort} in.</div>
             <br></br>
 
             <div className="space__title">Type</div>
@@ -60,24 +60,14 @@ export const RelationshipDetail = (props) => {
             if custom space: user can edit space OR delete space obj (also removes relationship obj)*/}
             <div>
                 {
-                    (space.custom === false)
+                    (space.custom === true)
                     ? 
-                        (
-                            <button className="btn btn--primary" id="btnDeleteRelationship"
-                                onClick={() => {
-                                    deleteRelationship(relationship.id)
-                                    props.history.push("/relationships")
-                                }
-                                }
-                            >X</button> 
-                        )
-                    : 
                         (
                             <>
                                 <button className="btn btn--primary" id="btnDeleteRelationship"
                                     onClick={() => {
-                                        deleteSpace(space.id)
                                         deleteRelationship(relationship.id)
+                                        deleteSpace(space.id)
                                         props.history.push("/relationships")
                                     }
                                 }
@@ -91,6 +81,16 @@ export const RelationshipDetail = (props) => {
                                     }}
                                 >✎</button> 
                             </>
+                        )
+                    : 
+                        (
+                            <button className="btn btn--primary" id="btnDeleteRelationship"
+                                onClick={() => {
+                                    deleteRelationship(relationship.id)
+                                    props.history.push("/relationships")
+                                }
+                                }
+                            >X</button> 
                         )
                         
                 }

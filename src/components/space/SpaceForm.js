@@ -33,6 +33,7 @@ export const SpaceForm = (props) => {
     
     useEffect(() => {
         getSpaces()
+        setImageURL("")
     }, [])
 
 
@@ -46,7 +47,7 @@ export const SpaceForm = (props) => {
     const width = useRef(null)
     const activeId = parseInt(localStorage.getItem("app_user"))
 
-    // sets form cursor to first input field 
+    // positions cursor to initial input field 
     useEffect(() => {
         name.current.focus()
     }, [name])
@@ -66,9 +67,9 @@ export const SpaceForm = (props) => {
         else {
             if (editMode){
                 editSpace({
-                    name: name.current.value,
-                    length: parseInt(length.current.value),
-                    width: parseInt(width.current.value),
+                    name: spaceName,
+                    lengthLong: Math.max(spaceLength, spaceWidth),
+                    lengthShort: Math.min(spaceLength, spaceWidth),
                     image: imageURL,
                     custom: true,
                     id: space.id
@@ -77,9 +78,9 @@ export const SpaceForm = (props) => {
             }
             else {
                 addSpace({
-                    name: name.current.value,
-                    length: parseInt(length.current.value),
-                    width: parseInt(width.current.value),
+                    name: spaceName,
+                    lengthLong: Math.max(spaceLength, spaceWidth),
+                    lengthShort: Math.min(spaceLength, spaceWidth),
                     image: imageURL,
                     custom: true
                 })
@@ -138,7 +139,7 @@ export const SpaceForm = (props) => {
                             proptype="int"
                             type="text" 
                             // placeholder="length" 
-                            defaultValue={space.length} 
+                            defaultValue={space.lengthLong} 
                             onChange={handleControlledInputChange}
                         />
                         <div>x</div>
@@ -151,7 +152,7 @@ export const SpaceForm = (props) => {
                             proptype="int"
                             type="text" 
                             // placeholder="width" 
-                            defaultValue={space.width} 
+                            defaultValue={space.lengthShort} 
                             onChange={handleControlledInputChange}
                         />
                         <div>inches</div>
