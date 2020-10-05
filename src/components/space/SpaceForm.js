@@ -3,6 +3,9 @@ import { SpaceContext } from "./SpaceProvider"
 import { RelationshipContext } from "../relationship/RelationshipProvider"
 import { ImageContext } from "../image/ImageProvider"
 import "./Space.css"
+import { Button } from '@material-ui/core'
+import SaveIcon from '@material-ui/icons/Save'
+
 
 export const SpaceForm = (props) => {
 
@@ -103,120 +106,140 @@ export const SpaceForm = (props) => {
 
     return (
         <form className="spaceForm">
-            <h3 className="spaceForm__title">{editMode ? "Edit Your Custom Space" : "Add a Custom Space"}</h3>
+            <div className="container__main">
+
+                <div className="container__mainTop">
+                    <h2 className="spaceForm__title">{editMode ? "Edit Your Custom Workspace" : "Add a Custom Workspace"}</h2>
+                </div>       
 
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="name">Space Name or Description*: </label>
-                    <input 
-                        className="form--control" 
-                        ref={name} 
-                        required 
-                        autoFocus 
-                        id="name" 
-                        proptype="varchar"
-                        type="text" 
-                        placeholder="input desc" 
-                        defaultValue={space.name} 
-                        onChange={handleControlledInputChange}
-                    />
-                </div>
-            </fieldset>
+                <div className="container__mainMiddle">
+                        <Button type="submit" className="btn btn--primary"
+                            size="small"
+                            variant="contained"
+                            startIcon={<SaveIcon />}
+                            onClick={evt => {
+                                evt.preventDefault() 
+                                createNewSpace()
+                            }}
+                        >
+                        Save
+                        </Button>
+                    </div> 
 
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="spaceDimensions">
-                        Space Dimensions*: 
-                    </label>
-                    <div className="form__spaceDimensionsInputGroup">
-                        <input 
-                            className="form--control" 
-                            ref={length} 
-                            required 
-                            autoFocus 
-                            id="spaceLength" 
-                            proptype="int"
-                            type="text" 
-                            // placeholder="length" 
-                            defaultValue={space.lengthLong} 
-                            onChange={handleControlledInputChange}
-                        />
-                        <div>x</div>
-                        <input 
-                            className="form--control" 
-                            ref={width} 
-                            required 
-                            autoFocus 
-                            id="spaceWidth" 
-                            proptype="int"
-                            type="text" 
-                            // placeholder="width" 
-                            defaultValue={space.lengthShort} 
-                            onChange={handleControlledInputChange}
-                        />
-                        <div>inches</div>
-                    </div>
-                </div>
-            </fieldset>
+                <div className="container__mainBottom">
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="name">Space Name or Description*: </label>
+                            <input 
+                                className="form--control" 
+                                ref={name} 
+                                required 
+                                autoFocus 
+                                id="name" 
+                                proptype="varchar"
+                                type="text" 
+                                placeholder="input desc" 
+                                defaultValue={space.name} 
+                                onChange={handleControlledInputChange}
+                            />
+                        </div>
+                    </fieldset>
 
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="image">Upload Image: </label>
-                    <input 
-                        className="form--control" 
-                        // ref={image}
-                        autoFocus 
-                        id="image" 
-                        name="file"
-                        type="file"  // renders "Choose File" button & file input field
-                        onChange={uploadImage}
-                    />
-                        {                           
-                            editMode
-                            ?  
-                                (imageURL === ""
-                                    ? ``
-                                    : (
-                                        <div>
-                                            <img src={imageURL} style={{width: `300px`}} />
-                                            <br></br>
-                                            <button 
-                                                onClick={() => {
-                                                    setImageURL("")
-                                                }}
-                                            >
-                                                Delete Image
-                                            </button>
-                                        </div>
-                                    )
-                                )
-                            : 
-                                (loading 
-                                ? (<h4>Loading...</h4>)
-                                : (<img src={imageURL} style={{width: `300px`}} />)
-                                )
-                        }
-                </div>
-            </fieldset>
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="spaceDimensions">
+                                Space Dimensions*: 
+                            </label>
+                            <div className="form__spaceDimensionsInputGroup">
+                                <input 
+                                    className="form--control" 
+                                    ref={length} 
+                                    required 
+                                    autoFocus 
+                                    id="spaceLength" 
+                                    proptype="int"
+                                    type="text" 
+                                    // placeholder="length" 
+                                    defaultValue={space.lengthLong} 
+                                    onChange={handleControlledInputChange}
+                                />
+                                <div>x</div>
+                                <input 
+                                    className="form--control" 
+                                    ref={width} 
+                                    required 
+                                    autoFocus 
+                                    id="spaceWidth" 
+                                    proptype="int"
+                                    type="text" 
+                                    // placeholder="width" 
+                                    defaultValue={space.lengthShort} 
+                                    onChange={handleControlledInputChange}
+                                />
+                                <div>inches</div>
+                            </div>
+                        </div>
+                    </fieldset>
 
 
-            <br></br>
-            <br></br>
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="image">Upload Image: </label>
+                            <input 
+                                className="form--control" 
+                                // ref={image}
+                                autoFocus 
+                                id="image" 
+                                name="file"
+                                type="file"  // renders "Choose File" button & file input field
+                                onChange={uploadImage}
+                            />
+                                {                           
+                                    editMode
+                                    ?  
+                                        (imageURL === ""
+                                            ? ``
+                                            : (
+                                                <div>
+                                                    <img src={imageURL} style={{width: `300px`}} />
+                                                    <br></br>
+                                                    <Button 
+                                                        onClick={() => {
+                                                            setImageURL("")
+                                                        }}
+                                                    >
+                                                        Delete Image
+                                                    </Button>
+                                                </div>
+                                            )
+                                        )
+                                    : 
+                                        (loading 
+                                        ? (<h4>Loading...</h4>)
+                                        : (<img src={imageURL} style={{width: `300px`}} />)
+                                        )
+                                }
+                        </div>
+                    </fieldset>
 
-            <button type="submit" className="btn btn--primary"
-                onClick={evt => {
-                    evt.preventDefault() 
-                    createNewSpace()
-                }}
-            >
-            Save
-            </button>
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                </div>                 
+            </div> 
 
         </form>
-
     )
 
 

@@ -1,5 +1,6 @@
 import React from "react"
 import "./Auth.css"
+import { Button } from '@material-ui/core'
 
 
 export const Logout = (props) => {
@@ -17,11 +18,11 @@ export const Logout = (props) => {
                     Happy puzzling! 
                 </div>
                 
-                <button className="btn btn--primary"
+                <Button className="btn btn--primary"
                 onClick={() => handleLogout()}
                 >
                 Log Out
-                </button>
+                </Button>
             </form>
         </>
     )

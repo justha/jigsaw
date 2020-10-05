@@ -2,8 +2,8 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    background-color: dimgrey;
-    color: whitesmoke;
+    background-color: whitesmoke;
+    color: dimgrey;
     font-size: small;
     font-weight: bold;
     padding: .5em 3em .5em 3em;
@@ -31,11 +31,10 @@
 .puzzleList__container {
     /* display: flex;
     flex-direction: row; */
-    overflow-y: auto;
 }
 
 .puzzleList {
-    margin: 1rem;
+    margin: 0;
 }
 
 .btnAddPuzzle {
@@ -60,7 +59,6 @@
 
 
 .puzzleForm {
-    font-size: small;
     margin: 1rem;
 }
 
@@ -90,7 +88,7 @@
 }
 
 .puzzle__detail {
-    font-size: small;
+    /* font-size: small; */
 }
 
 .puzzle__title {

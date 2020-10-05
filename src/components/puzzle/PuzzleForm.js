@@ -7,7 +7,10 @@ import { DustContext } from "../dust/DustProvider"
 import { StatusContext } from "../status/StatusProvider"
 import { ImageContext } from "../image/ImageProvider"
 import "./Puzzle.css"
-import { Link } from "react-router-dom"
+import { Button, Fab } from '@material-ui/core'
+import SaveIcon from '@material-ui/icons/Save'
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
+
 
 export const PuzzleForm = (props) => {
     // context providers
@@ -163,336 +166,343 @@ export const PuzzleForm = (props) => {
     }
 
     return (
-        <form className="puzzleForm">            
-            <h2 className="puzzleForm__title">{editMode ? "Edit Puzzle" : "Add a Puzzle"}</h2>
+        <form className="puzzleForm">   
+        
+            <div className="container__main">
+                <div className="container__mainTop">
+                    <h2 className="puzzleForm__title">{editMode ? "Edit Puzzle" : "Add a Puzzle"}</h2>
+                </div>  
 
-            <h3>Basic Details</h3>
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="name">Puzzle Name*: </label>
-                    <input 
-                        className="form--control" 
-                        ref={name} 
-                        required 
-                        autoFocus 
-                        id="name" 
-                        proptype="varchar"
-                        type="text" 
-                        placeholder="name or desc" 
-                        defaultValue={puzzle.name} 
-                        onChange={handleControlledInputChange}
-                    />
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="brandId">
-                        Brand*: 
-                    </label>
-                    <select 
-                        className="form--control" 
-                        ref={brand} 
-                        required
-                        id="brandId" 
-                        proptype="int"
-                        name="brandId" 
-                        value={puzzle.brandId}
-                        onChange={handleControlledInputChange}
+                <div className="container__mainMiddle">
+                    <Button type="submit" className="btn btn--primary" 
+                        size="small"
+                        variant="contained"
+                        startIcon={<SaveIcon />}
+                        onClick={evt => {
+                            evt.preventDefault() 
+                            createNewPuzzle()
+                        }}
                     >
-                        <option value="0">select</option>
-                            {brands.map(b => (
-                        <option key={b.id} value={b.id}>
-                            {b.name}</option>))}    
-                    </select>  
-                </div>
-            </fieldset>
+                        Save
+                    </Button>
+                </div>    
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="count">
-                        Number of Pieces*: 
-                    </label>
-                    <input 
-                        className="form--control" 
-                        ref={count} 
-                        autoFocus 
-                        id="count" 
-                        proptype="int"
-                        type="text" 
-                        placeholder="puzzle count" 
-                        defaultValue={puzzle.count} 
-                        onChange={handleControlledInputChange}
-                    />
-                </div>
-            </fieldset>
+                <div className="container__mainBottom">
+                    <h3>Basic Details</h3>
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="name">Puzzle Name*: </label>
+                            <input 
+                                className="form--control" 
+                                ref={name} 
+                                required 
+                                autoFocus 
+                                id="name" 
+                                proptype="varchar"
+                                type="text" 
+                                placeholder="name or desc" 
+                                defaultValue={puzzle.name} 
+                                onChange={handleControlledInputChange}
+                            />
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="brandId">
+                                Brand*: 
+                            </label>
+                            <select 
+                                className="form--control" 
+                                ref={brand} 
+                                required
+                                id="brandId" 
+                                proptype="int"
+                                name="brandId" 
+                                value={puzzle.brandId}
+                                onChange={handleControlledInputChange}
+                            >
+                                <option value="0">select</option>
+                                    {brands.map(b => (
+                                <option key={b.id} value={b.id}>
+                                    {b.name}</option>))}    
+                            </select>  
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="count">
+                                Number of Pieces*: 
+                            </label>
+                            <input 
+                                className="form--control" 
+                                ref={count} 
+                                autoFocus 
+                                id="count" 
+                                proptype="int"
+                                type="text" 
+                                placeholder="puzzle count" 
+                                defaultValue={puzzle.count} 
+                                onChange={handleControlledInputChange}
+                            />
+                        </div>
+                    </fieldset>
 
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="boxId">
-                        Box Size*: 
-                    </label>
-                    <select 
-                        className="form--control" 
-                        ref={box} 
-                        required
-                        id="boxId" 
-                        proptype="int"
-                        name="boxId" 
-                        value={puzzle.boxId}
-                        onChange={handleControlledInputChange}
-                    >
-                        <option value="0">select</option>
-                            {boxes.map(b => (
-                        <option key={b.id} value={b.id}>
-                            {b.size}</option>))}    
-                    </select>   
-                </div>
-            </fieldset>
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="boxId">
+                                Box Size*: 
+                            </label>
+                            <select 
+                                className="form--control" 
+                                ref={box} 
+                                required
+                                id="boxId" 
+                                proptype="int"
+                                name="boxId" 
+                                value={puzzle.boxId}
+                                onChange={handleControlledInputChange}
+                            >
+                                <option value="0">select</option>
+                                    {boxes.map(b => (
+                                <option key={b.id} value={b.id}>
+                                    {b.size}</option>))}    
+                            </select>   
+                        </div>
+                    </fieldset>
 
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="puzzleDimensions">
-                        Puzzle Dimensions*: 
-                    </label>
-                    <div className="form__puzzleDimensionsInputGroup">
-                        <input 
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="puzzleDimensions">
+                                Puzzle Dimensions*: 
+                            </label>
+                            <div className="form__puzzleDimensionsInputGroup">
+                                <input 
+                                    className="form--control" 
+                                    ref={length} 
+                                    required 
+                                    autoFocus 
+                                    id="puzzleLength" 
+                                    proptype="int"
+                                    type="text" 
+                                    // placeholder="length" 
+                                    defaultValue={puzzle.lengthLong} 
+                                    onChange={handleControlledInputChange}
+                                />
+                                <div>x</div>
+                                <input 
+                                    className="form--control" 
+                                    ref={width} 
+                                    required 
+                                    autoFocus 
+                                    id="puzzleWidth" 
+                                    proptype="int"
+                                    type="text" 
+                                    // placeholder="width" 
+                                    defaultValue={puzzle.lengthShort} 
+                                    onChange={handleControlledInputChange}
+                                />
+                                <div>inches</div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="note">Notes:</label>
+                            <textarea 
+                                className="form--control" 
+                                ref={note} 
+                                autoFocus 
+                                id="note" 
+                                proptype="varchar"
+                                type="text" 
+                                // placeholder="additional notes" 
+                                defaultValue={puzzle.note} 
+                                onChange={handleControlledInputChange}
+                            />
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset>    
+                        <div className="form--group">
+                        <label htmlFor="statusId">Status*:</label>
+                        <select 
                             className="form--control" 
-                            ref={length} 
-                            required 
-                            autoFocus 
-                            id="puzzleLength" 
+                            ref={status} 
+                            required
+                            id="statusId" 
                             proptype="int"
-                            type="text" 
-                            // placeholder="length" 
-                            defaultValue={puzzle.lengthLong} 
-                            onChange={handleControlledInputChange}
-                        />
-                        <div>x</div>
-                        <input 
-                            className="form--control" 
-                            ref={width} 
-                            required 
-                            autoFocus 
-                            id="puzzleWidth" 
-                            proptype="int"
-                            type="text" 
-                            // placeholder="width" 
-                            defaultValue={puzzle.lengthShort} 
-                            onChange={handleControlledInputChange}
-                        />
-                        <div>inches</div>
-                    </div>
-                </div>
-            </fieldset>
+                            name="statusId" 
+                            value={puzzle.statusId}
+                            onChange={handleControlledInputChange} 
+                        >
+                            <option value="0">select</option>
+                                {statuses.map(s => (
+                            <option key={s.id} value={s.id}>
+                                {s.desc}</option>))}    
+                        </select>            
+                        </div>
+                    </fieldset>
 
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="note">
-                        Notes: 
-                    </label>
-                    <textarea 
-                        className="form--control" 
-                        ref={note} 
-                        autoFocus 
-                        id="note" 
-                        proptype="varchar"
-                        type="text" 
-                        // placeholder="additional notes" 
-                        defaultValue={puzzle.note} 
-                        onChange={handleControlledInputChange}
-                    />
-                </div>
-            </fieldset>
-            <br></br>
+                    <br></br>
+                    <br></br>
 
 
-            <fieldset>    
-                <div className="form--group">
-                <label htmlFor="statusId">
-                    Status*: 
-                </label>
-                <select 
-                    className="form--control" 
-                    ref={status} 
-                    required
-                    id="statusId" 
-                    proptype="int"
-                    name="statusId" 
-                    value={puzzle.statusId}
-                    onChange={handleControlledInputChange} 
-                >
-                    <option value="0">select</option>
-                        {statuses.map(s => (
-                    <option key={s.id} value={s.id}>
-                        {s.desc}</option>))}    
-                </select>            
-                </div>
-            </fieldset>
+                    <h3>Optional</h3>
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="trade">Available to Trade?:</label>
+                            <select 
+                                className="form--control" 
+                                ref={trade} 
+                                id="trade" 
+                                proptype="bool"
+                                name="trade" 
+                                value={puzzle.trade}
+                                onChange={handleControlledInputChange}
+                            >
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
+                            </select>   
+                        </div>
+                    </fieldset>
 
 
-            <h3>Optional</h3>
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="poster">Poster Included:</label>
+                            <select 
+                                className="form--control" 
+                                ref={poster} 
+                                id="poster" 
+                                proptype="bool"
+                                name="poster" 
+                                value={puzzle.poster}
+                                onChange={handleControlledInputChange}
+                            >
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
+                            </select>   
+                        </div>
+                    </fieldset>
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="trade">
-                        Available to Trade?: 
-                    </label>
-                    <select 
-                        className="form--control" 
-                        ref={trade} 
-                        id="trade" 
-                        proptype="bool"
-                        name="trade" 
-                        value={puzzle.trade}
-                        onChange={handleControlledInputChange}
-                    >
-                        <option value="false">No</option>
-                        <option value="true">Yes</option>
-                    </select>   
-                </div>
-            </fieldset>
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="textureId">Texture:</label>
+                            <select 
+                                className="form--control" 
+                                ref={texture} 
+                                id="textureId" 
+                                proptype="int"
+                                name="textureId" 
+                                value={puzzle.textureId}
+                                onChange={handleControlledInputChange}
+                            >
+                                <option value="0">select</option>
+                                    {textures.map(t => (
+                                <option key={t.id} value={t.id}>
+                                    {t.desc}</option>))}    
+                            </select>   
+                        </div>
+                    </fieldset>
 
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="dustId">Puzzledust:</label>
+                            <select 
+                                className="form--control" 
+                                ref={dust} 
+                                id="dustId" 
+                                proptype="int"
+                                name="dustId" 
+                                value={puzzle.dustId}
+                                onChange={handleControlledInputChange}
+                            >
+                                <option value="0">select</option>
+                                    {dusts.map(d => (
+                                <option key={d.id} value={d.id}>
+                                    {d.amount}</option>))}    
+                            </select>   
+                        </div>
+                    </fieldset>
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="poster">
-                        Poster Included: 
-                    </label>
-                    <select 
-                        className="form--control" 
-                        ref={poster} 
-                        id="poster" 
-                        proptype="bool"
-                        name="poster" 
-                        value={puzzle.poster}
-                        onChange={handleControlledInputChange}
-                    >
-                        <option value="false">No</option>
-                        <option value="true">Yes</option>
-                    </select>   
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="textureId">
-                        Texture: 
-                    </label>
-                    <select 
-                        className="form--control" 
-                        ref={texture} 
-                        id="textureId" 
-                        proptype="int"
-                        name="textureId" 
-                        value={puzzle.textureId}
-                        onChange={handleControlledInputChange}
-                    >
-                        <option value="0">select</option>
-                            {textures.map(t => (
-                        <option key={t.id} value={t.id}>
-                            {t.desc}</option>))}    
-                    </select>   
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="dustId">
-                        Puzzledust: 
-                    </label>
-                    <select 
-                        className="form--control" 
-                        ref={dust} 
-                        id="dustId" 
-                        proptype="int"
-                        name="dustId" 
-                        value={puzzle.dustId}
-                        onChange={handleControlledInputChange}
-                    >
-                        <option value="0">select</option>
-                            {dusts.map(d => (
-                        <option key={d.id} value={d.id}>
-                            {d.amount}</option>))}    
-                    </select>   
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="assembled">
-                        Date Assembled: 
-                    </label>
-                    <input 
-                        className="form--control" 
-                        ref={assembled} 
-                        autoFocus 
-                        id="assembled" 
-                        proptype="date"
-                        type="date" 
-                        placeholder="if applicable" 
-                        defaultValue={puzzle.assembled} 
-                        onChange={handleControlledInputChange}
-                    />
-                </div>
-            </fieldset>
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="assembled">Date Assembled:</label>
+                            <input 
+                                className="form--control" 
+                                ref={assembled} 
+                                autoFocus 
+                                id="assembled" 
+                                proptype="date"
+                                type="date" 
+                                placeholder="if applicable" 
+                                defaultValue={puzzle.assembled} 
+                                onChange={handleControlledInputChange}
+                            />
+                        </div>
+                    </fieldset>
 
 
-            <fieldset>
-                <div className="form--group">
-                    <label htmlFor="image">Upload Image: </label>
-                    <input 
-                        className="form--control" 
-                        autoFocus 
-                        id="image" 
-                        name="file"
-                        type="file"  // renders "Choose File" button & file input field
-                        onChange={uploadImage}
-                    />
-                        {                           
-                            editMode
-                            ?  
-                                (imageURL === ""
-                                    ? ``
-                                    : (
-                                        <div>
-                                            <img src={imageURL} style={{width: `300px`}} />
-                                            <br></br>
-                                            <button 
-                                                onClick={() => {
-                                                    setImageURL("")
-                                                }}
-                                            >
-                                                Delete Image
-                                            </button>
-                                        </div>
-                                    )
-                                )
-                            : 
-                                (loading 
-                                ? (<h4>Loading...</h4>)
-                                : (<img src={imageURL} style={{width: `300px`}} />)
-                                )
-                        }
-                </div>
-            </fieldset>
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="image">Upload Image:</label>
+                            <input 
+                                className="form--control" 
+                                autoFocus 
+                                id="image" 
+                                name="file"
+                                type="file"  // renders "Choose File" button & file input field
+                                onChange={uploadImage}
+                            />
+                                {                           
+                                    editMode
+                                    ?  
+                                        (imageURL === ""
+                                            ? ``
+                                            : (
+                                                <div>
+                                                    <img src={imageURL} style={{width: `300px`}} />
+                                                    <br></br>
+                                                    <button 
+                                                        onClick={() => {
+                                                            setImageURL("")
+                                                        }}
+                                                    >
+                                                        Delete Image
+                                                    </button>
+                                                </div>
+                                            )
+                                        )
+                                    : 
+                                        (loading 
+                                        ? (<h4>Loading...</h4>)
+                                        : (<img src={imageURL} style={{width: `300px`}} />)
+                                        )
+                                }
+                        </div>
+                    </fieldset>
 
-
-            <br></br>
-            <br></br>
-
-            <button type="submit" className="btn btn--primary"
-                onClick={evt => {
-                    evt.preventDefault() 
-                    createNewPuzzle()
-                }}
-            >
-            Save
-            </button>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                </div>                
+            </div>     
 
         </form>
     )

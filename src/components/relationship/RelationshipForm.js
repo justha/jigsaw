@@ -2,6 +2,8 @@ import React, { useContext, useRef, useEffect, useState} from "react"
 import { RelationshipContext } from "./RelationshipProvider"
 import { SpaceContext } from "../space/SpaceProvider"
 import "./Relationship.css"
+import { Button } from '@material-ui/core'
+
 
 export const RelationshipForm = (props) => {
 
@@ -50,57 +52,69 @@ export const RelationshipForm = (props) => {
 
     return (
         <form className="relationshipForm">
-            <h3 className="relationshipForm__title">Add Puzzle Boards to Your Workspace</h3>
+            <div className="container__main">
 
-            <article className="addRelationship">
-                <fieldset>
-                    <div className="form--group">
-                        <label htmlFor="spaceId">
-                            Select a standard puzzle board
-                        </label>
-                        <select 
-                            className="form--control" 
-                            ref={space} 
-                            required
-                            id="spaceId" 
-                            proptype="int"
-                            name="spaceId" 
-                            value={relationship.spaceId}
-                            onChange={handleControlledInputChangeRelationship}
-                        >
-                            <option value="0">...</option>{
-
-                                spaces.filter(s => s.custom === false)
-                                .map(s => (
-                            <option key={s.id} value={s.id}>
-                                {s.name}:  {s.length} x {s.width} (inches)
-                            </option>))}    
-                        </select>  
-                    </div>
-                </fieldset>
-
-                <button type="submit" className="btn btn--primary"
-                    onClick={evt => {
-                        evt.preventDefault() 
-                        createNewRelationship()
-                    }}
-                >
-                Add
-                </button>
-
-            </article>
-            <br></br>
-
-            <div>or</div>
-            <br></br>
+            <div className="container__mainTop">
+                <h2 className="relationshipForm__title">Manage Your Workspace</h2>
+            </div>    
 
 
-            <button className="btn btn--primary" id="btnAddSpace"
-                onClick={() => {props.history.push("/spaces/create")}}
-            >
-            Create a Custom Space
-            </button>  
+            <div className="container__mainMiddle"></div>  
+     
+            
+            <div className="container__mainBottom">
+                <article className="addRelationship">
+                    <fieldset>
+                        <div className="form--group">
+                            <label htmlFor="spaceId">
+                                Select a Puzzleboard: 
+                            </label>
+                            <select 
+                                className="form--control" 
+                                ref={space} 
+                                required
+                                id="spaceId" 
+                                proptype="int"
+                                name="spaceId" 
+                                value={relationship.spaceId}
+                                onChange={handleControlledInputChangeRelationship}
+                            >
+                                <option value="0">...</option>{
 
+                                    spaces.filter(s => s.custom === false)
+                                    .map(s => (
+                                <option key={s.id} value={s.id}>
+                                    {s.name}:  {s.length} x {s.width} (inches)
+                                </option>))}    
+                            </select>  
+                        </div>
+                    </fieldset>
+
+                    <Button type="submit" className="btn btn--primary"
+                        onClick={evt => {
+                            evt.preventDefault() 
+                            createNewRelationship()
+                        }}
+                    >
+                    Add
+                    </Button>
+
+                    </article>
+                    <br></br>
+                    <br></br>
+
+                    <div>or</div>
+                    <br></br>
+                    <br></br>
+
+
+                    <Button className="btn btn--primary" id="btnAddSpace"
+                        onClick={() => {props.history.push("/spaces/create")}}
+                    >
+                    Create a Custom One
+                    </Button>  
+                </div>          
+            </div> 
         </form>
     )
 

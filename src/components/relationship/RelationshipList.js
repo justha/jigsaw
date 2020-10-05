@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { RelationshipContext } from "./RelationshipProvider"
 import { SpaceContext } from "../space/SpaceProvider"
 import { Relationship } from "./Relationship"
+import { Fab } from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
 
 
 export const RelationshipList = (props) => {
@@ -26,29 +28,33 @@ export const RelationshipList = (props) => {
         <>
             <div className="container__main">
 
-                <div className="container__mainLeft">
-                    <h2>My Workspaces</h2>
-                    <section className="relationshipList">
-                        {
-                            relationshipsActiveUser.map(r => {
-                                return (
-                                    <article key={r.id} className="relationship__item">
-                                        <Relationship relationship={r} />
-                                        <br></br>
-                                    </article>
-                                )
-                            })}
-                    </section>
-                </div>
+            <div className="container__mainTop">                
+                <h2>My Workspaces</h2>
+            </div>
 
-                <div className="container__mainRight">
-                    <button className="btn btn--primary" id="btnAddSpace"
-                        onClick={() => {props.history.push("/relationships/create")}}
-                    >
-                    +
-                    </button> 
-                </div>
 
+            <div className="container__mainMiddle">
+                <Fab size="small" className="btn btn--primary" id="btnAddSpace"
+                    onClick={() => {props.history.push("/relationships/create")}}
+                >
+                    <AddIcon />
+                </Fab> 
+            </div>
+
+
+            <div className="container__mainBottom">
+                <section className="relationshipList">
+                    {
+                        relationshipsActiveUser.map(r => {
+                            return (
+                                <article key={r.id} className="relationship__item">
+                                    <Relationship relationship={r} />
+                                    <br></br>
+                                </article>
+                            )
+                        })}
+                </section>
+            </div>
             </div>
             
         </>
