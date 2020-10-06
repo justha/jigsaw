@@ -30,15 +30,17 @@ export const RelationshipList = (props) => {
 
             <div className="container__mainTop">                
                 <h2>My Workspaces</h2>
-            </div>
 
-
-            <div className="container__mainMiddle">
-                <Fab size="small" className="btn btn--primary" id="btnAddSpace"
+                <Fab className="btn btn--primary" id="btnAddSpace"
+                    size="small" 
                     onClick={() => {props.history.push("/relationships/create")}}
                 >
                     <AddIcon />
                 </Fab> 
+            </div>
+
+
+            <div className="container__mainMiddle">
             </div>
 
 

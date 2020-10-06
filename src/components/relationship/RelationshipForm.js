@@ -3,6 +3,8 @@ import { RelationshipContext } from "./RelationshipProvider"
 import { SpaceContext } from "../space/SpaceProvider"
 import "./Relationship.css"
 import { Button } from '@material-ui/core'
+import SaveIcon from '@material-ui/icons/Save'
+
 
 
 export const RelationshipForm = (props) => {
@@ -63,11 +65,11 @@ export const RelationshipForm = (props) => {
      
             
             <div className="container__mainBottom">
-                <article className="addRelationship">
+                <article className="container__addRelationship">
                     <fieldset>
                         <div className="form--group">
                             <label htmlFor="spaceId">
-                                Select a Puzzleboard: 
+                                Standard puzzleboards:
                             </label>
                             <select 
                                 className="form--control" 
@@ -79,24 +81,27 @@ export const RelationshipForm = (props) => {
                                 value={relationship.spaceId}
                                 onChange={handleControlledInputChangeRelationship}
                             >
-                                <option value="0">...</option>{
+                                <option value="0">select...</option>{
 
                                     spaces.filter(s => s.custom === false)
                                     .map(s => (
                                 <option key={s.id} value={s.id}>
-                                    {s.name}:  {s.length} x {s.width} (inches)
+                                    {s.name} ({s.lengthLong} x {s.lengthShort} inches)
                                 </option>))}    
                             </select>  
                         </div>
                     </fieldset>
 
                     <Button type="submit" className="btn btn--primary"
+                        size="small"
+                        variant="outlined"
+                        startIcon={<SaveIcon />}
                         onClick={evt => {
                             evt.preventDefault() 
                             createNewRelationship()
                         }}
                     >
-                    Add
+                        Save
                     </Button>
 
                     </article>
@@ -109,6 +114,8 @@ export const RelationshipForm = (props) => {
 
 
                     <Button className="btn btn--primary" id="btnAddSpace"
+                        size="medium"
+                        variant="outlined"
                         onClick={() => {props.history.push("/spaces/create")}}
                     >
                     Create a Custom One

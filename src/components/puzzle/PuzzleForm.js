@@ -7,9 +7,11 @@ import { DustContext } from "../dust/DustProvider"
 import { StatusContext } from "../status/StatusProvider"
 import { ImageContext } from "../image/ImageProvider"
 import "./Puzzle.css"
-import { Button, Fab } from '@material-ui/core'
+import { Button, IconButton } from '@material-ui/core'
 import SaveIcon from '@material-ui/icons/Save'
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
+import DeleteIcon from '@material-ui/icons/Delete'
+import PhotoCamera from '@material-ui/icons/PhotoCamera'
+
 
 
 export const PuzzleForm = (props) => {
@@ -171,13 +173,10 @@ export const PuzzleForm = (props) => {
             <div className="container__main">
                 <div className="container__mainTop">
                     <h2 className="puzzleForm__title">{editMode ? "Edit Puzzle" : "Add a Puzzle"}</h2>
-                </div>  
 
-
-                <div className="container__mainMiddle">
                     <Button type="submit" className="btn btn--primary" 
                         size="small"
-                        variant="contained"
+                        variant="outlined"
                         startIcon={<SaveIcon />}
                         onClick={evt => {
                             evt.preventDefault() 
@@ -186,7 +185,11 @@ export const PuzzleForm = (props) => {
                     >
                         Save
                     </Button>
-                </div>    
+                </div>  
+
+
+                <div className="container__mainMiddle"></div>    
+
 
                 <div className="container__mainBottom">
                     <h3>Basic Details</h3>
@@ -201,7 +204,7 @@ export const PuzzleForm = (props) => {
                                 id="name" 
                                 proptype="varchar"
                                 type="text" 
-                                placeholder="name or desc" 
+                                placeholder="name or description" 
                                 defaultValue={puzzle.name} 
                                 onChange={handleControlledInputChange}
                             />
@@ -306,7 +309,7 @@ export const PuzzleForm = (props) => {
                                     defaultValue={puzzle.lengthShort} 
                                     onChange={handleControlledInputChange}
                                 />
-                                <div>inches</div>
+                                <div>in.</div>
                             </div>
                         </div>
                     </fieldset>
@@ -463,6 +466,11 @@ export const PuzzleForm = (props) => {
                                 type="file"  // renders "Choose File" button & file input field
                                 onChange={uploadImage}
                             />
+                            <label htmlFor="image">
+                                <IconButton color="primary" aria-label="upload picture" component="span">
+                                    <PhotoCamera />
+                                </IconButton>
+                            </label>
                                 {                           
                                     editMode
                                     ?  
@@ -472,20 +480,28 @@ export const PuzzleForm = (props) => {
                                                 <div>
                                                     <img src={imageURL} style={{width: `300px`}} />
                                                     <br></br>
-                                                    <button 
+                                                    <Button className="deleteImageBtn"
+                                                    size="small"
+                                                    variant="outlined"
+                                                    startIcon={<DeleteIcon />}
                                                         onClick={() => {
                                                             setImageURL("")
                                                         }}
                                                     >
-                                                        Delete Image
-                                                    </button>
+                                                        Image
+                                                    </Button>
                                                 </div>
                                             )
                                         )
                                     : 
-                                        (loading 
+                                        (
+                                        loading 
                                         ? (<h4>Loading...</h4>)
-                                        : (<img src={imageURL} style={{width: `300px`}} />)
+                                        : (
+                                            <div>
+                                                <img src={imageURL} style={{width: `300px`}} />
+                                            </div>
+                                            )
                                         )
                                 }
                         </div>

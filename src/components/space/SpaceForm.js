@@ -3,8 +3,10 @@ import { SpaceContext } from "./SpaceProvider"
 import { RelationshipContext } from "../relationship/RelationshipProvider"
 import { ImageContext } from "../image/ImageProvider"
 import "./Space.css"
-import { Button } from '@material-ui/core'
+import { Button, IconButton } from '@material-ui/core'
 import SaveIcon from '@material-ui/icons/Save'
+import DeleteIcon from '@material-ui/icons/Delete'
+import PhotoCamera from '@material-ui/icons/PhotoCamera'
 
 
 export const SpaceForm = (props) => {
@@ -110,22 +112,22 @@ export const SpaceForm = (props) => {
 
                 <div className="container__mainTop">
                     <h2 className="spaceForm__title">{editMode ? "Edit Your Custom Workspace" : "Add a Custom Workspace"}</h2>
+
+                    <Button type="submit" className="btn btn--primary"
+                        size="small"
+                        variant="outlined"
+                        startIcon={<SaveIcon />}
+                        onClick={evt => {
+                            evt.preventDefault() 
+                            createNewSpace()
+                        }}
+                    >
+                    Save
+                    </Button>
                 </div>       
 
 
-                <div className="container__mainMiddle">
-                        <Button type="submit" className="btn btn--primary"
-                            size="small"
-                            variant="contained"
-                            startIcon={<SaveIcon />}
-                            onClick={evt => {
-                                evt.preventDefault() 
-                                createNewSpace()
-                            }}
-                        >
-                        Save
-                        </Button>
-                    </div> 
+                <div className="container__mainMiddle"></div> 
 
 
                 <div className="container__mainBottom">
@@ -179,7 +181,7 @@ export const SpaceForm = (props) => {
                                     defaultValue={space.lengthShort} 
                                     onChange={handleControlledInputChange}
                                 />
-                                <div>inches</div>
+                                <div>in.</div>
                             </div>
                         </div>
                     </fieldset>
@@ -197,6 +199,11 @@ export const SpaceForm = (props) => {
                                 type="file"  // renders "Choose File" button & file input field
                                 onChange={uploadImage}
                             />
+                            <label htmlFor="image">
+                                <IconButton color="primary" aria-label="upload picture" component="span">
+                                    <PhotoCamera />
+                                </IconButton>
+                            </label>
                                 {                           
                                     editMode
                                     ?  
@@ -206,12 +213,15 @@ export const SpaceForm = (props) => {
                                                 <div>
                                                     <img src={imageURL} style={{width: `300px`}} />
                                                     <br></br>
-                                                    <Button 
+                                                    <Button className="deleteImageBtn"
+                                                        size="small"
+                                                        variant="outlined"
+                                                        startIcon={<DeleteIcon />}
                                                         onClick={() => {
                                                             setImageURL("")
                                                         }}
                                                     >
-                                                        Delete Image
+                                                        Image
                                                     </Button>
                                                 </div>
                                             )

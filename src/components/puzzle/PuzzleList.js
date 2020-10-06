@@ -63,17 +63,17 @@ export const PuzzleList = (props) => {
 
                 <div className="container__mainTop">
                     <h2>My Collection</h2>
-                </div>
 
-
-                <div className="container__mainMiddle">
-                    <Fab size="small" 
-                        className="btn btn--primary" id="btnAddPuzzle"
+                    <Fab className="btn btn--primary" id="btnAddPuzzle"
+                        size="small" 
                         onClick={() => {props.history.push("/puzzles/create")}}
                     >
                         <AddIcon />
                     </Fab>
                 </div>
+
+
+                <div className="container__mainMiddle"></div>
                     
 
             <div className="container__mainBottom">
@@ -88,6 +88,13 @@ export const PuzzleList = (props) => {
                                 )
                         })}
                     </section>
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+
                 </div>
 
 

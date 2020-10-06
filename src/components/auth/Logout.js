@@ -13,16 +13,30 @@ export const Logout = (props) => {
     return (
         <>
             <form className="logoutForm">
-                <div>
-                    See you again soon.<br></br>
-                    Happy puzzling! 
+                <div className="container__main">
+
+
+                    <div className="container__mainTop"></div>
+
+                    
+                    <div className="container__mainMiddle">                        
+                        <Button className="btn btn--primary"
+                            size="small"
+                            variant="outlined"
+                            onClick={() => handleLogout()}
+                        >
+                        Log Out
+                        </Button>
+                    </div>
+                    
+                    
+                    <div className="container__mainBottom">
+                        See you again soon.
+                        Happy puzzling! 
+                    </div>
                 </div>
-                
-                <Button className="btn btn--primary"
-                onClick={() => handleLogout()}
-                >
-                Log Out
-                </Button>
+
+
             </form>
         </>
     )
