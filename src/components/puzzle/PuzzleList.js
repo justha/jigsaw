@@ -5,6 +5,9 @@ import { BrandContext } from "../brand/BrandProvider"
 import { StatusContext } from "../status/StatusProvider"
 import { Puzzle } from "./Puzzle";
 import "./Puzzle.css"
+import { Fab } from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
+
 
 
 export const PuzzleList = (props) => {
@@ -57,9 +60,23 @@ export const PuzzleList = (props) => {
     return (
         <>
             <div className="container__main">
-                    
-                <div className="container__mainLeft">
+
+                <div className="container__mainTop">
                     <h2>My Collection</h2>
+
+                    <Fab className="btn btn--primary" id="btnAddPuzzle"
+                        size="small" 
+                        onClick={() => {props.history.push("/puzzles/create")}}
+                    >
+                        <AddIcon />
+                    </Fab>
+                </div>
+
+
+                <div className="container__mainMiddle"></div>
+                    
+
+            <div className="container__mainBottom">
                     <section className="puzzleList">            
                         {
                             puzzlesActiveUser.map(p => {
@@ -71,15 +88,15 @@ export const PuzzleList = (props) => {
                                 )
                         })}
                     </section>
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+
                 </div>
 
-                <div className="container__mainRight">
-                    <button className="btn btn--primary" id="btnAddPuzzle"
-                        onClick={() => {props.history.push("/puzzles/create")}}
-                    >
-                    +
-                    </button>
-                </div>
 
             </div> 
 

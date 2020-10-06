@@ -3,17 +3,27 @@
     flex-direction: column;
 }
 
-
 .container__main {
     display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 1rem;
+}
+
+.container__mainTop {
+    display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+.container__mainMiddle {
+    margin: 0 1rem 0 1rem;
+}
+
+.container__mainBottom {
+    margin: 1rem;
     overflow-y: scroll;
+    height: 700px;
+
 }
 
-.container__mainLeft {
-    margin: 1rem;
-}
-
-.container__mainRight {
-    margin: 1rem;
-}

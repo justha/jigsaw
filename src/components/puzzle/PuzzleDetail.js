@@ -7,6 +7,9 @@ import { TextureContext } from "../texture/TextureProvider"
 import { DustContext } from "../dust/DustProvider"
 import { StatusContext } from "../status/StatusProvider"
 import "./Puzzle.css"
+import { IconButton } from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 
 export const PuzzleDetail = (props) => {
@@ -67,85 +70,94 @@ export const PuzzleDetail = (props) => {
 
     return (
         <section className="puzzle__detail">
-            <Link className="link__toPuzzleDetails" to={{pathname: `/puzzles`}}>                
-                {/* <div className="puzzle__name">{puzzle.name}</div>
-                <div className="puzzle__brand">by {brand.name}</div>
-                
-                <br></br> */}
+            <div className="container__main">
                 
 
-                <div className="puzzle__title">Basic Details</div>
-                <div className="puzzle__count">{puzzle.count} pieces</div>
-                <div className="puzzle__dimensions">{puzzle.lengthLong} in. x {puzzle.lengthShort} in.</div>
-                <div className="puzzle__box">Box Size: {box.size}</div> 
-                <br></br>
+                <div className="container__mainTop">                    
+                    {/* <div className="puzzle__name">{puzzle.name}</div>
+                    <div className="puzzle__brand">by {brand.name}</div>
+                    <br></br> */}
+                </div>
+
+
+                <div className="container__mainMiddle">                    
+                    <IconButton size="small" 
+                        className="btn btn--primary" id="btnDeletePuzzle"
+                        onClick={() => {
+                            deletePuzzle(puzzle.id)
+                            props.history.push("/puzzles")
+                        }}
+                    >
+                        <DeleteIcon />
+                    </IconButton> 
+
+                    <IconButton size="small"
+                        // className="btn btn--primary" 
+                        id="btnPuzzleEdit" 
+                        onClick={() => {props.history.push(`/puzzles/edit/${puzzle.id}`)}}
+                    >
+                        <EditIcon />
+                    </IconButton>
+
                 
-
-                <div className="puzzle__title">Other</div>
-                <div className="puzzle__poster">Poster Included: { 
-                        (puzzle.poster === true)
-                        ? "Yes"
-                        : "No"
-                    }
+                    {/* <Fab Fab size="small"
+                        className="btn btn--primary" 
+                        id="btnPuzzleBack" 
+                        onClick={() => {props.history.push(`/puzzles`)}}
+                    >⇦</Fab> */}
                 </div>
-                <div className="puzzle__texture">{ 
-                        (puzzle.textureId === undefined)
-                        ? ``
-                        : `Texture: ${texture.desc}`
-                    }
+    
+    
+                <div className="container__mainBottom">                    
+                    <Link className="link__toPuzzleDetails" to={{pathname: `/puzzles`}}>                
+                        <div className="puzzle__title">Basic Details</div>
+                        <div className="puzzle__count">{puzzle.count} pieces</div>
+                        <div className="puzzle__dimensions">{puzzle.lengthLong} in. x {puzzle.lengthShort} in.</div>
+                        <div className="puzzle__box">Box Size: {box.size}</div> 
+                        <br></br>
+                        
+
+                        <div className="puzzle__title">Other</div>
+                        <div className="puzzle__poster">Poster Included: { 
+                                (puzzle.poster === true)
+                                ? "Yes"
+                                : "No"
+                            }
+                        </div>
+                        <div className="puzzle__texture">{ 
+                                (puzzle.textureId === undefined)
+                                ? ``
+                                : `Texture: ${texture.desc}`
+                            }
+                        </div>
+                        <div className="puzzle__dust">{ 
+                                (puzzle.dustId === undefined)
+                                ? ``
+                                : `Puzzledust: ${dust.amount}`
+                            }
+                        </div>
+                        <div className="puzzle__assembled">{ 
+                                (status.id === 4 && puzzle.assembledId !== "")
+                                ? `Assembled: ${puzzle.assembled}`
+                                : ``
+                            }
+                        </div>
+                        <br></br>
+
+
+                        { 
+                            (puzzle.note === undefined)
+                            ? ``
+                            : (
+                                <article>
+                                    <div className="puzzle__title">Notes</div>
+                                    <div className="puzzle__note">{puzzle.note}</div> 
+                                </article>
+                                )
+                        }
+                    </Link>
                 </div>
-                <div className="puzzle__dust">{ 
-                        (puzzle.dustId === undefined)
-                        ? ``
-                        : `Puzzledust: ${dust.amount}`
-                    }
-                </div>
-                <div className="puzzle__assembled">{ 
-                        (status.id === 4 && puzzle.assembledId !== "")
-                        ? `Assembled: ${puzzle.assembled}`
-                        : ``
-                    }
-                </div>
-                <br></br>
-
-
-                { 
-                    (puzzle.note === undefined)
-                    ? ``
-                    : (
-                        <article>
-                            <div className="puzzle__title">Notes</div>
-                            <div className="puzzle__note">{puzzle.note}</div> 
-                        </article>
-                        )
-                }
-
-                <br></br>
-            </Link>
-
-
-            <button className="btn btn--primary" id="btnDeletePuzzle"
-                onClick={() => {
-                    deletePuzzle(puzzle.id)
-                    props.history.push("/puzzles")
-                }}
-            >X</button> 
-
-
-            <button 
-                className="btn btn--primary" 
-                id="btnPuzzleEdit" 
-                onClick={() => {
-                    props.history.push(`/puzzles/edit/${puzzle.id}`)
-                }}
-            >✎</button>
-
-           
-            {/* <button 
-                className="btn btn--primary" 
-                id="btnPuzzleBack" 
-                onClick={() => {props.history.push(`/puzzles`)}}
-            >⇦</button> */}
+            </div>
 
 
         </section>

@@ -3,6 +3,8 @@ import { RelationshipContext } from "../relationship/RelationshipProvider"
 import { PuzzleContext } from "../puzzle/PuzzleProvider"
 import { SpaceContext } from "../space/SpaceProvider"
 import { StatusContext } from "../status/StatusProvider"
+import { Button } from '@material-ui/core'
+
 
 
 export const PuzzleSearch = () => {
@@ -32,35 +34,11 @@ export const PuzzleSearch = () => {
             <div className="searchbar">
 
                 <section className="searchbar__container">
-                    <article className="searchbar__status">
-                        <button
-                            className="btn btn--searchbar"
-                            value="0"
-                            onClick={clickEvent => {setChosenStatusId(parseInt(clickEvent.target.value))}}
-                        >
-                            All
-                        </button>
-
-                        {statuses.map(s => {
-                            return (
-                                <button 
-                                    className="btn btn--searchbar" 
-                                    key={s.id}
-                                    value={s.id}
-                                    onClick={clickEvent => {setChosenStatusId(parseInt(clickEvent.target.value))}}
-                                    >
-                                        {s.desc}
-                                </button>
-                            )
-                        })}
-                    </article>
-                    
-
                     <article className="searchbar__workspace">
                         <fieldset>
                             <div className="form--group">
                                 <label htmlFor="spaceId">
-                                    Does it fit?
+                                    DOES IT FIT WORKSPACE?
                                 </label>
                                 <select 
                                     className="form--control" 
@@ -89,6 +67,31 @@ export const PuzzleSearch = () => {
                         </fieldset>
                     </article>
 
+
+                    <article className="searchbar__status">
+                        <button
+                            className="btn btn--searchbar"
+                            value="0"
+                            onClick={clickEvent => {setChosenStatusId(parseInt(clickEvent.target.value))}}
+                        >
+                            All
+                        </button>
+
+                        {statuses.map(s => {
+                            return (
+                                <button 
+                                    className="btn btn--searchbar" 
+                                    key={s.id}
+                                    value={s.id}
+                                    onClick={clickEvent => {setChosenStatusId(parseInt(clickEvent.target.value))}}
+                                    >
+                                        {s.desc
+                                        .toUpperCase()}
+                                </button>
+                            )
+                        })}
+                    </article>
+                    
                 </section>                
             </div>
 

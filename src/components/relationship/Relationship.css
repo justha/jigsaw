@@ -1,5 +1,5 @@
 .relationshipList {
-    margin: 1em;
+    margin: 0;
 }
 
 .relationship__card {
@@ -13,13 +13,12 @@
 }
 
 .relationshipForm {
-    font-size: small;
     margin: 1rem;
 }
 
-.addRelationship {
-    /* display: flex; */
-    /* flex-direction: row; */
+.container__addRelationship {
+    /* display: flex;
+    flex-direction: row; */
 }
 
 .link__toRelationshipDetails {
@@ -37,6 +36,6 @@
 }
 
 .relationship__detail {
-    font-size: small;
+    /* font-size: small; */
 }
 

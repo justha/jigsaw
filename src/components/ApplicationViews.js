@@ -1,6 +1,7 @@
 import React from "react"
 import { Route } from "react-router-dom"
 import { Logout } from "./auth/Logout"
+import { Stats } from "./stat/Stat"
 import { PuzzleProvider } from "./puzzle/PuzzleProvider"
 import { BrandProvider } from "./brand/BrandProvider"
 import { StatusProvider } from "./status/StatusProvider"
@@ -89,6 +90,10 @@ export const ApplicationViews = (props) => {
 
 
 
+
+            <Route exact path="/stats">
+                <Stats />
+            </Route>
 
             <Route exact path="/logout">
                 <Logout />
