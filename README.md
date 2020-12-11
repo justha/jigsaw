@@ -10,24 +10,24 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 1. Clone the repository with 'git clone'
 1. Installations: 
- - `npm install`
- - `npm i --save react react-dom react-router-dom` 
- - `npm install json-server` 
- - `npm install @material-ui/core` 
- - `npm install @material-ui/icons` 
+`npm install`
+`npm i --save react react-dom react-router-dom` 
+`npm install json-server` 
+`npm install @material-ui/core` 
+`npm install @material-ui/icons` 
 
 1. Start the development server
- - Open a separate terminal, `cd` into the project directory 
- - `npm start` to run the app in development mode
- - Open [http://localhost:3000](http://localhost:3000) to view in the browser.
+Open a separate terminal, `cd` into the project directory 
+`npm start` to run the app in development mode
+Open [http://localhost:3000](http://localhost:3000) to view in the browser.
 
 1. Create a local API: 
- - 'mkdir puzl-api' to create a new directory
- - 'touch database.json' to create the database
+'mkdir puzl-api' to create a new directory
+'touch database.json' to create the database
 
 1. Serve the JSON database: 
- - 'cd' into the puzl-api directory
- - 'json-server -w database.json -p 8088' 
+'cd' into the puzl-api directory
+'json-server -w database.json -p 8088' 
 
 ### Features
 **Gallery**
