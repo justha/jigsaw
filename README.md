@@ -1,12 +1,12 @@
 ## puzl
-**For avid jigsaw puzzlers**
-by Ha Nguyen
+**For avid jigsaw puzzlers** <br/>
+by Ha Nguyen <br/>
 
 ### About
 A place for those who like to sort, organize and put things in the right place. Keeps those who like organization...organized.
 
 ### Installation and Setup
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <br/>
 
 1. Clone the repository with 'git clone'
 1. Installations: <br />
@@ -32,8 +32,12 @@ Open [http://localhost:3000](http://localhost:3000) to view in the browser <br /
 ### Features
 **Gallery** <br />
 View a collection of puzzles you are working on, completed and have added to your wishlist. <br />
+<br/>
 **Workspaces** <br />
 Helps you manage workspaces so you can have puzzles going everywhere they fit. Avoid starting on one, only to find that the partially assembled pieces have to be moved to a larger space. This app will help you plan your next project by perfectly matching puzzles to open workspaces. Happy puzzling! <br />
+<!-- **Stats**
+Displays your puzzle productivity and history
+**Sample Screen Shots** -->
 
 ### Planning
 ERD: [dbdiagram](https://res.cloudinary.com/djxxamywv/image/upload/v1607700885/github/dbdiagram_puzl_yd9pdu.png) <br />
