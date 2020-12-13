@@ -22,12 +22,12 @@ Open a separate terminal, `cd` into the project directory <br />
 Open [http://localhost:3000](http://localhost:3000) to view in the browser <br />
 
 1. Create a local API: <br />
-'mkdir puzl-api' to create a new directory <br />
-'touch database.json' to create the database <br />
+`mkdir puzl-api` to create a new directory <br />
+`touch database.json` to create the database <br />
 
 1. Serve the JSON database: <br />
-'cd' into the puzl-api directory <br />
-'json-server -w database.json -p 8088' <br />
+`cd` into the puzl-api directory <br />
+`json-server -w database.json -p 8088` <br />
 
 ### Features
 **Gallery** <br />
