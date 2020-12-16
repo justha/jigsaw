@@ -8,6 +8,8 @@ A place for those who like to sort, organize and put things in the right place. 
 ### Installation and Setup
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <br/>
 
+This project uses integrated image management services by [Cloudinary](https://github.com/cloudinary/cloudinary-react). <br/>
+
 1. Clone the repository with 'git clone'
 1. Installations: <br />
 `npm install` <br />
@@ -15,6 +17,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 `npm install json-server` <br />
 `npm install @material-ui/core` <br />
 `npm install @material-ui/icons` <br />
+`npm install cloudinary-react --save` <br />
 
 1. Start the development server<br />
 Open a separate terminal, `cd` into the project directory <br />
