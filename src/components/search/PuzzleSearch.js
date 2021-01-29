@@ -6,7 +6,6 @@ import { StatusContext } from "../status/StatusProvider"
 import { Button } from '@material-ui/core'
 
 
-
 export const PuzzleSearch = () => {
     const { relationships, getRelationships } = useContext(RelationshipContext)
     const { setChosenStatusId, setChosenSpace } = useContext(PuzzleContext)
@@ -65,6 +64,13 @@ export const PuzzleSearch = () => {
                                 </select> 
                             </div>
                         </fieldset>
+                            <button
+                                className="btn btn--searchbar"
+                                value="0"
+                                onClick={clickEvent => {setChosenSpace("none")}}
+                            >
+                                clear
+                            </button>
                     </article>
 
 

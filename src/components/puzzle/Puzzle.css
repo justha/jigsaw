@@ -22,14 +22,16 @@
     align-items: flex-start;
 }
 
+.searchbar__workspace {
+    display: flex;
+    flex-direction: row;
+    padding: 0 0 0 1em;
+}
+
 .searchbar__status {
     display: flex;
     flex-direction: row;
     white-space: nowrap;
-    padding: 0 0 0 1em;
-}
-
-.searchbar__workspace {
     padding: 0 0 0 1em;
 }
  
