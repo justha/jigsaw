@@ -363,6 +363,10 @@ export const PuzzleForm = (props) => {
                     <fieldset>
                         <div className="form--group">
                             <label htmlFor="trade">Available to Trade?:</label>
+                            <div>                                
+                                <input type="radio" value="false" name="trade" /> No
+                                <input type="radio" value="true" name="trade" /> Yes
+                            </div>
                             <select 
                                 className="form--control" 
                                 ref={trade} 
@@ -382,6 +386,10 @@ export const PuzzleForm = (props) => {
                     <fieldset>
                         <div className="form--group">
                             <label htmlFor="poster">Poster Included:</label>
+                            <div>                                
+                                <input type="radio" value="false" name="poster" /> No
+                                <input type="radio" value="true" name="poster" /> Yes
+                            </div>
                             <select 
                                 className="form--control" 
                                 ref={poster} 
