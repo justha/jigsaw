@@ -1,5 +1,6 @@
 # puzl
 **Organization for avid jigsaw puzzlers** <br/>
+created by Ha Nguyen
 
 ## About
 A place for those who like to sort, organize and put things in the right place. Keeps those who like organization...organized.
