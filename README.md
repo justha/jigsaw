@@ -1,11 +1,11 @@
-## puzl
+# puzl
 **For avid jigsaw puzzlers** <br/>
 Created by Ha Nguyen <br/>
 
-### About
+## About
 A place for those who like to sort, organize and put things in the right place. Keeps those who like organization...organized.
 
-### Installation and Setup
+## Installation and Setup
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <br/>
 
 This project uses integrated image management services by [Cloudinary](https://github.com/cloudinary/cloudinary-react). <br/>
@@ -32,7 +32,7 @@ Open [http://localhost:3000](http://localhost:3000) to view in the browser <br /
 `cd` into the puzl-api directory <br />
 `json-server -w database.json -p 8088` <br />
 
-### Features
+## Features
 **Gallery** <br />
 View a collection of puzzles you are working on, completed and have added to your wishlist. <br />
 <br/>
@@ -42,6 +42,6 @@ Helps you manage workspaces so you can have puzzles going everywhere they fit. A
 Displays your puzzle productivity and history
 **Sample Screen Shots** -->
 
-### Planning
+## Planning
 ERD: [dbdiagram](https://res.cloudinary.com/djxxamywv/image/upload/v1607700885/github/dbdiagram_puzl_yd9pdu.png) <br />
 Wireframe: [Miro](https://res.cloudinary.com/djxxamywv/image/upload/v1607650031/github/miro_puzl_z2ge6n.png) <br />
