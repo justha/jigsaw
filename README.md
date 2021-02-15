@@ -45,5 +45,5 @@ Displays your puzzle productivity and history
 **Sample Screen Shots** -->
 
 ## Planning
-ERD: [dbdiagram](https://res.cloudinary.com/djxxamywv/image/upload/v1607700885/github/dbdiagram_puzl_yd9pdu.png) <br />
 Wireframe: [Miro](https://res.cloudinary.com/djxxamywv/image/upload/v1607650031/github/miro_puzl_z2ge6n.png) <br />
+ERD: [dbdiagram](https://res.cloudinary.com/djxxamywv/image/upload/v1607700885/github/dbdiagram_puzl_yd9pdu.png) <br />
