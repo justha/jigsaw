@@ -1,5 +1,5 @@
 # puzl
-**For avid jigsaw puzzlers** <br/>
+**Organization for avid jigsaw puzzlers** <br/>
 Created by Ha Nguyen <br/>
 
 ## About
