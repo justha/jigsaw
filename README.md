@@ -21,8 +21,10 @@ This project uses integrated image management services by [Cloudinary](https://g
 
 1. Start the development server<br />
 Open a separate terminal, `cd` into the project directory <br />
-`npm start` to run the app in development mode <br />
-Open [http://localhost:3000](http://localhost:3000) to view in the browser <br />
+Run `npm start` to view the app in development mode <br />
+Open [http://localhost:3000](http://localhost:3000) to view in the browser <br /> 
+The page will reload if you make edits. <br />
+You will also see any lint errors in the console. <br />
 
 1. Create a local API: <br />
 `mkdir puzl-api` to create a new directory <br />
