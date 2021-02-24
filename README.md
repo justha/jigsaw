@@ -5,6 +5,10 @@ created by Ha Nguyen
 ## About
 A place for those who like to sort, organize and put things in the right place. Keeps those who like organization...organized.
 
+## Planning
+Wireframe: [Miro](https://res.cloudinary.com/djxxamywv/image/upload/v1607650031/github/miro_puzl_z2ge6n.png) <br />
+ERD: [dbdiagram](https://res.cloudinary.com/djxxamywv/image/upload/v1607700885/github/dbdiagram_puzl_yd9pdu.png) <br />
+
 ## Installation and Setup
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <br/>
 
@@ -43,7 +47,3 @@ Helps you manage workspaces so you can have puzzles going everywhere they fit. A
 <!-- **Stats**
 Displays your puzzle productivity and history
 **Sample Screen Shots** -->
-
-## Planning
-Wireframe: [Miro](https://res.cloudinary.com/djxxamywv/image/upload/v1607650031/github/miro_puzl_z2ge6n.png) <br />
-ERD: [dbdiagram](https://res.cloudinary.com/djxxamywv/image/upload/v1607700885/github/dbdiagram_puzl_yd9pdu.png) <br />
